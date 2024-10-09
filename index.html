@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>How Well Do You Know Me?</h1>
+        <div id="quiz-container">
+            <!-- Question 1 -->
+            <div class="question">
+                <h2>Question 1: What's my favorite color?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Red</button>
+                    <button class="option" onclick="selectAnswer(this)">Blue</button>
+                    <button class="option" onclick="selectAnswer(this)">Green</button>
+                    <button class="option" onclick="selectAnswer(this)">Yellow</button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <h2>Question 2: Where did we first meet?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Cafe</button>
+                    <button class="option" onclick="selectAnswer(this)">Primary School</button>
+                    <button class="option" onclick="selectAnswer(this)">Park</button>
+                    <button class="option" onclick="selectAnswer(this)">Beach</button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <h2>Question 3: What's my dream vacation?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Paris</button>
+                    <button class="option" onclick="selectAnswer(this)">Maldives</button>
+                    <button class="option" onclick="selectAnswer(this)">Tokyo</button>
+                    <button class="option" onclick="selectAnswer(this)">New York</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score and Submit Button -->
+        <div id="score-container">
+            <h2 id="score"></h2>
+        </div>
+        <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        <button id="restart-btn" style="display:none;" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <script>
+        // Correct answers
+        const correctAnswers = ['Blue', 'Primary School', 'Tokyo'];
+        let score = 0;
+
+        function selectAnswer(button) {
+            const parent = button.parentElement;
+            const siblings = parent.querySelectorAll('button');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+            button.classList.add('selected');
+        }
+
+        function submitQuiz() {
+            // Reset score before submission
+            score = 0;
+            const selectedOptions = document.querySelectorAll('.selected');
+            
+            selectedOptions.forEach((option, index) => {
+                if (option.innerText === correctAnswers[index]) {
+                    score += 1;
+                }
+            });
+
+            const scoreElement = document.getElementById('score');
+            scoreElement.innerText = `You scored: ${score}/${correctAnswers.length}`;
+            
+            // Display personalized message based on the score
+            const message = document.createElement('h3');
+            if (score === correctAnswers.length) {
+                message.innerText = "Wow, you know me so well! 💕";
+            } else if (score > 0) {
+                message.innerText = "You're pretty close! 😊";
+            } else {
+                message.innerText = "Looks like we need a date to learn more about each other! 😄";
+            }
+            document.getElementById('score-container').appendChild(message);
+
+            // Play sound after submission (optional)
+            const audio = new Audio('success-sound.mp3');  // Add your sound file if needed
+            audio.play();
+
+            // Disable all buttons after submission
+            document.querySelectorAll('.option').forEach(button => button.disabled = true);
+
+            // Hide the submit button
+            document.getElementById('submit-btn').style.display = 'none';
+            // Show the restart button
+            document.getElementById('restart-btn').style.display = 'inline-block';
+
+            // Animation: Bounce the score after submission
+            scoreElement.style.animation = 'bounce 0.5s ease';
+        }
+
+        function restartQuiz() {
+            // Reset score
+            score = 0;
+
+            // Clear score display
+            document.getElementById('score').innerText = "";
+            
+            // Clear personalized message
+            const message = document.querySelector('#score-container h3');
+            if (message) message.remove();
+
+            // Remove selected class from buttons
+            document.querySelectorAll('.selected').forEach(button => button.classList.remove('selected'));
+            
+            // Enable all buttons again
+            document.querySelectorAll('.option').forEach(button => button.disabled = false);
+
+            // Show the submit button again
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            // Hide the restart button
+            document.getElementById('restart-btn').style.display = 'none';
+        }
+    </script>
+
+    <style>
+        /* Basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 2rem;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-family: 'Lobster', cursive;
+            color: #FF6F61;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .options button.selected {
+            background-color: #28a745;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+
+        #submit-btn, #restart-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #submit-btn:hover, #restart-btn:hover {
+            background-color: #218838;
+        }
+
+        #score-container {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Bounce animation for score */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</body>
+</html>
