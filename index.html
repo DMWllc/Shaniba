@@ -1,215 +1,351 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quick Reflex Challenge</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #1c1c1c; /* Dark background */
-      font-family: Arial, sans-serif;
-      overflow: hidden; /* Prevent scrollbars */
-    }
-
-    .container {
-      text-align: center;
-    }
-
-    .message {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #fff; /* White text */
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-    }
-
-    .button {
-      padding: 20px 40px;
-      background-color: #00bfff;
-      border: none;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      border-radius: 10px;
-      transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
-      box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
-    }
-
-    .button:hover {
-      background-color: #007acc;
-      transform: scale(1.1); /* Slightly grow on hover */
-      box-shadow: 0 0 20px rgba(0, 191, 255, 1); /* Brighter glow on hover */
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .score-display {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      color: #fff; /* White text */
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
-    }
-
-    .share-button {
-      padding: 10px 20px;
-      background-color: #1DA1F2;
-      color: white;
-      font-size: 1.2rem;
-      margin-top: 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
-      box-shadow: 0 0 10px rgba(29, 161, 242, 0.7);
-    }
-
-    .share-button:hover {
-      background-color: #007acc;
-      transform: scale(1.1); /* Slightly grow on hover */
-      box-shadow: 0 0 20px rgba(29, 161, 242, 1); /* Brighter glow on hover */
-    }
-
-    @keyframes glow {
-      0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); }
-      50% { text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
-      100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); }
-    }
-
-    .glow {
-      animation: glow 1.5s infinite alternate; /* Glowing effect */
-    }
-
-    /* Mobile adjustments */
-    @media only screen and (max-width: 600px) {
-      .message {
-        font-size: 1.5rem;
-      }
-
-      .button {
-        font-size: 1.5rem;
-        padding: 15px 30px;
-      }
-
-      .score-display {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me playing around Shaniba's mind.</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+ <h1 style="color: Green; font-size:40px">For Shaniba of my life!</h1>
+ 
+ <div class ="contain"><h1>Donath</h1></div>
+ <hr>
+        <div>
+            <p>Hello, I just made this quiz quest for you. Tinkle your brain till you get it. Just enjoy responses.</p>
+        </div>
+<hr><br>
+        <h1>How Well Do You Know Me? 💝</h1>
+        
+        
+        <div id="quiz-container">
+            <!-- Question 1 -->
+            <div class="question">
+                <h2>Question 1: What's my favorite color?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Red</button>
+                    <button class="option" onclick="selectAnswer(this)">Blue</button>
+                    <button class="option" onclick="selectAnswer(this)">Green</button>
+                    <button class="option" onclick="selectAnswer(this)">Yellow</button>
+                </div>
+            </div>
 
-<div class="container">
-  <div id="message" class="message glow">How fast is your reflex arc!<br>Let's play! </div>
-  <button id="action-button" class="button">Start</button>
-  <div id="score" class="score-display hidden"></div>
-  <button id="share-button" class="share-button hidden">Share on X<br>Invite more challengers!</button>
-  <div id="follow-message" class="hidden">
-    <p style="color: #fff;">Follow me for more challenges: 
-      <a href="https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09" target="_blank" style="color: #1DA1F2;">@DamnKampala</a>
-    </p>
-  </div>
-</div>
+            <!-- Question 2 -->
+            <div class="question">
+                <h2>Question 2: Where did we first meet?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Cafe</button>
+                    <button class="option" onclick="selectAnswer(this)">Primary School</button>
+                    <button class="option" onclick="selectAnswer(this)">Park</button>
+                    <button class="option" onclick="selectAnswer(this)">Beach</button>
+                </div>
+            </div>
 
-<script>
-  let startTime;
-  let timeout;
-  let gameStarted = false;
-  let greenLightOn = false;
-  let reactionTimeout;
+            <!-- Question 3 -->
+            <div class="question">
+                <h2>Question 3: What's my dream vacation?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Paris</button>
+                    <button class="option" onclick="selectAnswer(this)">Maldives</button>
+                    <button class="option" onclick="selectAnswer(this)">Tokyo</button>
+                    <button class="option" onclick="selectAnswer(this)">New York</button>
+                </div>
+            </div>
+             <!-- Question 4 -->
+             <div class="question">
+                <h2>Question 4: What's my favorite dessert?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Chocolate cake</button>
+                    <button class="option" onclick="selectAnswer(this)">Ice cream</button>
+                    <button class="option" onclick="selectAnswer(this)">Apple pie</button>
+                    <button class="option" onclick="selectAnswer(this)">Cheesecake</button>
+                </div>
+            </div>
+             <!-- Question 5 -->
+             <div class="question">
+                <h2>Question 5: Which sport did I play in school?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Football</button>
+                    <button class="option" onclick="selectAnswer(this)">Basketball</button>
+                    <button class="option" onclick="selectAnswer(this)">Volleyball</button>
+                    <button class="option" onclick="selectAnswer(this)">Tennis</button>
+                </div>
+            </div>
 
-  const messageElement = document.getElementById('message');
-  const actionButton = document.getElementById('action-button');
-  const scoreDisplay = document.getElementById('score');
-  const shareButton = document.getElementById('share-button');
-  const followMessage = document.getElementById('follow-message');
+            <!-- Question 6 -->
+            <div class="question">
+                <h2>Question 6: What's my first pet?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Dog</button>
+                    <button class="option" onclick="selectAnswer(this)">Cat</button>
+                    <button class="option" onclick="selectAnswer(this)">Parrot</button>
+                    <button class="option" onclick="selectAnswer(this)">Hamster</button>
+                </div>
+            </div>
+             <!-- Question 7 -->
+             <div class="question">
+                <h2>Question 7: Which color do I dislike the most?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Red</button>
+                    <button class="option" onclick="selectAnswer(this)">Pink</button>
+                    <button class="option" onclick="selectAnswer(this)">Orange</button>
+                    <button class="option" onclick="selectAnswer(this)">Yellow</button>
+                </div>
+            </div>
 
-  actionButton.addEventListener('click', () => {
-    if (!gameStarted) {
-      startGame();
-    } else if (greenLightOn) {
-      checkReaction();
-    } else {
-      earlyClick();
-    }
-  });
+            <!-- Question 8 -->
+            <div class="question">
+                <h2>Question 8: What is my biggest fear?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Heights</button>
+                    <button class="option" onclick="selectAnswer(this)">Spiders</button>
+                    <button class="option" onclick="selectAnswer(this)">Public speaking</button>
+                    <button class="option" onclick="selectAnswer(this)">Ammunition</button>
+                </div>
+            </div>
 
-  function startGame() {
-    gameStarted = true;
-    greenLightOn = false;
-    messageElement.textContent = 'Waiting......';
-    actionButton.textContent = '...';
+            <!-- Question 9 -->
+            <div class="question">
+                <h2>Question 9: Which of these was my favorite childhood cartoon?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Tom & Jelly</button>
+                    <button class="option" onclick="selectAnswer(this)">SpongeBob SquarePants</button>
+                    <button class="option" onclick="selectAnswer(this)">Scooby-Doo</button>
+                    <button class="option" onclick="selectAnswer(this)">The flintstones</button>
+                </div>
+            </div>
+             <!-- Question 10 -->
+             <div class="question">
+                <h2>Question 10: What subject was I best at in school?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Mathematics</button>
+                    <button class="option" onclick="selectAnswer(this)">History</button>
+                    <button class="option" onclick="selectAnswer(this)">Science</button>
+                    <button class="option" onclick="selectAnswer(this)">Literature</button>
+                </div>
+            </div>
+             <!-- Question 11 -->
+             <div class="question">
+                <h2>Question 11: What was my favorite childhood snack?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Potato chips</button>
+                    <button class="option" onclick="selectAnswer(this)">Chocolate bar</button>
+                    <button class="option" onclick="selectAnswer(this)">Popcorn</button>
+                    <button class="option" onclick="selectAnswer(this)">Gummies</button>
+                </div>
+            </div>
 
-    // Random delay between 2-5 seconds (2000ms to 5000ms)
-    const delay = Math.floor(Math.random() * 3000) + 2000;
-    
-    timeout = setTimeout(() => {
-      greenLightOn = true;
-      messageElement.textContent = 'Go!';
-      startTime = new Date().getTime();
-      actionButton.textContent = 'Tap!';
-      
-      // Set a 2-second window for the player to react
-      reactionTimeout = setTimeout(() => {
-        if (greenLightOn) {
-          tooLate();
+            <!-- Question 12-->
+            <div class="question">
+                <h2>Question 12: What's my favorite type of music?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Rock</button>
+                    <button class="option" onclick="selectAnswer(this)">Jazz</button>
+                    <button class="option" onclick="selectAnswer(this)">Classical</button>
+                    <button class="option" onclick="selectAnswer(this)">Hip Hop</button>
+                </div>
+            </div>
+            <!-- Question 13 -->
+            <div class="question">
+                <h2>Question 13: What's my favorite childhood game?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Tag</button>
+                    <button class="option" onclick="selectAnswer(this)">Hide & seek</button>
+                    <button class="option" onclick="selectAnswer(this)">Monopoly</button>
+                    <button class="option" onclick="selectAnswer(this)">Chess</button>
+                </div>
+            </div>
+             <!-- Question 14-->
+             <div class="question">
+                <h2>Question 14: Which instrument would I love to learn?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Guitor</button>
+                    <button class="option" onclick="selectAnswer(this)">Saxophone</button>
+                    <button class="option" onclick="selectAnswer(this)">Piano</button>
+                    <button class="option" onclick="selectAnswer(this)">Flutte</button>
+                </div>
+            </div>
+
+            <!-- Question 15 -->
+            <div class="question">
+                <h2>Question 15: What name do I enjoy most calling you?</h2>
+                <div class="options">
+                    <button class="option" onclick="selectAnswer(this)">Shaniba</button>
+                    <button class="option" onclick="selectAnswer(this)">Nyakato</button>
+                    <button class="option" onclick="selectAnswer(this)">Nakato</button>
+                    <button class="option" onclick="selectAnswer(this)">Pie</button>
+                </div>
+            </div>
+        
+        
+        
+        <!-- Score and Submit Button -->
+        <div id="score-container">
+            <h2 id="score"></h2>
+        </div>
+        <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        <button id="restart-btn" style="display:none;" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <script>
+        // Correct answers
+        const correctAnswers = ['Blue', 'Primary School', 'Tokyo', 'Apple pie', 'Football', 'Dog', 'Red', 'Ammunition', 'Tom & Jelly', 'Mathematics', 'Popcorn', 'Hip Hop', 'Hide & seek', 'Piano', 'Pie'];
+        let score = 0;
+
+        function selectAnswer(button) {
+            const parent = button.parentElement;
+            const siblings = parent.querySelectorAll('button');
+            siblings.forEach(sibling => sibling.classList.remove('selected'));
+            button.classList.add('selected');
         }
-      }, 2000); // 2 seconds to tap
-    }, delay);
-  }
 
-  function checkReaction() {
-    const reactionTime = new Date().getTime() - startTime;
-    gameStarted = false;
-    greenLightOn = false;
-    clearTimeout(timeout);
-    clearTimeout(reactionTimeout);
+        function submitQuiz() {
+            score = 0;
+            const selectedOptions = document.querySelectorAll('.selected');
+            selectedOptions.forEach((option, index) => {
+                if (option.innerText === correctAnswers[index]) {
+                    score += 1;
+                }
+            });
 
-    messageElement.textContent = `Your reaction time: ${reactionTime}ms`;
-    scoreDisplay.textContent = `Your score: ${reactionTime}ms`;
-    scoreDisplay.classList.remove('hidden');
-    shareButton.classList.remove('hidden');
-    followMessage.classList.remove('hidden');
-    actionButton.textContent = 'Play Again';
-  }
+            const scoreElement = document.getElementById('score');
+            scoreElement.innerText = `You scored: ${score}/${correctAnswers.length}`;
 
-  function earlyClick() {
-    messageElement.textContent = 'Too soon! Wait a little bit.';
-    gameStarted = false;
-    greenLightOn = false;
-    clearTimeout(timeout);
-    clearTimeout(reactionTimeout);
-    actionButton.textContent = 'Try Again';
-    scoreDisplay.classList.add('hidden');
-    shareButton.classList.add('hidden');
-    followMessage.classList.add('hidden');
-  }
+            // Display personalized message
+            let message = '';
+            if (score === correctAnswers.length) {
+                message = "Wow, you know me so well! 💕. Shaniba, always be my date.";
+            } else if (score > 0) {
+                message = "You're pretty close! 😊, should I give you a call you ask me where things failed?";
+            } else {
+                message = "Looks like we need a date to learn more about each other! 😄";
+            }
 
-  function tooLate() {
-    gameStarted = false;
-    greenLightOn = false;
-    messageElement.textContent = 'Too slow! You didn\'t react in time.';
-    actionButton.textContent = 'Try Again';
-    scoreDisplay.classList.add('hidden');
-    shareButton.classList.add('hidden');
-    followMessage.classList.add('hidden');
-  }
+            const messageElement = document.createElement('h3');
+            messageElement.innerText = message;
+            document.getElementById('score-container').appendChild(messageElement);
 
-  // Share score on X
-  shareButton.addEventListener('click', () => {
-    const text = `Hi, how fast can you react? Test your reaction rate. I just got a reaction time of ${scoreDisplay.textContent.split(": ")[1]} in the Quick Reflex Challenge! Can you beat my score? Play here: https://shr.link/njq38`;
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
-    window.open(twitterUrl, '_blank');
-  });
-  
-  
-</script>
+            // Disable all buttons after submission
+            document.querySelectorAll('.option').forEach(button => button.disabled = true);
 
+            // Hide the submit button and show the restart button
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('restart-btn').style.display = 'inline-block';
+        }
+
+        function restartQuiz() {
+            score = 0;
+            document.getElementById('score').innerText = '';
+
+            const message = document.querySelector('#score-container h3');
+            if (message) message.remove();
+
+            document.querySelectorAll('.selected').forEach(button => button.classList.remove('selected'));
+
+            document.querySelectorAll('.option').forEach(button => button.disabled = false);
+
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('restart-btn').style.display = 'none';
+        }
+    </script>
+
+    <style>
+        /* Basic styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color:gold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400vh;
+            font-family: 'Courier New', Courier, monospace;
+            background-image: url(images/blue-futuristic-waves-background-with-computer-code-technology_53876-119584.jpg);
+        }
+
+        .container {
+            background: #bfffd5;
+            padding: 2rem;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+        
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-family: 'Lobster', cursive;
+            color: #e90b28;
+        }
+        {
+          
+            font-size: 1.5rem;
+           
+            color: #1523ff;
+           
+    font-family: 'Roboto', sans-serif;
+
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-family: 'parisienne 'cursive ;
+        }
+
+        .options button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .options button.selected {
+            background-color: #28a745;
+        }
+
+        .options button:hover {
+            background-color: #0056b3;
+        }
+
+        #submit-btn, #restart-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #score-container {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
 </body>
 </html>
