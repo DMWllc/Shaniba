@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Colorful Tricky Puzzle Game</title>
+  <title>iTech Web Design puzzle games</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -150,7 +150,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Crack the Code Puzzle!</h1>
+    <h1>Crack the Code Puzzle! Remember it is just a puzzle and youre human. Think otherwise to crack it. </h1>
     <p id="puzzleText">The puzzle:</p>
     <p id="currentPuzzleClue"></p>
     <p>Enter the 3-digit code:</p>
@@ -197,11 +197,11 @@
       let correctCode = puzzles[currentPuzzle].solution;
       if (guess === correctCode) {
         solvedPuzzles++;
-        document.getElementById("result").innerHTML = "✅ Correct! Moving on to the next puzzle.";
+        document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
         failedAttempts = 0;
         currentPuzzle++;
         if (solvedPuzzles >= 5) {
-          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all 5 puzzles!";
+          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all 5 puzzles! You can refresh now.";
           document.getElementById("userGuess").disabled = true;
           document.getElementById("submitBtn").disabled = true;
 
@@ -267,14 +267,14 @@
 
     // Function to share on WhatsApp
     function shareOnWhatsApp() {
-      const message = "I just solved a puzzle! It looks to be so logical.Can you crack it? Join the game!";
+      const message = "I just solved a puzzle! It looks to be so logical but interesting. Can you crack it? Join the game!";
       const url = " https://shr.link/o94z5"; // Replace with your game URL
       window.open(`https://wa.me/?text=${encodeURIComponent(message + " " + url)}`, '_blank');
     }
 
     // Function to share on X
     function shareOnX() {
-      const message = "I just solved a puzzle! It was so tricky.Can you crack it? Join the game!";
+      const message = "I just solved a puzzle! It was so tricky but interesting. Can you crack it? Join the game!";
       const url = "https://shr.link/o94z5 "; // Replace with your game URL
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message + " " + url)}`, '_blank');
     }
