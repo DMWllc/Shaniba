@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iTech Web Design puzzle games</title>
+  <title>iTech Web Design Puzzle Games</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -201,8 +200,8 @@
         document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
         failedAttempts = 0;
         currentPuzzle++;
-        if (solvedPuzzles >= 5) {
-          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all 5 puzzles! You can refresh now.";
+        if (solvedPuzzles >= puzzles.length) {
+          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all puzzles! You can refresh now.";
           document.getElementById("userGuess").disabled = true;
           document.getElementById("submitBtn").disabled = true;
 
@@ -251,52 +250,49 @@
     // Function to show sharing options
     function showShareOptions() {
       const shareOptionsHTML = `
-        <h3>Share this puzzle! (Ask help)</h3>
+        <h3>Share this puzzle! (Ask for help)</h3>
         <button class="social-button whatsapp" onclick="shareOnWhatsApp()">
-          
-          
-          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
-          Share on WhatsApp
+          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo"> Share on WhatsApp
         </button>
         <button class="social-button x" onclick="shareOnX()">
-          <img class="social-icon" src="https://images.app.goo.gl/nNVMr9fcoUHj6Zsv7" alt="X Logo">
-          Share on X
+          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter Logo"> Share on X
         </button>
       `;
-      document.getElementById("result").innerHTML = shareOptionsHTML;
+      document.getElementById("result").innerHTML += shareOptionsHTML;
     }
 
     // Function to share on WhatsApp
     function shareOnWhatsApp() {
-      const message = "I just solved a puzzle! It looks to be so logical but interesting. Can you crack it? Join the game!";
-      const url = "https://shr.link/oj77i "; // Replace with your game URL
-      window.open(`https://wa.me/?text=${encodeURIComponent(message + " " + url)}`, '_blank');
+      const message = `I've solved ${solvedPuzzles} puzzles! Can you solve this one? ${puzzles[currentPuzzle].clue}`;
+      const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
     }
 
     // Function to share on X
-    function shareOnX() {⁹
-      const message = "I just solved a puzzle! It was so tricky but interesting. Can you crack it? Join the game!";
-      const url = " https://shr.link/oj77i"; // Replace with your game URL
-      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message + " " + url)}`, '_blank');
+    function shareOnX() {
+      const message = `I’m currently solving a puzzle game! Can you solve this one? ${puzzles[currentPuzzle].clue}`;
+      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
     }
 
-    // Event listener for follow button
+    // Function to handle follow button click
     document.getElementById("followBtn").addEventListener("click", function() {
-      window.open("https://twitter.com/damnkampala", '_blank'); // Replace with your X profile link
+      window.open("https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09", '_blank');
     });
 
-    // Event listeners for closing the pop-up and invite guide
+    // Event listener to close the pop-up
     document.getElementById("closePopup").addEventListener("click", function() {
       document.getElementById("overlay").style.display = "none";
       document.getElementById("popup").style.display = "none";
     });
 
+    // Event listener to close the invite guide
     document.getElementById("closeInvite").addEventListener("click", function() {
       document.getElementById("inviteOverlay").style.display = "none";
       document.getElementById("inviteGuide").style.display = "none";
     });
 
-    // Load the first puzzle on page load
+    // Initial load of the first puzzle
     loadNextPuzzle();
   </script>
 </body>
