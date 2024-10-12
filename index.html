@@ -177,123 +177,131 @@
     <p>Send them the link to join the fun and see who can solve it the fastest!</p>
     <button id="closeInvite">Close</button>
   </div>
+<script >
+  
+  // Puzzle data
+let puzzles = [
+  { clue: "The product and the difference of the last digit with first and second digits respectively is 4.", solution: "451" },
+  { clue: "The quotient of the product of the first and last digits by 2 is 3. The sum of all digits is 9.", solution: "243" },
+  { clue: "The quotient of the first two digits is 2. The difference of the sum of first two digits and last digit is 1.", solution: "631" },
+  { clue: "The last digit is the quotient of the sum of first two digits and last digit.", solution: "442" },
+  { clue: "The difference of the product of first and last digits and difference of 1 from second digit is 4. Digits sum to 10", solution: "352" }
+];
 
-  <script>
-    // Puzzle data
-    let puzzles = [
-      { clue: "The product and the difference of the last digit with first and second digits respectively is 4.", solution: "451" },
-      { clue: "The quotient of the product of the first and last digits by 2 is 3. The sum of all digits is 9.", solution: "243" },
-      { clue: "The quotient of the first two digits is 2. The difference of the sum of first two digits and last digit is 1.", solution: "631" },
-      { clue: "The last digit is the quotient of the sum of first two digits and last digit.", solution: "442" },
-      { clue: "The difference of the product of first and last digits and difference of 1 from second digit is 4. Digits sum to 10", solution: "352" }
-    ];
+let currentPuzzle = 0;
+let solvedPuzzles = 0;
+let failedAttempts = 0;
 
-    let currentPuzzle = 0;
-    let solvedPuzzles = 0;
-    let failedAttempts = 0;
+// Function to check the guess
+function checkGuess(guess) {
+  let correctCode = puzzles[currentPuzzle].solution;
+  if (guess === correctCode) {
+    solvedPuzzles++;
+    document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
+    failedAttempts = 0;
+    currentPuzzle++;
+    if (solvedPuzzles >= puzzles.length) {
+      document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all puzzles! You can refresh now.";
+      document.getElementById("userGuess").disabled = true;
+      document.getElementById("submitBtn").disabled = true;
 
-    // Function to check the guess
-    function checkGuess(guess) {
-      let correctCode = puzzles[currentPuzzle].solution;
-      if (guess === correctCode) {
-        solvedPuzzles++;
-        document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
-        failedAttempts = 0;
-        currentPuzzle++;
-        if (solvedPuzzles >= puzzles.length) {
-          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all puzzles! You can refresh now.";
-          document.getElementById("userGuess").disabled = true;
-          document.getElementById("submitBtn").disabled = true;
+      // Show the pop-up notification
+      document.getElementById("overlay").style.display = "block";
+      document.getElementById("popup").style.display = "block";
 
-          // Show the pop-up notification
-          document.getElementById("overlay").style.display = "block";
-          document.getElementById("popup").style.display = "block";
-
-        } else {
-          setTimeout(loadNextPuzzle, 2000);
-        }
-      } else {
-        failedAttempts++;
-        document.getElementById("result").innerHTML = `❌ Incorrect. Try again! (${failedAttempts}/3 attempts)`;
-        if (failedAttempts >= 3) {
-          document.getElementById("submitBtn").style.display = 'none';
-          document.getElementById("shareBtn").style.display = 'block';
-          showShareOptions();
-        }
-      }
+    } else {
+      setTimeout(loadNextPuzzle, 2000);
     }
-
-    // Function to load the next puzzle
-    function loadNextPuzzle() {
-      if (currentPuzzle < puzzles.length) {
-        document.getElementById("puzzleText").innerHTML = "The puzzle:";
-        document.getElementById("currentPuzzleClue").innerHTML = puzzles[currentPuzzle].clue; 
-        document.getElementById("userGuess").value = "";  
-        document.getElementById("result").innerHTML = "";  
-        document.getElementById("submitBtn").style.display = 'inline';  
-        document.getElementById("shareBtn").style.display = 'none';  
-      }
+  } else {
+    failedAttempts++;
+    document.getElementById("result").innerHTML = `❌ Incorrect. Try again! (${failedAttempts}/3 attempts)`;
+    if (failedAttempts >= 3) {
+      document.getElementById("submitBtn").style.display = 'none';
+      document.getElementById("shareBtn").style.display = 'block';
+      showShareOptions(); // Show sharing options after 3 failed attempts
     }
+  }
+}
 
-    // Event listener for the Submit button
-    document.getElementById("submitBtn").addEventListener("click", function() {
-      const guess = document.getElementById("userGuess").value;
+// Function to load the next puzzle
+function loadNextPuzzle() {
+  if (currentPuzzle < puzzles.length) {
+    document.getElementById("puzzleText").innerHTML = "The puzzle:";
+    document.getElementById("currentPuzzleClue").innerHTML = puzzles[currentPuzzle].clue; 
+    document.getElementById("userGuess").value = "";  
+    document.getElementById("result").innerHTML = "";  
+    document.getElementById("submitBtn").style.display = 'inline';  
+    document.getElementById("shareBtn").style.display = 'none';  
+  }
+}
 
-      if (guess.length !== 3 || isNaN(guess)) {
-        document.getElementById("result").innerHTML = "Please enter a valid 3-digit number.";
-        return;
-      }
+// Event listener for the Submit button
+document.getElementById("submitBtn").addEventListener("click", function() {
+  const guess = document.getElementById("userGuess").value;
 
-      checkGuess(guess);
-    });
+  if (guess.length !== 3 || isNaN(guess)) {
+    document.getElementById("result").innerHTML = "Please enter a valid 3-digit number.";
+    return;
+  }
 
-    // Function to show sharing options
-    function showShareOptions() {
-      const shareOptionsHTML = `
-        <h3>Share this puzzle! (Ask for help)</h3>
-        <button class="social-button whatsapp" onclick="shareOnWhatsApp()">
-          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo"> Share on WhatsApp
-        </button>
-        <button class="social-button x" onclick="shareOnX()">
-          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter Logo"> Share on X
-        </button>
-      `;
-      document.getElementById("result").innerHTML += shareOptionsHTML;
-    }
+  checkGuess(guess);
+});
 
-    // Function to share on WhatsApp
-    function shareOnWhatsApp() {
-      const message = `I've solved ${solvedPuzzles} puzzles! Can you solve this one? ${puzzles[currentPuzzle].clue}` https://shr.link/exj52;
-      const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
+// Function to show sharing options
+function showShareOptions() {
+  const currentPuzzleClue = puzzles[currentPuzzle].clue; // Get the clue of the current puzzle
+  const shareOptionsHTML = `
+    <h3>Share this puzzle! (Ask for help)</h3>
+    <button class="social-button whatsapp" onclick="shareOnWhatsApp('${currentPuzzleClue}')">
+      <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo"> Share on WhatsApp
+    </button>
+    <button class="social-button x" onclick="shareOnX('${currentPuzzleClue}')">
+      <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter Logo"> Share on X
+    </button>
+  `;
+  document.getElementById("result").innerHTML += shareOptionsHTML;
+}
 
-    // Function to share on X
-    function shareOnX() {
-      const message = `I’m currently solving a puzzle game! Can you solve this one?  ${puzzles[currentPuzzle].clue}` https://shr.link/exj52 ;
-      const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
+// Function to share on WhatsApp
+function shareOnWhatsApp(clue) {
+  const message = `I've completely failed to solve this puzzle:
+   "${clue}". 
+   Can you help me? Check it out here: https://shr.link/oj77i`;
+  const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
 
-    // Function to handle follow button click
-    document.getElementById("followBtn").addEventListener("click", function() {
-      window.open("https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09", '_blank');
-    });
+// Function to share on X
+function shareOnX(clue) {
+  const message = `I’m currently trying to solve a puzzle:
+   "${clue}". 
+   Can you help me? Check it out here: https://shr.link/oj77i`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
 
-    // Event listener to close the pop-up
-    document.getElementById("closePopup").addEventListener("click", function() {
-      document.getElementById("overlay").style.display = "none";
-      document.getElementById("popup").style.display = "none";
-    });
+// Function to handle follow button click
+document.getElementById("followBtn").addEventListener("click", function() {
+  window.open("https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09", '_blank');
+});
 
-    // Event listener to close the invite guide
-    document.getElementById("closeInvite").addEventListener("click", function() {
-      document.getElementById("inviteOverlay").style.display = "none";
-      document.getElementById("inviteGuide").style.display = "none";
-    });
+// Event listener to close the pop-up
+document.getElementById("closePopup").addEventListener("click", function() {
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("popup").style.display = "none";
+});
 
-    // Initial load of the first puzzle
-    loadNextPuzzle();
+// Event listener to close the invite guide
+document.getElementById("closeInvite").addEventListener("click", function() {
+  document.getElementById("inviteOverlay").style.display = "none";
+  document.getElementById("inviteGuide").style.display = "none";
+});
+
+// Initial load of the first puzzle
+loadNextPuzzle();
+  
+  
+  
   </script>
 </body>
 </html>
