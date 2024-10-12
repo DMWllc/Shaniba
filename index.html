@@ -182,11 +182,11 @@
   <script>
     // Puzzle data
     let puzzles = [
-      { clue: "The sum of the digits is 10. The first digit is twice the second digit, and the third digit is equal to the first.", solution: "451" },
-      { clue: "The second digit is 2 more than the first. The third digit is the first digit plus 1. The sum of all digits is 9.", solution: "243" },
-      { clue: "The third digit is 4 less than the first. The second digit is half the first. The sum of all digits is 10.", solution: "631" },
-      { clue: "The first and second digits are equal. The third digit is 2 more than the first. The sum of all digits is 12.", solution: "442" },
-      { clue: "The second digit is 2 more than the first. The third digit is equal to the first digit. The sum of all digits is 11.", solution: "352" }
+      { clue: "The product and the difference of the last digit with first and second digits respectively is 4.", solution: "451" },
+      { clue: "The quotient of the product of the first and last digits by 2 is 3. The sum of all digits is 9.", solution: "243" },
+      { clue: "The quotient of the first two digits is 2. The difference of the sum of first two digits and last digit is 1.", solution: "631" },
+      { clue: "The last digit is the quotient of the sum of first two digits and last digit.", solution: "442" },
+      { clue: "The difference of the product of first and last digits and difference of 1 from second digit is 4. Digits sum to 10", solution: "352" }
     ];
 
     let currentPuzzle = 0;
@@ -274,7 +274,7 @@
     }
 
     // Function to share on X
-    function shareOnX() {
+    function shareOnX() {⁹
       const message = "I just solved a puzzle! It was so tricky but interesting. Can you crack it? Join the game!";
       const url = " https://shr.link/oj77i"; // Replace with your game URL
       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message + " " + url)}`, '_blank');
