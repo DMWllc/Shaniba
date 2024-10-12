@@ -2,350 +2,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Me playing around Shaniba's mind.</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iTech Web Design puzzle games</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #4169e1;
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    #shareBtn {
+      background-color: #25D366;
+    }
+
+    #submitBtn {
+      background-color: #007bff;
+    }
+
+    #submitBtn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* CSS for pop-up notification */
+    .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .popup h2 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .popup button {
+      background-color: #4169e1;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    /* CSS for invite guide */
+    .inviteGuide {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .social-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .whatsapp {
+      background-color: #25D366;
+      color: white;
+    }
+
+    .x {
+      background-color: #1DA1F2;
+      color: white;
+    }
+
+    .social-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
- <h1 style="color: Green; font-size:40px">For Shaniba of my life!</h1>
- 
- <div class ="contain"><h1>Donath</h1></div>
- <hr>
-        <div>
-            <p>Hello, I just made this quiz quest for you. Tinkle your brain till you get it. Just enjoy responses.</p>
-        </div>
-<hr><br>
-        <h1>How Well Do You Know Me? 💝</h1>
-        
-        
-        <div id="quiz-container">
-            <!-- Question 1 -->
-            <div class="question">
-                <h2>Question 1: What's my favorite color?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Red</button>
-                    <button class="option" onclick="selectAnswer(this)">Blue</button>
-                    <button class="option" onclick="selectAnswer(this)">Green</button>
-                    <button class="option" onclick="selectAnswer(this)">Yellow</button>
-                </div>
-            </div>
+  <div class="container">
+    <h1>iTech Web Design</h1>
+    <p id="puzzleText">Crack the Puzzle:</p>
+    <p id="currentPuzzleClue"></p>
+    <p>Enter the 3-digit code:</p>
+    <input type="text" id="userGuess" maxlength="3" placeholder="Enter code (e.g. 123)">
+    <button id="submitBtn">Submit</button>
+    <p id="result"></p>
+    
+    <!-- Share Button for WhatsApp -->
+    <button id="shareBtn" style="display:none;">Share on Social Media</button>
+  </div>
 
-            <!-- Question 2 -->
-            <div class="question">
-                <h2>Question 2: Where did we first meet?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Cafe</button>
-                    <button class="option" onclick="selectAnswer(this)">Primary School</button>
-                    <button class="option" onclick="selectAnswer(this)">Park</button>
-                    <button class="option" onclick="selectAnswer(this)">Beach</button>
-                </div>
-            </div>
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="popup">
+    <h2>Follow Me for More Puzzles!</h2>
+    <p>Click the button below to follow me on X.</p>
+    <button id="followBtn">Follow on X</button>
+    <button id="closePopup">Close</button>
+  </div>
 
-            <!-- Question 3 -->
-            <div class="question">
-                <h2>Question 3: What's my dream vacation?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Paris</button>
-                    <button class="option" onclick="selectAnswer(this)">Maldives</button>
-                    <button class="option" onclick="selectAnswer(this)">Tokyo</button>
-                    <button class="option" onclick="selectAnswer(this)">New York</button>
-                </div>
-            </div>
-             <!-- Question 4 -->
-             <div class="question">
-                <h2>Question 4: What's my favorite dessert?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Chocolate cake</button>
-                    <button class="option" onclick="selectAnswer(this)">Ice cream</button>
-                    <button class="option" onclick="selectAnswer(this)">Apple pie</button>
-                    <button class="option" onclick="selectAnswer(this)">Cheesecake</button>
-                </div>
-            </div>
-             <!-- Question 5 -->
-             <div class="question">
-                <h2>Question 5: Which sport did I play in school?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Football</button>
-                    <button class="option" onclick="selectAnswer(this)">Basketball</button>
-                    <button class="option" onclick="selectAnswer(this)">Volleyball</button>
-                    <button class="option" onclick="selectAnswer(this)">Tennis</button>
-                </div>
-            </div>
+  <div class="overlay" id="inviteOverlay"></div>
+  <div class="inviteGuide" id="inviteGuide">
+    <h2>Invite Your Friends!</h2>
+    <p>Share this game with your friends and challenge them to solve the puzzles!</p>
+    <p>Send them the link to join the fun and see who can solve it the fastest!</p>
+    <button id="closeInvite">Close</button>
+  </div>
 
-            <!-- Question 6 -->
-            <div class="question">
-                <h2>Question 6: What's my first pet?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Dog</button>
-                    <button class="option" onclick="selectAnswer(this)">Cat</button>
-                    <button class="option" onclick="selectAnswer(this)">Parrot</button>
-                    <button class="option" onclick="selectAnswer(this)">Hamster</button>
-                </div>
-            </div>
-             <!-- Question 7 -->
-             <div class="question">
-                <h2>Question 7: Which color do I dislike the most?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Red</button>
-                    <button class="option" onclick="selectAnswer(this)">Pink</button>
-                    <button class="option" onclick="selectAnswer(this)">Orange</button>
-                    <button class="option" onclick="selectAnswer(this)">Yellow</button>
-                </div>
-            </div>
+  <script>
+    // Puzzle data
+    let puzzles = [
+      { clue: "The sum of the digits is 10. The first digit is twice the second digit, and the third digit is equal to the first.", solution: "451" },
+      { clue: "The second digit is 2 more than the first. The third digit is the first digit plus 1. The sum of all digits is 9.", solution: "243" },
+      { clue: "The third digit is 4 less than the first. The second digit is half the first. The sum of all digits is 10.", solution: "631" },
+      { clue: "The first and second digits are equal. The third digit is 2 more than the first. The sum of all digits is 12.", solution: "442" },
+      { clue: "The second digit is 2 more than the first. The third digit is equal to the first digit. The sum of all digits is 11.", solution: "352" }
+    ];
 
-            <!-- Question 8 -->
-            <div class="question">
-                <h2>Question 8: What is my biggest fear?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Heights</button>
-                    <button class="option" onclick="selectAnswer(this)">Spiders</button>
-                    <button class="option" onclick="selectAnswer(this)">Public speaking</button>
-                    <button class="option" onclick="selectAnswer(this)">Ammunition</button>
-                </div>
-            </div>
+    let currentPuzzle = 0;
+    let solvedPuzzles = 0;
+    let failedAttempts = 0;
 
-            <!-- Question 9 -->
-            <div class="question">
-                <h2>Question 9: Which of these was my favorite childhood cartoon?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Tom & Jelly</button>
-                    <button class="option" onclick="selectAnswer(this)">SpongeBob SquarePants</button>
-                    <button class="option" onclick="selectAnswer(this)">Scooby-Doo</button>
-                    <button class="option" onclick="selectAnswer(this)">The flintstones</button>
-                </div>
-            </div>
-             <!-- Question 10 -->
-             <div class="question">
-                <h2>Question 10: What subject was I best at in school?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Mathematics</button>
-                    <button class="option" onclick="selectAnswer(this)">History</button>
-                    <button class="option" onclick="selectAnswer(this)">Science</button>
-                    <button class="option" onclick="selectAnswer(this)">Literature</button>
-                </div>
-            </div>
-             <!-- Question 11 -->
-             <div class="question">
-                <h2>Question 11: What was my favorite childhood snack?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Potato chips</button>
-                    <button class="option" onclick="selectAnswer(this)">Chocolate bar</button>
-                    <button class="option" onclick="selectAnswer(this)">Popcorn</button>
-                    <button class="option" onclick="selectAnswer(this)">Gummies</button>
-                </div>
-            </div>
+    // Function to check the guess
+    function checkGuess(guess) {
+      let correctCode = puzzles[currentPuzzle].solution;
+      if (guess === correctCode) {
+        solvedPuzzles++;
+        document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
+        failedAttempts = 0;
+        currentPuzzle++;
+        if (solvedPuzzles >= 5) {
+          document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all 5 puzzles! You can refresh now.";
+          document.getElementById("userGuess").disabled = true;
+          document.getElementById("submitBtn").disabled = true;
 
-            <!-- Question 12-->
-            <div class="question">
-                <h2>Question 12: What's my favorite type of music?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Rock</button>
-                    <button class="option" onclick="selectAnswer(this)">Jazz</button>
-                    <button class="option" onclick="selectAnswer(this)">Classical</button>
-                    <button class="option" onclick="selectAnswer(this)">Hip Hop</button>
-                </div>
-            </div>
-            <!-- Question 13 -->
-            <div class="question">
-                <h2>Question 13: What's my favorite childhood game?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Tag</button>
-                    <button class="option" onclick="selectAnswer(this)">Hide & seek</button>
-                    <button class="option" onclick="selectAnswer(this)">Monopoly</button>
-                    <button class="option" onclick="selectAnswer(this)">Chess</button>
-                </div>
-            </div>
-             <!-- Question 14-->
-             <div class="question">
-                <h2>Question 14: Which instrument would I love to learn?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Guitor</button>
-                    <button class="option" onclick="selectAnswer(this)">Saxophone</button>
-                    <button class="option" onclick="selectAnswer(this)">Piano</button>
-                    <button class="option" onclick="selectAnswer(this)">Flutte</button>
-                </div>
-            </div>
+          // Show the pop-up notification
+          document.getElementById("overlay").style.display = "block";
+          document.getElementById("popup").style.display = "block";
 
-            <!-- Question 15 -->
-            <div class="question">
-                <h2>Question 15: What name do I enjoy most calling you?</h2>
-                <div class="options">
-                    <button class="option" onclick="selectAnswer(this)">Shaniba</button>
-                    <button class="option" onclick="selectAnswer(this)">Nyakato</button>
-                    <button class="option" onclick="selectAnswer(this)">Nakato</button>
-                    <button class="option" onclick="selectAnswer(this)">Pie</button>
-                </div>
-            </div>
-        
-        
-        
-        <!-- Score and Submit Button -->
-        <div id="score-container">
-            <h2 id="score"></h2>
-        </div>
-        <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
-        <button id="restart-btn" style="display:none;" onclick="restartQuiz()">Restart Quiz</button>
-    </div>
-
-    <script>
-        // Correct answers
-        const correctAnswers = ['Blue', 'Primary School', 'Tokyo', 'Apple pie', 'Football', 'Dog', 'Red', 'Ammunition', 'Tom & Jelly', 'Mathematics', 'Popcorn', 'Hip Hop', 'Hide & seek', 'Piano', 'Pie'];
-        let score = 0;
-
-        function selectAnswer(button) {
-            const parent = button.parentElement;
-            const siblings = parent.querySelectorAll('button');
-            siblings.forEach(sibling => sibling.classList.remove('selected'));
-            button.classList.add('selected');
+        } else {
+          setTimeout(loadNextPuzzle, 2000);
         }
-
-        function submitQuiz() {
-            score = 0;
-            const selectedOptions = document.querySelectorAll('.selected');
-            selectedOptions.forEach((option, index) => {
-                if (option.innerText === correctAnswers[index]) {
-                    score += 1;
-                }
-            });
-
-            const scoreElement = document.getElementById('score');
-            scoreElement.innerText = `You scored: ${score}/${correctAnswers.length}`;
-
-            // Display personalized message
-            let message = '';
-            if (score === correctAnswers.length) {
-                message = "Wow, you know me so well! 💕. Shaniba, always be my date.";
-            } else if (score > 0) {
-                message = "You're pretty close! 😊, should I give you a call you ask me where things failed?";
-            } else {
-                message = "Looks like we need a date to learn more about each other! 😄";
-            }
-
-            const messageElement = document.createElement('h3');
-            messageElement.innerText = message;
-            document.getElementById('score-container').appendChild(messageElement);
-
-            // Disable all buttons after submission
-            document.querySelectorAll('.option').forEach(button => button.disabled = true);
-
-            // Hide the submit button and show the restart button
-            document.getElementById('submit-btn').style.display = 'none';
-            document.getElementById('restart-btn').style.display = 'inline-block';
+      } else {
+        failedAttempts++;
+        document.getElementById("result").innerHTML = `❌ Incorrect. Try again! (${failedAttempts}/3 attempts)`;
+        if (failedAttempts >= 3) {
+          document.getElementById("submitBtn").style.display = 'none';
+          document.getElementById("shareBtn").style.display = 'block';
+          showShareOptions();
         }
+      }
+    }
 
-        function restartQuiz() {
-            score = 0;
-            document.getElementById('score').innerText = '';
+    // Function to load the next puzzle
+    function loadNextPuzzle() {
+      if (currentPuzzle < puzzles.length) {
+        document.getElementById("puzzleText").innerHTML = "The puzzle:";
+        document.getElementById("currentPuzzleClue").innerHTML = puzzles[currentPuzzle].clue; 
+        document.getElementById("userGuess").value = "";  
+        document.getElementById("result").innerHTML = "";  
+        document.getElementById("submitBtn").style.display = 'inline';  
+        document.getElementById("shareBtn").style.display = 'none';  
+      }
+    }
 
-            const message = document.querySelector('#score-container h3');
-            if (message) message.remove();
+    // Event listener for the Submit button
+    document.getElementById("submitBtn").addEventListener("click", function() {
+      const guess = document.getElementById("userGuess").value;
 
-            document.querySelectorAll('.selected').forEach(button => button.classList.remove('selected'));
+      if (guess.length !== 3 || isNaN(guess)) {
+        document.getElementById("result").innerHTML = "Please enter a valid 3-digit number.";
+        return;
+      }
 
-            document.querySelectorAll('.option').forEach(button => button.disabled = false);
+      checkGuess(guess);
+    });
 
-            document.getElementById('submit-btn').style.display = 'inline-block';
-            document.getElementById('restart-btn').style.display = 'none';
-        }
-    </script>
-
-    <style>
-        /* Basic styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color:gold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400vh;
-            font-family: 'Courier New', Courier, monospace;
-            background-image: url(images/blue-futuristic-waves-background-with-computer-code-technology_53876-119584.jpg);
-        }
-
-        .container {
-            background: #bfffd5;
-            padding: 2rem;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            max-width: 600px;
-            text-align: center;
-            animation: fadeIn 1.5s ease;
-        }
-        
-
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2rem;
-            font-family: 'Lobster', cursive;
-            color: #e90b28;
-        }
-        {
+    // Function to show sharing options
+    function showShareOptions() {
+      const shareOptionsHTML = `
+        <h3>Share this puzzle! (Ask help)</h3>
+        <button class="social-button whatsapp" onclick="shareOnWhatsApp()">
           
-            font-size: 1.5rem;
-           
-            color: #1523ff;
-           
-    font-family: 'Roboto', sans-serif;
+          
+          <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
+          Share on WhatsApp
+        </button>
+        <button class="social-button x" onclick="shareOnX()">
+          <img class="social-icon" src="https://images.app.goo.gl/nNVMr9fcoUHj6Zsv7" alt="X Logo">
+          Share on X
+        </button>
+      `;
+      document.getElementById("result").innerHTML = shareOptionsHTML;
+    }
 
-        }
+    // Function to share on WhatsApp
+    function shareOnWhatsApp() {
+      const message = "I just solved a puzzle! It looks to be so logical but interesting. Can you crack it? Join the game!";
+      const url = "https://shr.link/oj77i "; // Replace with your game URL
+      window.open(`https://wa.me/?text=${encodeURIComponent(message + " " + url)}`, '_blank');
+    }
 
-        .question {
-            margin-bottom: 20px;
-            font-family: 'parisienne 'cursive ;
-        }
+    // Function to share on X
+    function shareOnX() {
+      const message = "I just solved a puzzle! It was so tricky but interesting. Can you crack it? Join the game!";
+      const url = " https://shr.link/oj77i"; // Replace with your game URL
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(message + " " + url)}`, '_blank');
+    }
 
-        .options button {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    // Event listener for follow button
+    document.getElementById("followBtn").addEventListener("click", function() {
+      window.open("https://twitter.com/damnkampala", '_blank'); // Replace with your X profile link
+    });
 
-        .options button.selected {
-            background-color: #28a745;
-        }
+    // Event listeners for closing the pop-up and invite guide
+    document.getElementById("closePopup").addEventListener("click", function() {
+      document.getElementById("overlay").style.display = "none";
+      document.getElementById("popup").style.display = "none";
+    });
 
-        .options button:hover {
-            background-color: #0056b3;
-        }
+    document.getElementById("closeInvite").addEventListener("click", function() {
+      document.getElementById("inviteOverlay").style.display = "none";
+      document.getElementById("inviteGuide").style.display = "none";
+    });
 
-        #submit-btn, #restart-btn {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        #score-container {
-            margin-top: 20px;
-            font-size: 1.5rem;
-            color: #343a40;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-    </style>
+    // Load the first puzzle on page load
+    loadNextPuzzle();
+  </script>
 </body>
 </html>
