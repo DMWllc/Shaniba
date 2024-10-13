@@ -1,307 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iTech Web Design Puzzle Games</title>
-  <style>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <style >
+        /* Basic Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+}
+
+.book-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chapter {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: background-color 0.3s;
+}
+
+/* Locked Chapter Styling */
+.chapter.locked {
+    background-color: #f0f0f0;
+    opacity: 0.6;
+}
+
+.chapter h2 {
+    margin-top: 0;
+    color: #d9534f; /* Red color to indicate locked */
+}
+
+/* Input Fields */
+input[type="email"],
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Button Styling */
+button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Unlock Button Styling */
+button.unlock {
+    background-color: #007bff;
+}
+
+button.unlock:hover {
+    background-color: #0056b3;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
     body {
-      font-family: Arial, sans-serif;
-      background-color: #0081ff;
-      text-align: center;
-      padding: 50px;
+        padding: 10px;
     }
 
-    .container {
-      background-color: gold;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .chapter {
+        padding: 15px;
     }
 
-    h1 {
-      color: #4169e1;
-      font-size: 36px;
-    }
-
-    p {
-      font-size: 18px;
-      color: #333;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+    input[type="email"],
+    input[type="text"] {
+        width: calc(100% - 20px);
     }
 
     button {
-      background-color: #28a745;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 5px;
+        width: 100%;
+        padding: 12px;
     }
-
-    button:hover {
-      background-color: #218838;
-    }
-
-    #result {
-      margin-top: 20px;
-      font-size: 20px;
-    }
-
-    #shareBtn {
-      background-color: #25D366;
-    }
-
-    #submitBtn {
-      background-color: #007bff;
-    }
-
-    #submitBtn:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-
-    /* CSS for pop-up notification */
-    .popup {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
-
-    .popup h2 {
-      margin: 0 0 10px;
-      color: #333;
-    }
-
-    .popup button {
-      background-color: #4169e1;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-
-    /* CSS for invite guide */
-    .inviteGuide {
-      display: none;
-      position: fixed;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-    }
-
-    .social-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      margin: 5px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .whatsapp {
-      background-color: #25D366;
-      color: white;
-    }
-
-    .x {
-      background-color: #1DA1F2;
-      color: white;
-    }
-
-    .social-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 5px;
-    }
-  </style>
+}
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>iTech Web Design</h1>
-    <p id="puzzleText">Crack the Puzzle:</p>
-    <p id="currentPuzzleClue"></p>
-    <p>Enter the 3-digit code:</p>
-    <input type="text" id="userGuess" maxlength="3" placeholder="Enter code (e.g. 123)">
-    <button id="submitBtn">Submit</button>
-    <p id="result"></p>
-    
-    <!-- Share Button for WhatsApp -->
-    <button id="shareBtn" style="display:none;">Share on Social Media</button>
-  </div>
+    <div class="book-container">
+    <h1>Online Book</h1>
+    <div class="chapter locked" id="chapter1">
+        <h2>Chapter 1: Locked</h2>
+        <p>This chapter is locked. Please pay 1000 UGX to unlock.</p>
+        <input type="email" id="email1" placeholder="Enter your email to receive the code" />
+        <button onclick="processPayment(1)">Unlock Chapter 1</button>
+        <br>
+        <input type="text" id="code1" placeholder="Enter unlock code" />
+        <button onclick="verifyUnlockCode(1)">Submit Code</button>
+    </div>
 
-  <div class="overlay" id="overlay"></div>
-  <div class="popup" id="popup">
-    <h2>Follow Me for More Puzzles!</h2>
-    <p>Click the button below to follow me on X.</p>
-    <button id="followBtn">Follow on X</button>
-    <button id="closePopup">Close</button>
-  </div>
+    <div class="chapter locked" id="chapter2">
+        <h2>Chapter 2: Locked</h2>
+        <p>This chapter is locked. Please pay 1000 UGX to unlock.</p>
+        <input type="email" id="email2" placeholder="Enter your email to receive the code" />
+        <button onclick="processPayment(2)">Unlock Chapter 2</button>
+        <br>
+        <input type="text" id="code2" placeholder="Enter unlock code" />
+        <button onclick="verifyUnlockCode(2)">Submit Code</button>
+    </div>
+</div>
+<script>
+    // Function to handle payment and generate unlock code
+function processPayment(chapterNumber) {
+    const email = document.getElementById(`email${chapterNumber}`).value;
 
-  <div class="overlay" id="inviteOverlay"></div>
-  <div class="inviteGuide" id="inviteGuide">
-    <h2>Invite Your Friends!</h2>
-    <p>Share this game with your friends and challenge them to solve the puzzles!</p>
-    <p>Send them the link to join the fun and see who can solve it the fastest!</p>
-    <button id="closeInvite">Close</button>
-  </div>
-<script >
-  
-  // Puzzle data
-let puzzles = [
-  { clue: "The product and the difference of the last digit with first and second digits respectively is 4.", solution: "451" },
-  { clue: "The quotient of the product of the first and last digits by 2 is 3. The sum of all digits is 9.", solution: "243" },
-  { clue: "The quotient of the first two digits is 2. The difference of the sum of first two digits and last digit is 1.", solution: "631" },
-  { clue: "The last digit is the quotient of the sum of first two digits and last digit.", solution: "442" },
-  { clue: "The difference of the product of first and last digits and difference of 1 from second digit is 4. Digits sum to 10", solution: "352" }
-];
+    if (!email) {
+        alert("Please enter your email address.");
+        return;
+    }
 
-let currentPuzzle = 0;
-let solvedPuzzles = 0;
-let failedAttempts = 0;
+    // Redirect to Chipper Cash for payment
+    const paymentUrl = "https://chipper.me/@Donath98";
+    window.open(paymentUrl, "_blank");
 
-// Function to check the guess
-function checkGuess(guess) {
-  let correctCode = puzzles[currentPuzzle].solution;
-  if (guess === correctCode) {
-    solvedPuzzles++;
-    document.getElementById("result").innerHTML = "✔︎ Correct! Moving on to the next puzzle.";
-    failedAttempts = 0;
-    currentPuzzle++;
-    if (solvedPuzzles >= puzzles.length) {
-      document.getElementById("result").innerHTML = "🎉 Congratulations! You've solved all puzzles! You can refresh now.";
-      document.getElementById("userGuess").disabled = true;
-      document.getElementById("submitBtn").disabled = true;
+    // After payment, generate an unlock code
+    const unlockCode = generateUnlockCode(chapterNumber);
 
-      // Show the pop-up notification
-      document.getElementById("overlay").style.display = "block";
-      document.getElementById("popup").style.display = "block";
+    // Simulate sending unlock code via email (no backend here)
+    alert(`Unlock code for Chapter ${chapterNumber}: ${unlockCode}`);
+    saveUnlockCode(chapterNumber, unlockCode);
+}
 
+// Function to generate unlock code
+function generateUnlockCode(chapterNumber) {
+    return `chapter${chapterNumber}_` + Math.floor(Math.random() * 10000);
+}
+
+// Save the unlock code in localStorage to simulate keeping the chapter unlocked
+function saveUnlockCode(chapterNumber, code) {
+    localStorage.setItem(`unlockCode_chapter${chapterNumber}`, code);
+}
+
+// Verify unlock code entered by the user
+function verifyUnlockCode(chapterNumber) {
+    const enteredCode = document.getElementById(`code${chapterNumber}`).value;
+    const savedCode = localStorage.getItem(`unlockCode_chapter${chapterNumber}`);
+
+    if (enteredCode === savedCode) {
+        alert(`Chapter ${chapterNumber} unlocked!`);
+        document.getElementById(`chapter${chapterNumber}`).classList.remove("locked");
     } else {
-      setTimeout(loadNextPuzzle, 2000);
+        alert("Invalid unlock code. Please try again.");
     }
-  } else {
-    failedAttempts++;
-    document.getElementById("result").innerHTML = `❌ Incorrect. Try again! (${failedAttempts}/3 attempts)`;
-    if (failedAttempts >= 3) {
-      document.getElementById("submitBtn").style.display = 'none';
-      document.getElementById("shareBtn").style.display = 'block';
-      showShareOptions(); // Show sharing options after 3 failed attempts
-    }
-  }
 }
-
-// Function to load the next puzzle
-function loadNextPuzzle() {
-  if (currentPuzzle < puzzles.length) {
-    document.getElementById("puzzleText").innerHTML = "The puzzle:";
-    document.getElementById("currentPuzzleClue").innerHTML = puzzles[currentPuzzle].clue; 
-    document.getElementById("userGuess").value = "";  
-    document.getElementById("result").innerHTML = "";  
-    document.getElementById("submitBtn").style.display = 'inline';  
-    document.getElementById("shareBtn").style.display = 'none';  
-  }
-}
-
-// Event listener for the Submit button
-document.getElementById("submitBtn").addEventListener("click", function() {
-  const guess = document.getElementById("userGuess").value;
-
-  if (guess.length !== 3 || isNaN(guess)) {
-    document.getElementById("result").innerHTML = "Please enter a valid 3-digit number.";
-    return;
-  }
-
-  checkGuess(guess);
-});
-
-// Function to show sharing options
-function showShareOptions() {
-  const currentPuzzleClue = puzzles[currentPuzzle].clue; // Get the clue of the current puzzle
-  const shareOptionsHTML = `
-    <h3>Share this puzzle! (Ask for help)</h3>
-    <button class="social-button whatsapp" onclick="shareOnWhatsApp('${currentPuzzleClue}')">
-      <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo"> Share on WhatsApp
-    </button>
-    <button class="social-button x" onclick="shareOnX('${currentPuzzleClue}')">
-      <img class="social-icon" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Twitter-logo.svg" alt="Twitter Logo"> Share on X
-    </button>
-  `;
-  document.getElementById("result").innerHTML += shareOptionsHTML;
-}
-
-// Function to share on WhatsApp
-function shareOnWhatsApp(clue) {
-  const message = `I've completely failed to solve this puzzle:
-   "${clue}". 
-   Can you help me? Check it out here: https://shr.link/oj77i`;
-  const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-}
-
-// Function to share on X
-function shareOnX(clue) {
-  const message = `I’m currently trying to solve a puzzle:
-   "${clue}". 
-   Can you help me? Check it out here: https://shr.link/oj77i`;
-  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-}
-
-// Function to handle follow button click
-document.getElementById("followBtn").addEventListener("click", function() {
-  window.open("https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09", '_blank');
-});
-
-// Event listener to close the pop-up
-document.getElementById("closePopup").addEventListener("click", function() {
-  document.getElementById("overlay").style.display = "none";
-  document.getElementById("popup").style.display = "none";
-});
-
-// Event listener to close the invite guide
-document.getElementById("closeInvite").addEventListener("click", function() {
-  document.getElementById("inviteOverlay").style.display = "none";
-  document.getElementById("inviteGuide").style.display = "none";
-});
-
-// Initial load of the first puzzle
-loadNextPuzzle();
-  
-  
-  
-  </script>
+</script>
 </body>
 </html>
