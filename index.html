@@ -3,93 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Payment Chapter Unlock</title>
+    <title>Book Chapter Unlock</title>
     <link rel="stylesheet" href="styles.css">
     <style >
-        /* General body styling */
+        /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f4f9;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* Chapter container styling */
 .chapter {
     background-color: white;
+    border: 2px solid #007bff;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
     padding: 20px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.chapter.locked {
-    background-color: #ffcccc; /* Indicate locked chapter with a reddish tint */
-    opacity: 0.6;
-}
-
-.chapter h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.chapter p {
-    font-size: 16px;
-    color: #666;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    text-align: center;
 }
 
-/* Button styling */
+/* Locked Chapter */
+.locked {
+    background-color: #ffeded;
+    border-color: #dc3545;
+}
+
+.locked h2 {
+    color: #dc3545;
+}
+
+.locked p {
+    color: #d9534f;
+}
+
+/* Unlocked Chapter */
+.unlocked {
+    background-color: #e6ffe6;
+    border-color: #28a745;
+}
+
+.unlocked h2 {
+    color: #28a745;
+}
+
+.unlocked p {
+    color: #155724;
+}
+
+/* Input Fields */
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Buttons */
 button {
+    width: 100%;
     background-color: #007bff;
     color: white;
+    padding: 12px;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* Input fields */
-input[type="email"], input[type="text"] {
-    width: calc(100% - 22px);
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+/* Hidden Section */
+.hidden {
+    display: none;
 }
 
-input[type="email"]:focus, input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Unlock code section */
-#unlockCodeSection1 {
-    margin-top: 20px;
-}
-
-/* For unlocked chapters */
-.unlocked {
-    background-color: #ccffcc; /* Indicate unlocked chapter with a greenish tint */
-    opacity: 1;
-}
-
+/* Alerts */
 .alert {
-    font-size: 14px;
     color: red;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Success Message */
+.alert.success {
+    color: green;
+    display: block;
+}
+
+/* Centered content */
+#chapter1 {
+    margin-top: 50px;
+}
+
+@media (max-width: 600px) {
+    .chapter {
+        width: 95%;
+    }
 }
     </style>
 </head>
@@ -101,14 +123,15 @@ input[type="email"]:focus, input[type="text"]:focus {
         <p>This chapter is locked. Please make a payment to unlock it.</p>
         
         <!-- Payment instructions -->
-        <p>Make a payment of <strong>1000 UGX</strong> via mobile money to: <br> <strong>+256777309128</strong> and provide your email below to receive the unlock code.</p>
+        <p>Make a payment of <strong>1000 UGX</strong> via mobile money to: <br> <strong>+256777309128</strong> and provide your transaction ID below for verification.</p>
         
-        <!-- Email input and button to confirm payment -->
-        <input type="email" id="email1" placeholder="Enter your email to receive unlock code">
-        <button onclick="confirmPayment(1)">I have paid</button>
+        <!-- User inputs transaction ID and email -->
+        <input type="text" id="transactionID1" placeholder="Enter your transaction ID">
+        <input type="email" id="email1" placeholder="Enter your email">
+        <button onclick="submitPayment(1)">Submit Payment for Verification</button>
 
         <!-- Unlock code input -->
-        <div id="unlockCodeSection1">
+        <div id="unlockCodeSection1" class="hidden">
             <input type="text" id="code1" placeholder="Enter unlock code">
             <button onclick="verifyUnlockCode(1)">Submit Unlock Code</button>
         </div>
@@ -116,33 +139,16 @@ input[type="email"]:focus, input[type="text"]:focus {
         <p class="alert" id="alert1"></p>
     </div>
 
-    <script>
-        function confirmPayment(chapterNumber) {
-    const email = document.getElementById(`email${chapterNumber}`).value;
-    if (!email) {
-        alert("Please enter your email address.");
-        return;
-    }
+    <script >
+        function generateUniqueUnlockCode(chapterNumber, email) {
+    // Generate a unique code using the chapter number and email
+    const timestamp = Date.now();  // Current time in milliseconds
+    const code = `${chapterNumber}-${timestamp}-${Math.floor(1000 + Math.random() * 9000)}`;  // A unique code based on time and random number
 
-    // Alert to make manual payment
-    alert("Please make a payment of 1000 UGX to +256777309128. Once payment is verified, you will receive an unlock code via email.");
+    // Optionally, store the code somewhere for reference (localStorage is just for demo)
+    localStorage.setItem(`unlockCodeChapter${chapterNumber}`, code);
 
-    // Here you would manually confirm payment, send the code, and store unlock code.
-}
-
-function verifyUnlockCode(chapterNumber) {
-    const enteredCode = document.getElementById(`code${chapterNumber}`).value;
-    
-    // Replace this with the actual code you send to the user
-    const validCode = "1234"; 
-
-    if (enteredCode === validCode) {
-        alert(`Chapter ${chapterNumber} unlocked!`);
-        document.getElementById(`chapter${chapterNumber}`).classList.remove("locked");
-        document.getElementById(`chapter${chapterNumber}`).classList.add("unlocked");
-    } else {
-        alert("Invalid unlock code. Please try again.");
-    }
+    return code;
 }
     </script>
 
