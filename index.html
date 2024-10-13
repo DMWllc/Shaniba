@@ -161,7 +161,7 @@ document.getElementById("transactionForm").addEventListener("submit", function(e
 
 // Unlock code functionality
 document.getElementById("unlockButton").addEventListener("click", function() {
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value; // Retrieve email from input
     const unlockCodeInput = document.getElementById("unlockCode").value;
 
     // Check if the unlock code is valid
@@ -186,7 +186,6 @@ document.getElementById("unlockButton").addEventListener("click", function() {
         unlockMessage.style.display = "block";
     }
 });
-    </script> 
-    <!-- Link to your JavaScript -->
+</script >
 </body>
 </html>
