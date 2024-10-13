@@ -1,191 +1,216 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Chapter Unlock</title>
-    <link rel="stylesheet" href="styles.css"> 
-    <!-- Link to your CSS -->
-    <style >
-        /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Reflex Challenge</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1c1c1c; /* Dark background */
+      font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevent scrollbars */
+    }
 
-.chapter, .unlock-section, .content {
-    background-color: white;
-    border: 2px solid #007bff;
-    border-radius: 8px;
-    padding: 20px;
-    width: 80%;
-    max-width: 400px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    text-align: center;
-}
+    .container {
+      text-align: center;
+    }
 
-/* Locked Chapter */
-.locked {
-    background-color: #ffeded;
-    border-color: #dc3545;
-}
+    .message {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #fff; /* White text */
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
 
-.locked h2 {
-    color: #dc3545;
-}
+    .button {
+      padding: 20px 40px;
+      background-color: #00bfff;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+    }
 
-/* Unlock Section */
-.unlock-section {
-    margin-top: 20px;
-}
+    .button:hover {
+      background-color: #007acc;
+      transform: scale(1.1); /* Slightly grow on hover */
+      box-shadow: 0 0 20px rgba(0, 191, 255, 1); /* Brighter glow on hover */
+    }
 
-/* Input Fields */
-input[type="text"], input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    font-size: 16px;
-}
+    .hidden {
+      display: none;
+    }
 
-/* Buttons */
-button {
-    width: 100%;
-    background-color: #007bff;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+    .score-display {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #fff; /* White text */
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
 
-button:hover {
-    background-color: #0056b3;
-}
+    .share-button {
+      padding: 10px 20px;
+      background-color: #1DA1F2;
+      color: white;
+      font-size: 1.2rem;
+      margin-top: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+      box-shadow: 0 0 10px rgba(29, 161, 242, 0.7);
+    }
 
-/* Alerts */
-.alert {
-    color: red;
-    margin-top: 10px;
-    display: none;
-}
+    .share-button:hover {
+      background-color: #007acc;
+      transform: scale(1.1); /* Slightly grow on hover */
+      box-shadow: 0 0 20px rgba(29, 161, 242, 1); /* Brighter glow on hover */
+    }
 
-/* Success Message */
-.alert.success {
-    color: green;
-    display: block;
-}
-    </style>
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); }
+      50% { text-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+      100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); }
+    }
+
+    .glow {
+      animation: glow 1.5s infinite alternate; /* Glowing effect */
+    }
+
+    /* Mobile adjustments */
+    @media only screen and (max-width: 600px) {
+      .message {
+        font-size: 1.5rem;
+      }
+
+      .button {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+      }
+
+      .score-display {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="chapter locked" id="chapter1">
-        <h2>Chapter 1: Locked</h2>
-        <p>This chapter is locked. Please enter your transaction ID to unlock it.</p>
-        <form id="transactionForm">
-            <label for="transactionId">Enter Transaction ID:</label>
-            <input type="text" id="transactionId" name="transactionId" required>
-            <label for="email">Enter Your Email:</label>
-            <input type="email" id="email" name="email" required>
-            <button type="submit">Submit</button>
-        </form>
-        <p class="alert" id="alertMessage"></p>
-    </div>
 
-    <!-- Unlock Code Section -->
-    <div class="unlock-section" id="unlockSection" style="display: none;">
-        <h3>Enter Unlock Code:</h3>
-        <input type="text" id="unlockCode" placeholder="Enter your unlock code" required>
-        <button id="unlockButton">Unlock Chapter</button>
-        <p class="alert" id="unlockMessage"></p>
-    </div>
+<div class="container">
+  <div id="message" class="message glow">How fast is your reflex arc!<br>Let's play! </div>
+  <button id="action-button" class="button">Start</button>
+  <div id="score" class="score-display hidden"></div>
+  <button id="share-button" class="share-button hidden">Share on X<br>Invite more challengers!</button>
+  <div id="follow-message" class="hidden">
+    <p style="color: #fff;">Follow me for more challenges: 
+      <a href="https://x.com/DamnKampala?t=0clp0psKrR7cU8LZcv70yQ&s=09" target="_blank" style="color: #1DA1F2;">@DamnKampala</a>
+    </p>
+  </div>
+</div>
 
-    <!-- Locked Content -->
-    <div class="content" id="lockedContent" style="display: none;">
-        <h2>Chapter 1 Content</h2>
-        <p>This is the content of Chapter 1. You have successfully unlocked it!</p>
-    </div>
+<script>
+  let startTime;
+  let timeout;
+  let gameStarted = false;
+  let greenLightOn = false;
+  let reactionTimeout;
 
-    <script>
-        // Predefined unlock codes for specific emails and chapters
-const unlockCodes = {
-    'nowamaanidonath6@gmail.com': {
-        'chapter1': 'C0123',
-    },
-    // You can add more emails and their corresponding unlock codes here
-};
+  const messageElement = document.getElementById('message');
+  const actionButton = document.getElementById('action-button');
+  const scoreDisplay = document.getElementById('score');
+  const shareButton = document.getElementById('share-button');
+  const followMessage = document.getElementById('follow-message');
 
-document.getElementById("transactionForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent form submission
-
-    const transactionId = document.getElementById("transactionId").value;
-    const email = document.getElementById("email").value;
-
-    // Construct the message for email and WhatsApp
-    const message = `New Unlock Request:\n\nTransaction ID: ${transactionId}\nEmail: ${email}\n`;
-
-    // Email notification (using mailto)
-    const emailSubject = encodeURIComponent("New Unlock Request");
-    const emailBody = encodeURIComponent(message);
-    const emailLink = `mailto:nowamaanidonath6@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-    window.location.href = emailLink;
-
-    // WhatsApp notification
-    const whatsappMessage = encodeURIComponent(message);
-    const whatsappLink = `https://wa.me/256777309128?text=${whatsappMessage}`;
-    window.open(whatsappLink, "_blank");
-
-    // Show unlock code section
-    document.getElementById("unlockSection").style.display = "block";
-
-    // Show success message
-    const alertMessage = document.getElementById("alertMessage");
-    alertMessage.textContent = "Your request has been sent! Please enter your unlock code.";
-    alertMessage.classList.add("success");
-    alertMessage.style.display = "block";
-
-    // Reset form fields
-    document.getElementById("transactionId").value = "";
-    document.getElementById("email").value = "";
-});
-
-// Unlock code functionality
-document.getElementById("unlockButton").addEventListener("click", function() {
-    const email = document.getElementById("email").value; // Retrieve email from input
-    const unlockCodeInput = document.getElementById("unlockCode").value;
-
-    // Check if the unlock code is valid
-    const validCode = unlockCodes[email]?.chapter1; // Check for chapter 1 unlock code
-    if (unlockCodeInput === validCode) {
-        // Show locked content
-        document.getElementById("lockedContent").style.display = "block";
-
-        // Show unlock success message
-        const unlockMessage = document.getElementById("unlockMessage");
-        unlockMessage.textContent = "Chapter unlocked successfully!";
-        unlockMessage.classList.add("success");
-        unlockMessage.style.display = "block";
-
-        // Hide unlock section
-        document.getElementById("unlockSection").style.display = "none";
+  actionButton.addEventListener('click', () => {
+    if (!gameStarted) {
+      startGame();
+    } else if (greenLightOn) {
+      checkReaction();
     } else {
-        // Show error message
-        const unlockMessage = document.getElementById("unlockMessage");
-        unlockMessage.textContent = "Invalid unlock code. Please try again.";
-        unlockMessage.classList.remove("success");
-        unlockMessage.style.display = "block";
+      earlyClick();
     }
-});
-</script >
+  });
+
+  function startGame() {
+    gameStarted = true;
+    greenLightOn = false;
+    messageElement.textContent = 'Waiting......';
+    actionButton.textContent = '...';
+
+    // Random delay between 2-5 seconds (2000ms to 5000ms)
+    const delay = Math.floor(Math.random() * 3000) + 2000;
+    
+    timeout = setTimeout(() => {
+      greenLightOn = true;
+      messageElement.textContent = 'Go!';
+      startTime = new Date().getTime();
+      actionButton.textContent = 'Tap!';
+      
+      // Set a 2-second window for the player to react
+      reactionTimeout = setTimeout(() => {
+        if (greenLightOn) {
+          tooLate();
+        }
+      }, 2000); // 2 seconds to tap
+    }, delay);
+  }
+
+  function checkReaction() {
+    const reactionTime = new Date().getTime() - startTime;
+    gameStarted = false;
+    greenLightOn = false;
+    clearTimeout(timeout);
+    clearTimeout(reactionTimeout);
+
+    messageElement.textContent = `Your reaction time: ${reactionTime}ms`;
+    scoreDisplay.textContent = `Your score: ${reactionTime}ms`;
+    scoreDisplay.classList.remove('hidden');
+    shareButton.classList.remove('hidden');
+    followMessage.classList.remove('hidden');
+    actionButton.textContent = 'Play Again';
+  }
+
+  function earlyClick() {
+    messageElement.textContent = 'Too soon! Wait a little bit.';
+    gameStarted = false;
+    greenLightOn = false;
+    clearTimeout(timeout);
+    clearTimeout(reactionTimeout);
+    actionButton.textContent = 'Try Again';
+    scoreDisplay.classList.add('hidden');
+    shareButton.classList.add('hidden');
+    followMessage.classList.add('hidden');
+  }
+
+  function tooLate() {
+    gameStarted = false;
+    greenLightOn = false;
+    messageElement.textContent = 'Too slow! You didn\'t react in time.';
+    actionButton.textContent = 'Try Again';
+    scoreDisplay.classList.add('hidden');
+    shareButton.classList.add('hidden');
+    followMessage.classList.add('hidden');
+  }
+
+  // Share score on X
+  shareButton.addEventListener('click', () => {
+    const text = `Hi, how fast can you react? Test your reaction rate. I just got a reaction time of ${scoreDisplay.textContent.split(": ")[1]} in the Quick Reflex Challenge! Can you beat my score? Play here: https://shr.link/njq38`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(twitterUrl, '_blank');
+  });
+  
+  
+</script>
+
 </body>
 </html>
