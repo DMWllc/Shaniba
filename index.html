@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Chapter Unlock</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> 
+    <!-- Link to your CSS -->
     <style >
         /* General Styles */
 body {
@@ -15,10 +16,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
 }
 
-.chapter {
+.chapter, .unlock-section, .content {
     background-color: white;
     border: 2px solid #007bff;
     border-radius: 8px;
@@ -40,22 +42,9 @@ body {
     color: #dc3545;
 }
 
-.locked p {
-    color: #d9534f;
-}
-
-/* Unlocked Chapter */
-.unlocked {
-    background-color: #e6ffe6;
-    border-color: #28a745;
-}
-
-.unlocked h2 {
-    color: #28a745;
-}
-
-.unlocked p {
-    color: #155724;
+/* Unlock Section */
+.unlock-section {
+    margin-top: 20px;
 }
 
 /* Input Fields */
@@ -85,11 +74,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Hidden Section */
-.hidden {
-    display: none;
-}
-
 /* Alerts */
 .alert {
     color: red;
@@ -102,55 +86,107 @@ button:hover {
     color: green;
     display: block;
 }
-
-/* Centered content */
-#chapter1 {
-    margin-top: 50px;
-}
-
-@media (max-width: 600px) {
-    .chapter {
-        width: 95%;
-    }
-}
     </style>
 </head>
 <body>
-
-    <!-- Chapter 1 (Locked) -->
-    <div id="chapter1" class="chapter locked">
-        <h2>Chapter 1 (Locked)</h2>
-        <p>This chapter is locked. Please make a payment to unlock it.</p>
-        
-        <!-- Payment instructions -->
-        <p>Make a payment of <strong>1000 UGX</strong> via mobile money to: <br> <strong>+256777309128</strong> and provide your transaction ID below for verification.</p>
-        
-        <!-- User inputs transaction ID and email -->
-        <input type="text" id="transactionID1" placeholder="Enter your transaction ID">
-        <input type="email" id="email1" placeholder="Enter your email">
-        <button onclick="submitPayment(1)">Submit Payment for Verification</button>
-
-        <!-- Unlock code input -->
-        <div id="unlockCodeSection1" class="hidden">
-            <input type="text" id="code1" placeholder="Enter unlock code">
-            <button onclick="verifyUnlockCode(1)">Submit Unlock Code</button>
-        </div>
-
-        <p class="alert" id="alert1"></p>
+    <div class="chapter locked" id="chapter1">
+        <h2>Chapter 1: Locked</h2>
+        <p>This chapter is locked. Please enter your transaction ID to unlock it.</p>
+        <form id="transactionForm">
+            <label for="transactionId">Enter Transaction ID:</label>
+            <input type="text" id="transactionId" name="transactionId" required>
+            <label for="email">Enter Your Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p class="alert" id="alertMessage"></p>
     </div>
 
-    <script >
-        function generateUniqueUnlockCode(chapterNumber, email) {
-    // Generate a unique code using the chapter number and email
-    const timestamp = Date.now();  // Current time in milliseconds
-    const code = `${chapterNumber}-${timestamp}-${Math.floor(1000 + Math.random() * 9000)}`;  // A unique code based on time and random number
+    <!-- Unlock Code Section -->
+    <div class="unlock-section" id="unlockSection" style="display: none;">
+        <h3>Enter Unlock Code:</h3>
+        <input type="text" id="unlockCode" placeholder="Enter your unlock code" required>
+        <button id="unlockButton">Unlock Chapter</button>
+        <p class="alert" id="unlockMessage"></p>
+    </div>
 
-    // Optionally, store the code somewhere for reference (localStorage is just for demo)
-    localStorage.setItem(`unlockCodeChapter${chapterNumber}`, code);
+    <!-- Locked Content -->
+    <div class="content" id="lockedContent" style="display: none;">
+        <h2>Chapter 1 Content</h2>
+        <p>This is the content of Chapter 1. You have successfully unlocked it!</p>
+    </div>
 
-    return code;
-}
-    </script>
+    <script>
+        // Predefined unlock codes for specific emails and chapters
+const unlockCodes = {
+    'nowamaanidonath6@gmail.com': {
+        'chapter1': 'CODE123',
+    },
+    // You can add more emails and their corresponding unlock codes here
+};
 
+document.getElementById("transactionForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent form submission
+
+    const transactionId = document.getElementById("transactionId").value;
+    const email = document.getElementById("email").value;
+
+    // Construct the message for email and WhatsApp
+    const message = `New Unlock Request:\n\nTransaction ID: ${transactionId}\nEmail: ${email}\n`;
+
+    // Email notification (using mailto)
+    const emailSubject = encodeURIComponent("New Unlock Request");
+    const emailBody = encodeURIComponent(message);
+    const emailLink = `mailto:nowamaanidonath6@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+    window.location.href = emailLink;
+
+    // WhatsApp notification
+    const whatsappMessage = encodeURIComponent(message);
+    const whatsappLink = `https://wa.me/256777309128?text=${whatsappMessage}`;
+    window.open(whatsappLink, "_blank");
+
+    // Show unlock code section
+    document.getElementById("unlockSection").style.display = "block";
+
+    // Show success message
+    const alertMessage = document.getElementById("alertMessage");
+    alertMessage.textContent = "Your request has been sent! Please enter your unlock code.";
+    alertMessage.classList.add("success");
+    alertMessage.style.display = "block";
+
+    // Reset form fields
+    document.getElementById("transactionId").value = "";
+    document.getElementById("email").value = "";
+});
+
+// Unlock code functionality
+document.getElementById("unlockButton").addEventListener("click", function() {
+    const email = document.getElementById("email").value;
+    const unlockCodeInput = document.getElementById("unlockCode").value;
+
+    // Check if the unlock code is valid
+    const validCode = unlockCodes[email]?.chapter1; // Check for chapter 1 unlock code
+    if (unlockCodeInput === validCode) {
+        // Show locked content
+        document.getElementById("lockedContent").style.display = "block";
+
+        // Show unlock success message
+        const unlockMessage = document.getElementById("unlockMessage");
+        unlockMessage.textContent = "Chapter unlocked successfully!";
+        unlockMessage.classList.add("success");
+        unlockMessage.style.display = "block";
+
+        // Hide unlock section
+        document.getElementById("unlockSection").style.display = "none";
+    } else {
+        // Show error message
+        const unlockMessage = document.getElementById("unlockMessage");
+        unlockMessage.textContent = "Invalid unlock code. Please try again.";
+        unlockMessage.classList.remove("success");
+        unlockMessage.style.display = "block";
+    }
+});
+    </script> 
+    <!-- Link to your JavaScript -->
 </body>
 </html>
