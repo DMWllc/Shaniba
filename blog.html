@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/favicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>IMF-Data collection Centre</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <!-- header section strats -->
+  <header class="header_section innerpage_header">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg custom_nav-container">
+        <a class="navbar-brand" href="index.html">
+          <span>
+            IMF Data capture
+          </span>
+        </a>
+        <div class="" id="">
+
+          <div class="custom_menu-btn">
+            <button onclick="openNav()">
+              <span class="s-1"> </span>
+              <span class="s-2"> </span>
+              <span class="s-3"> </span>
+            </button>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="shop.html">Shop</a>
+                <a href="blog.html">Blog</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- end header section -->
+
+  <!-- blog section -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Imperial Monetary Fund Members Data Collection</title>
+      <link rel="stylesheet" href="styles.css">
+      <style >
+          /* Basic page styling */
+  body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+      color: #333;
+  }
+  
+  /* Form title styling */
+  h2 {
+      text-align: center;
+      color: #333;
+      background-color: #87cefa;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+  }
+  
+  /* Fieldset styling for better structure */
+  fieldset {
+      border: 2px solid #87cefa;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #f7faff;
+      border-radius: 10px;
+  }
+  
+  /* Legend styling */
+  legend {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #4682b4;
+  }
+  
+  /* Table styling for structured layout */
+  .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+      background-color: #ffffff;
+  }
+  
+  /* Table cells and header styling */
+  .data-table td, .data-table th {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+  }
+  
+  /* Header cell styling */
+  .data-table th {
+      background-color: #b0c4de;
+      color: white;
+  }
+  
+  /* Form input fields */
+  .data-table input[type="text"], 
+  .data-table input[type="number"], 
+  .data-table input[type="date"], 
+  .data-table input[type="tel"], 
+  .data-table input[type="file"], 
+  .data-table select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+  
+  /* Submit button styling */
+  button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #4682b4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for button */
+  button:hover {
+      background-color: #5a9bd4;
+  }
+  
+  /* Image preview styling */
+  img {
+      max-width: 150px;  /* Maximum width for image preview */
+      max-height: 200px; /* Maximum height for image preview */
+      display: block;
+      margin-top: 10px;
+      border: 1px solid #ddd;
+      padding: 5px;
+      border-radius: 8px;
+      background-color: #f7f7f7;
+  }
+  
+  /* Responsive form layout */
+  form {
+      max-width: 800px;
+      margin: auto;
+  }
+  
+  /* Hide father details when deceased */
+  .father-details {
+      display: table-row;
+  }
+      </style>
+      
+  </head>
+  <body>
+      <h2>Imperial Monetary Fund Members Data Collection</h2>
+      
+      <form action="submit.php" method="POST" enctype="multipart/form-data">
+          <!-- MEMBER PERSONAL DETAILS -->
+          <fieldset>
+              <legend>Member Personal Details</legend>
+              <table class="data-table">
+                  <tbody>
+                      <tr>
+                          <td><label for="passportPhoto">Passport Photo (JPEG/PNG)</label></td>
+                          <td>
+                              <input type="file" name="passportPhoto" id="passportPhoto" accept="image/*" required onchange="previewImage(event, 'passportPreview')">
+                              <br>
+                              <img id="passportPreview" src="#" alt="Passport Photo Preview" style="display: none;">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><label for="surname">Surname</label></td>
+                          <td><input type="text" name="surname" id="surname" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="givenName">Given Name</label></td>
+                          <td><input type="text" name="givenName" id="givenName" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="dob">Date of Birth</label></td>
+                          <td><input type="date" name="dob" id="dob" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="nin">National ID (NIN)</label></td>
+                          <td><input type="text" name="nin" id="nin" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="idFront">ID Image (Front)</label></td>
+                          <td>
+                              <input type="file" name="idFront" id="idFront" accept="image/*" required onchange="previewImage(event, 'idFrontPreview')">
+                              <br>
+                              <img id="idFrontPreview" src="#" alt="ID Front Preview" style="display: none;">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><label for="idBack">ID Image (Back)</label></td>
+                          <td>
+                              <input type="file" name="idBack" id="idBack" accept="image/*" required onchange="previewImage(event, 'idBackPreview')">
+                              <br>
+                              <img id="idBackPreview" src="#" alt="ID Back Preview" style="display: none;">
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><label for="indexNumber">Index Number</label></td>
+                          <td><input type="text" name="indexNumber" id="indexNumber" minlength="8" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="birthAddress">Address of Birth</label></td>
+                          <td><input type="text" name="birthAddress" id="birthAddress" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="currentAddress">Current Address</label></td>
+                          <td><input type="text" name="currentAddress" id="currentAddress" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="yearAtSchool">Year While at School</label></td>
+                          <td><input type="text" name="yearAtSchool" id="yearAtSchool" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="membershipStart">Membership Start Date</label></td>
+                          <td><input type="date" name="membershipStart" id="membershipStart" required></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </fieldset>
+          
+          <!-- FATHER'S DETAILS -->
+          <fieldset>
+              <legend>Father's Details</legend>
+              <table class="data-table">
+                  <tbody>
+                      <tr>
+                          <td><label for="fatherStatus">Father Status</label></td>
+                          <td>
+                              <select id="fatherStatus" name="fatherStatus" onchange="toggleFatherDetails()" required>
+                                  <option value="alive">Alive</option>
+                                  <option value="deceased">Deceased</option>
+                              </select>
+                          </td>
+                      </tr>
+                      <tr class="father-details">
+                          <td><label for="fatherName">Father's Name</label></td>
+                          <td><input type="text" name="fatherName" id="fatherName" required></td>
+                      </tr>
+                      <tr class="father-details">
+                          <td><label for="fatherContact">Father's Contact</label></td>
+                          <td><input type="tel" name="fatherContact" id="fatherContact" required></td>
+                      </tr>
+                      <tr class="father-details">
+                          <td><label for="fatherOccupation">Father's Occupation</label></td>
+                          <td><input type="text" name="fatherOccupation" id="fatherOccupation" required></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </fieldset>
+  
+          <!-- CURRENT JOB DETAILS -->
+          <fieldset>
+              <legend>Current Job Details</legend>
+              <table class="data-table">
+                  <tbody>
+                      <tr>
+                          <td><label for="workplaceAddress">Address of Workplace</label></td>
+                          <td><input type="text" name="workplaceAddress" id="workplaceAddress" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="employerContact">Employer's Contact</label></td>
+                          <td><input type="tel" name="employerContact" id="employerContact" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="timeAtWork">Time Spent at Workplace (Years)</label></td>
+                          <td><input type="number" name="timeAtWork" id="timeAtWork" required></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </fieldset>
+  
+          <!-- NEXT OF KIN DETAILS -->
+          <fieldset>
+              <legend>Next of Kin Details</legend>
+              <table class="data-table">
+                  <tbody>
+                      <tr>
+                          <td><label for="kinName">Next of Kin Name</label></td>
+                          <td><input type="text" name="kinName" id="kinName" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="kinRelationship">Relationship to Member</label></td>
+                          <td><input type="text" name="kinRelationship" id="kinRelationship" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="kinContact">Next of Kin Contact</label></td>
+                          <td><input type="tel" name="kinContact" id="kinContact" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="kinAddress">Next of Kin Address</label></td>
+                          <td><input type="text" name="kinAddress" id="kinAddress"></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </fieldset>
+  
+          <!-- EMERGENCY CONTACT DETAILS -->
+          <fieldset>
+              <legend>Emergency Contact Details</legend>
+              <table class="data-table">
+                  <tbody>
+                      <tr>
+                          <td><label for="emergencyContactName">Emergency Contact Name</label></td>
+                          <td><input type="text" name="emergencyContactName" id="emergencyContactName" required></td>
+                      </tr>
+                      <tr>
+                          <td><label for="emergencyContactPhone">Emergency Contact Phone</label></td>
+                          <td><input type="tel" name="emergencyContactPhone" id="emergencyContactPhone" required></td>
+                      </tr>
+                      
+                      
+                      
+                  </tbody>
+                 
+                      
+                      
+                  
+              </table>
+              
+              <tbody >
+                  
+                  <tr>
+      <td><label for="documentUpload">Upload Document (PDF/DOC)</label></td>
+      <td>
+          <input type="file" name="documentUpload" id="documentUpload" accept=".pdf,.doc,.docx" required onchange="checkFileSize(event)">
+          <small>Maximum size: 1MB</small>
+      </td>
+  </tr>
+              </tbody>
+          </fieldset>
+  
+          <br>
+          <button type="submit">Submit</button>
+      </form>
+  
+      <!-- JavaScript for image preview and conditional father details -->
+      <script>
+          // Image preview function
+  function previewImage(event, previewId) {
+      const reader = new FileReader();
+      reader.onload = function() {
+          const output = document.getElementById(previewId);
+          output.src = reader.result;
+          output.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+  }
+  
+  // Show or hide Father's Details based on status
+  function toggleFatherDetails() {
+      const fatherStatus = document.getElementById('fatherStatus').value;
+      const fatherDetails = document.querySelectorAll('.father-details');
+      
+      if (fatherStatus === 'deceased') {
+          fatherDetails.forEach(detail => {
+              detail.style.display = 'none';
+          });
+      } else {
+          fatherDetails.forEach(detail => {
+              detail.style.display = 'table-row'; // Show all rows for alive father
+          });
+      }
+  }
+  
+  // Initialize the form on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      toggleFatherDetails(); // Run to set the initial state based on default select value
+  });
+  // Check file size for document upload
+  function checkFileSize(event) {
+      const file = event.target.files[0];
+      const maxSize = 1 * 1024 * 1024; // 1 MB in bytes
+  
+      if (file.size > maxSize) {
+          alert("File size exceeds 1MB. Please upload a smaller file.");
+          event.target.value = ""; // Clear the input
+      }
+  }
+  
+  
+          
+          
+      </script>
+ 
+<br>
+  <!-- info section -->
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row info_form_social_row">
+        <div class="col-md-8 col-lg-9">
+          <div class="info_form">
+            <form action="">
+              <input type="email" placeholder="Enter your email">
+              <button>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-3">
+
+          <div class="social_box">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row info_main_row">
+        <div class="col-md-6 col-lg-3">
+          <div class="info_links">
+            <h4>
+              Menu
+            </h4>
+            <div class="info_links_menu">
+              <a href="index.html">Home</a>
+              <a href="about.html">About</a>
+              <a href="shop.html">Shop</a>
+              <a href="blog.html">Blog</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_insta">
+            <h4>
+              Instagram
+            </h4>
+            <div class="insta_box">
+              <div class="img-box">
+                <img src="images/p1.png" alt="">
+              </div>
+              <p>
+                long established fact that a reader
+              </p>
+            </div>
+            <div class="insta_box">
+              <div class="img-box">
+                <img src="images/p2.png" alt="">
+              </div>
+              <p>
+                long established fact that a reader
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_detail">
+            <h4>
+              About Us
+            </h4>
+            <p class="mb-0">
+              when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h4>
+            Contact Us
+          </h4>
+          <div class="info_contact">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Location
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call +01 1234567890
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope"></i>
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+      </p>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+
+  <!-- jQery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <!-- custom js -->
+  <script src="js/custom.js"></script>
+
+</body>
+
+</html>
