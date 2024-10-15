@@ -26,12 +26,8 @@
     }
 
     @keyframes fadeInHeader {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .content, .section, footer {
@@ -106,6 +102,56 @@
       width: 100px;
     }
 
+    /* Full-screen Navigation Panel */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-overlay-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .nav-overlay-content a {
+      display: block;
+      font-size: 36px;
+      color: white;
+      text-decoration: none;
+      margin: 20px 0;
+      padding: 10px 0;
+      transition: 0.3s ease;
+    }
+
+    .nav-overlay-content a:hover {
+      background-color: #ffcc00;
+      color: #003366;
+      padding: 15px;
+    }
+
+    /* Open/Close Navigation Button */
+    .nav-btn {
+      background-color: #ffcc00;
+      color: #003366;
+      padding: 15px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 3000;
+    }
+
     /* Footer */
     footer {
       background-color: #003366;
@@ -125,10 +171,6 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    @keyframes sectionFade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
   </style>
 </head>
 <body>
@@ -137,11 +179,14 @@
   Imperial Monetary Fund
 </header>
 
+<!-- Full-page Navigation Button -->
+<button class="nav-btn" onclick="openNav()">☰ </button>
+
 <!-- Section 1: About Us -->
 <div class="content" style="background-color: #e8f4ff;">
   <h1>About Us</h1>
   <p>
-    The Imperial Monetary Fund (IMF) is an organization dedicated to fostering global financial stability and economic cooperation. We offer financial aid and policy guidance to ensure economic resilience across the world. Our aim is to support sustainable development and foster equitable economic growth.
+    The Imperial Monetary Fund (IMF) is an organization dedicated to fostering global financial stability and economic cooperation.
   </p>
   <p>
     Our global partnerships and financial tools empower governments to overcome challenges, stabilize economies, and promote prosperity for future generations.
@@ -154,7 +199,7 @@
 <div class="section" style="background-color: #ffefcc;">
   <h2>Our Vision</h2>
   <p>
-    Our vision is to create a world where financial systems are secure, and economies thrive. We aim to provide every nation with the tools and expertise needed for sustainable development, ensuring inclusive economic growth.
+    Our vision is to create a world where financial systems are secure, and economies thrive. We aim to provide every nation with the tools and expertise needed for sustainable development.
   </p>
 </div>
 
@@ -182,11 +227,22 @@
   </div>
 </div>
 
+<!-- Full-screen Navigation Panel -->
+<div id="navOverlay" class="nav-overlay">
+  <div class="nav-overlay-content">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">My Data</a>
+    <a href="about.html">About Us</a>
+    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">Close</a>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer>
   <h2>Contact Us</h2>
   <p>Imperial Monetary Fund</p>
-  <p>&copy2024 All Rights Reserved for IMF</p>
+  <p>Email: contact@imf.org| Phone: +256 777 309128</p>
 </footer>
 
 <script>
@@ -196,6 +252,14 @@
 
   function closePopup() {
     document.getElementById('popup').style.display = 'none';
+  }
+
+  function openNav() {
+    document.getElementById("navOverlay").style.display = "block";
+  }
+
+  function closeNav() {
+    document.getElementById("navOverlay").style.display = "none";
   }
 </script>
 
