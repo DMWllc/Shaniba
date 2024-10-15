@@ -1,149 +1,203 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <link rel="icon" href="favicon.png" type="image/gif" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Imperial Monetary Fund</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-  <title>Imperial Monetary Fund-About Us.</title>
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: relative;
+      animation: fadeInHeader 2s ease-in-out;
+    }
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <!-- font awesome style -->
-  <link href="font-awesome.min.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="responsive.css" rel="stylesheet" />
+    @keyframes fadeInHeader {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
+    .content, .section, footer {
+      padding: 40px;
+      text-align: center;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .content h1, .section h2, footer h2 {
+      font-size: 36px;
+      color: #003366;
+    }
+
+    .content p, .section p, footer p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .popup-btn {
+      background-color: #ffcc00;
+      color: #003366;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Popup Modal */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .popup-content {
+      background-color: white;
+      margin: auto;
+      padding: 20px;
+      width: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      animation: fadeInPopup 0.5s ease;
+    }
+
+    @keyframes fadeInPopup {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .close-btn {
+      background-color: #003366;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      margin: 20px auto;
+      width: 100px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    /* Section Animations */
+    @keyframes fadeInUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes sectionFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
-
 <body>
 
-  <!-- header section strats -->
-  <header class="header_section innerpage_header">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand" href="index.html">
-          <span>
-            Healet
-          </span>
-        </a>
-        <div class="" id="">
+<header>
+  Imperial Monetary Fund
+</header>
 
-          <div class="custom_menu-btn">
-            <button onclick="openNav()">
-              <span class="s-1"> </span>
-              <span class="s-2"> </span>
-              <span class="s-3"> </span>
-            </button>
-            <div id="myNav" class="overlay">
-              <div class="overlay-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="shop.html">Shop</a>
-                <a href="blog.html">My Data</a>
-              </div>
-            </div>
-          </div>
+<!-- Section 1: About Us -->
+<div class="content" style="background-color: #e8f4ff;">
+  <h1>About Us</h1>
+  <p>
+    The Imperial Monetary Fund (IMF) is an organization dedicated to fostering global financial stability and economic cooperation. We offer financial aid and policy guidance to ensure economic resilience across the world. Our aim is to support sustainable development and foster equitable economic growth.
+  </p>
+  <p>
+    Our global partnerships and financial tools empower governments to overcome challenges, stabilize economies, and promote prosperity for future generations.
+  </p>
+  <!-- Popup trigger -->
+  <button class="popup-btn" onclick="openPopup()">Learn More</button>
+</div>
 
-        </div>
-      </nav>
-    </div>
-  </header>
-  <!-- end header section -->
+<!-- Section 2: Our Vision -->
+<div class="section" style="background-color: #ffefcc;">
+  <h2>Our Vision</h2>
+  <p>
+    Our vision is to create a world where financial systems are secure, and economies thrive. We aim to provide every nation with the tools and expertise needed for sustainable development, ensuring inclusive economic growth.
+  </p>
+</div>
 
-  <!-- about section -->
+<!-- Section 3: Our Services -->
+<div class="section" style="background-color: #e1ffe7;">
+  <h2>Our Services</h2>
+  <p>
+    The Imperial Monetary Fund offers:
+    <ul style="text-align: left; margin-left: 40%; font-size: 18px;">
+      <li>Financial Aid for economic recovery.</li>
+      <li>Policy Advisory for expert fiscal guidance.</li>
+      <li>Capacity Building through training and technical support.</li>
+    </ul>
+  </p>
+</div>
 
- 
+<!-- Popup Modal -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h2>Our Mission</h2>
+    <p>
+      At the Imperial Monetary Fund, our mission is to provide strategic financial aid and guidance to countries in need, helping them overcome economic crises and ensure long-term financial stability.
+    </p>
+    <button class="close-btn" onclick="closePopup()">Close</button>
+  </div>
+</div>
 
-  <!-- end about section -->
+<!-- Footer -->
+<footer>
+  <h2>Contact Us</h2>
+  <p>Imperial Monetary Fund</p>
+  <p>&copy2024 All Rights Reserved for IMF</p>
+</footer>
 
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row info_form_social_row">
-        <div class="col-md-8 col-lg-9">
-         
-        <div class="col-md-4 col-lg-3">
+<script>
+  function openPopup() {
+    document.getElementById('popup').style.display = 'block';
+  }
 
-          <div class="social_box">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row info_main_row">
-        <div class="col-md-6 col-lg-3">
-
-        </div>
-      
-        <div class="col-md-6 col-lg-3">
-          <h4>
-            Contact Us
-          </h4>
-          <div class="info_contact">
-            <a href="">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Location
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>
-                Call +256 777 309128
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-envelope"></i>
-              <span>
-                nowamaanidonath6@gmail.com
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end info_section -->
-
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Imperial Monetary Fund.</a>
-      </p>
-    </div>
-  </footer>
-  <!-- footer section -->
-
-
-  <!-- jQery -->
-  <script src="jquery-3.4.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="bootstrap.js"></script>
-  <!-- custom js -->
-  <script src="custom.js"></script>
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+</script>
 
 </body>
-
 </html>
