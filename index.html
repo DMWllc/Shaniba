@@ -1,511 +1,213 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <link rel="icon" href="favicon.png" type="image/gif" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damn Aviator Quiz</title>
+    <style>
+        /* Reset and base styling */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; font-family: Arial, sans-serif; }
 
-  <title>Imperial Monetary Fund-Home</title>
+        /* Header styling with gradient and image */
+        .header {
+            background-image: linear-gradient(to right, #0099cc, #0066cc), url('  https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.istockphoto.com%2Fid%2F155439315%2Fphoto%2Fpassenger-airplane-flying-above-clouds-during-sunset.jpg%3Fs%3D612x612%26w%3D0%26k%3D20%26c%3DLJWadbs3B-jSGJBVy9s0f8gZMHi2NvWFXa3VJ2lFcL0%3D&tbnid=8SXcZM5-ubFbjM&vet=1&imgrefurl=https%3A%2F%2Fwww.istockphoto.com%2Fphotos%2Fplane-flying&docid=ZOaGPY_-DqpijM&w=612&h=408&source=sh%2Fx%2Fim%2Fm1%2F2&kgs=6b2fee5ffafcdecf&shem=abme%2Ctrie '); /* Replace with preferred image URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .header h1 { font-size: 3em; margin-bottom: 0.5em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); }
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="bootstrap.css" />
-  <!-- font awesome style -->
-  <link href="font-awesome.min.css" rel="stylesheet" />
-  <!-- Custom styles for this template -->
-  <link href="style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="responsive.css" rel="stylesheet" />
-
-</head>
-
-<body style="background-color: rgb(79, 182, 182);">
-
-  <!-- header section strats -->
-  <header class="header_section">
-    <div class="container-fluid">
-      <nav class="navbar navbar-expand-lg custom_nav-container">
-        <a class="navbar-brand" href="index.html">
-          <span>
-            
-          </span>
-        </a>
-        <div class="" id="">
-
-          <div class="custom_menu-btn">
-            <button onclick="openNav()">
-              <span class="s-1"> </span>
-              <span class="s-2"> </span>
-              <span class="s-3"> </span>
-            </button>
-            <div id="myNav" class="overlay">
-              <div class="overlay-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="shop.html">Shop</a>
-                <a href="blog.html">My data</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </nav>
-    </div>
-  </header>
-  <!-- end header section -->
-
-  <!-- slider section -->
-  <section class="slider_section position-relative">
-    <div class="slider_bg_box">
-      <img src="slider-bg.jpg" alt="">
-    </div>
-    <div class="slider_bg"></div>
-    <div class="container">
-      <div class="col-md-9 col-lg-8">
-        <div class="detail-box">
-          <h1>
-          
-            <br> 
-            <br>
-          </h1>
-          <p>
-            <br>
-          </p>
-          <div>
-            <br>
-            
-            <br>
-            <br>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end slider section -->
-
-  <!-- shop section -->
-
-  <section class="shop_section layout_padding">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2 style="color: rgb(8, 42, 87);">
-          Imperial Monetary Fund.
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="box">
-              <div class="img-box"><br>
-                <p>"To create a financially empowered and united community of <strong style="color: blue;">Imperial SS alumni</strong>, 
-                  where every member has access to the resources needed for stability, growth, and mutual support."
-                </p>
-                <hr>
-              </div>
-              <div class="detail-box">
-               
-              </div>
-              <div class="new">
-                <span style="font-size: medium; color: royalblue;">
-                  Vision
-                </span>
-              </div>
-            
-          </div>
-        </div>
-
+        /* Main container */
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 140px);
+            padding: 20px;
+            background-color: #e9f5ff;
+        }
         
-      </div>
+        h2 { color: #005bb5; text-align: center; margin-bottom: 20px; }
+        .content { text-align: center; font-size: 1.1em; color: #444; margin-bottom: 25px; }
+
+        /* Question and submit button */
+        .question { margin-bottom: 20px; display: none; text-align: left; width: 100%; max-width: 600px; }
+        .question p { font-weight: bold; margin-bottom: 10px; }
+        .question label { display: block; margin-bottom: 10px; cursor: pointer; }
+
+        /* Buttons and colors */
+        .submit-btn, .share-btn, .follow-btn {
+            background-color: #005bb5;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+        .submit-btn:hover, .share-btn:hover, .follow-btn:hover { background-color: #004080; }
+        
+        /* Footer and sharing */
+        .footer { background-color: #005bb5; color: #fff; text-align: center; padding: 20px; }
+        .share-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        a{
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body onload="displayQuestion()">
+
+<!-- Header -->
+<div class="header">
+    <h1>Damn Aviator Quiz</h1>
+</div>
+
+<!-- Quiz Container -->
+<div class="quiz-container">
+    <h2>Practical Flying Knowledge Quiz</h2>
+    <div class="content">Answer each question in sequence. Good luck, aviator!</div>
+
+    <div id="question-container"></div>
+    <button id="next-button" class="submit-btn" onclick="submitAnswer()">Submit Answer</button>
+
+    <!-- Share and follow buttons -->
+    <div class="share-container" id="share-follow-container" style="display:none;">
+        <a href="https://x.com/DamnKampala?s=09 " target="_blank" class="follow-btn">Follow for next series</a>
+        <button onclick="shareQuiz()" class="share-btn">Share with a Buddy</button>
     </div>
+</div>
 
-  </section>
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Damn Aviator. All rights reserved. Part 1</p>
+</div>
 
-  <section class="shop_section layout_padding">
-    <div class="container">
-      
-      <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="box">
-              <div class="img-box">
-                <p>"To pool resources among <strong style="color: blue;">Imperial SS alumni</strong>
-              in a transparent, secure, and efficient manner, providing financial support during times of need, fostering economic security, and empowering members to thrive together."
-                </p>
-                <hr>
-              </div>
-              <div class="detail-box">
-               
-              </div>
-              <div class="new">
-                <span style="font-size: small; color: royalblue;">
-                  Mission
-                </span>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+<script>
+    const questions = [
+        { question: "What should you do before starting the engine?", options: ["Check fuel level", "Activate autopilot", "Contact ATC", "Turn off all lights"], correct: "Check fuel level" },
+        { question: "What is the purpose of the pre-flight walk-around?", options: ["To greet passengers", "To check aircraft’s exterior", "To review flight plan", "To perform a weight check"], correct: "To check aircraft’s exterior" },
+        { question: "What’s the normal climb speed for a Cessna 172?", options: ["70 knots", "90 knots", "100 knots", "110 knots"], correct: "70 knots" },
+        { question: "Which instrument indicates altitude?", options: ["Airspeed indicator", "Altimeter", "Attitude indicator", "Vertical speed indicator"], correct: "Altimeter" },
+        { question: "What is the first step in an emergency landing?", options: ["Activate autopilot", "Turn off all electronics", "Establish best glide speed", "Turn on landing lights"], correct: "Establish best glide speed" },
+        { question: "How often should you check fuel gauges in flight?", options: ["Every 15 minutes", "Every 30 minutes", "Every hour", "Before descent"], correct: "Every 30 minutes" },
+        { question: "What does a red light on the runway indicate?", options: ["Take-off only", "Landing only", "Do not enter", "Clear for taxi"], correct: "Do not enter" },
+        { question: "How should you respond to turbulence?", options: ["Increase airspeed", "Descend immediately", "Maintain level flight and reduce speed", "Turn back"], correct: "Maintain level flight and reduce speed" },
+        { question: "What is the function of the rudder?", options: ["To control pitch", "To control roll", "To control yaw", "To control speed"], correct: "To control yaw" },
+        { question: "How is a stall recovered?", options: ["Increase throttle and pull up", "Decrease throttle and push down", "Pitch down and increase power", "Turn immediately"], correct: "Pitch down and increase power" },
+        { question: "What is the minimum safe altitude over congested areas?", options: ["500 feet AGL", "1,000 feet AGL", "2,000 feet AGL", "3,000 feet AGL"], correct: "1,000 feet AGL" },
+        { question: "What should you do if you experience engine failure?", options: ["Descend immediately", "Check fuel", "Establish best glide speed", "Contact ATC"], correct: "Establish best glide speed" },
+        { question: "What does a yellow light mean on the control tower?", options: ["Proceed with caution", "Clear for takeoff", "Emergency landing", "Hold short"], correct: "Proceed with caution" },
+        { question: "What is the first action after touchdown?", options: ["Deploy flaps", "Apply brakes", "Turn off the autopilot", "Check gauges"], correct: "Apply brakes" },
+        { question: "Which system is used for navigation?", options: ["Flight Management System", "Engine Control System", "Avionics", "Landing Gear"], correct: "Flight Management System" },
+        { question: "What is VFR?", options: ["Visual Flight Rules", "Vertical Flight Rules", "Variable Flight Rules", "Very Fast Response"], correct: "Visual Flight Rules" },
+        { question: "What is the recommended action during a go-around?", options: ["Maintain altitude", "Reduce throttle", "Retract flaps", "Increase throttle"], correct: "Increase throttle" },
+        { question: "What does the altimeter measure?", options: ["Pressure", "Speed", "Altitude", "Heading"], correct: "Altitude" },
+        { question: "What color are runway lights?", options: ["Red and green", "White and yellow", "Red", "Blue"], correct: "Red and green" },
+        { question: "What is the purpose of a crosswind landing?", options: ["To gain altitude", "To maintain speed", "To land safely in crosswinds", "To prevent stalling"], correct: "To land safely in crosswinds" },
+        { question: "What does the term 'pitch' refer to?", options: ["Speed", "Altitude", "Angle of ascent/descent", "Turning left or right"], correct: "Angle of ascent/descent" },
+        { question: "What is a typical cruising altitude for small aircraft?", options: ["1,000 feet", "3,000 feet", "5,000 feet", "10,000 feet"], correct: "5,000 feet" },
+        { question: "What is the function of the elevator?", options: ["To control yaw", "To control pitch", "To control roll", "To control speed"], correct: "To control pitch" },
+        { question: "What do you do if the oil pressure drops?", options: ["Continue flying", "Land as soon as possible", "Increase throttle", "Check gauges"], correct: "Land as soon as possible" },
+        { question: "What is the function of flaps?", options: ["Increase speed", "Decrease lift", "Increase lift and drag", "Decrease drag"], correct: "Increase lift and drag" },
+        
+        
+        { question: "What does the heading indicator measure?", options: ["Speed", "Heading", "Altitude", "Angle of ascent"], correct: "Heading" },
+        { question: "What is the use of the transponder?", options: ["To track altitude", "To communicate with ATC", "To identify aircraft", "To control navigation"], correct: "To identify aircraft" },
+        { question: "What action should you take if you see a traffic conflict?", options: ["Climb", "Descend", "Turn left", "Turn right"], correct: "Turn right" },
+        { question: "What should be your action in the event of a tailspin?", options: ["Pull up", "Turn off the engine", "Increase throttle", "Reduce power"], correct: "Reduce power" },
+        { question: "What is the purpose of the carburetor heat?", options: ["Increase power", "Prevent icing", "Increase speed", "Improve fuel efficiency"], correct: "Prevent icing" },
+        { question: "How often should the oil be changed?", options: ["Every 10 hours", "Every 25 hours", "Every 50 hours", "Every 100 hours"], correct: "Every 50 hours" },
+        { question: "What is the maximum allowable crosswind component for landing?", options: ["10 knots", "15 knots", "20 knots", "25 knots"], correct: "20 knots" },
+        { question: "What is the purpose of the yoke?", options: ["Throttle control", "Directional control", "Altitude control", "Pitch control"], correct: "Directional control" },
+        { question: "How should you check for wake turbulence?", options: ["Look for other aircraft", "Monitor ATC", "Check the weather", "Ascertain landing direction"], correct: "Ascertain landing direction" },
+        { question: "What is the primary function of ailerons?", options: ["Control pitch", "Control roll", "Control yaw", "Control speed"], correct: "Control roll" },
+        { question: "What is the meaning of a yellow circle on a chart?", options: ["Warning area", "Military airspace", "Restricted area", "Class B airspace"], correct: "Warning area" },
+        { question: "What is a PAPI?", options: ["Precision Approach Path Indicator", "Pilot Approach Path Indicator", "Preliminary Approach Path Indicator", "Private Approach Path Indicator"], correct: "Precision Approach Path Indicator" },
+        { question: "What should you do during a go-around?", options: ["Pull back sharply", "Check the fuel", "Increase power and pitch up", "Land immediately"], correct: "Increase power and pitch up" },
+        { question: "What is a NOTAM?", options: ["Notice to Airmen", "Notice of Airspace Management", "Notice of Terrain Alteration", "Notice of Technical Maintenance"], correct: "Notice to Airmen" },
+        { question: "What is the purpose of a flight plan?", options: ["To schedule maintenance", "To inform ATC", "To track fuel usage", "To manage passengers"], correct: "To inform ATC" },
+        { question: "What does the 'S' in VFR stand for?", options: ["Standard", "Statute", "Safe", "Stabilized"], correct: "Statute" },
+        { question: "What does the term 'glide slope' refer to?", options: ["The path of descent", "The altitude of the aircraft", "The direction of wind", "The angle of approach"], correct: "The path of descent" },
+        { question: "What do you do if you see a signal from the control tower?", options: ["Ignore it", "Follow the signals", "Contact ATC", "Change course"], correct: "Follow the signals" },
+        { question: "What is the standard rate of turn?", options: ["1 degree per second", "3 degrees per second", "5 degrees per second", "3 minutes for a full circle"], correct: "3 minutes for a full circle" },
+        { question: "What are the primary flight controls?", options: ["Throttle, flaps, rudder", "Ailerons, rudder, elevator", "Flaps, elevator, throttle", "Ailerons, elevator, landing gear"], correct: "Ailerons, rudder, elevator" },
+        { question: "What is the first action when an engine fails on takeoff?", options: ["Land immediately", "Continue the takeoff", "Establish best glide speed", "Contact ATC"], correct: "Establish best glide speed" },
+        { question: "What is the meaning of a flashing white light from the control tower?", options: ["Return to landing", "Clear to taxi", "Cleared for takeoff", "Landing not allowed"], correct: "Return to landing" },
+        { question: "What is a controlled airspace?", options: ["Where ATC has jurisdiction", "Uncontrolled airspace", "Airspace with no restrictions", "Airspace above 10,000 feet"], correct: "Where ATC has jurisdiction" },
+        { question: "What is the purpose of the VSI (Vertical Speed Indicator)?", options: ["Shows altitude", "Shows rate of climb/descent", "Shows speed", "Shows direction"], correct: "Shows rate of climb/descent" },
+        { question: "What is the maximum weight for a small aircraft?", options: ["2,500 lbs", "5,000 lbs", "12,500 lbs", "20,000 lbs"], correct: "12,500 lbs" },
+        { question: "What does an orange light on the panel indicate?", options: ["Normal operation", "Caution", "Warning", "Emergency"], correct: "Caution" },
+        { question: "What should you do before a long flight?", options: ["Check weather conditions", "Review the flight plan", "Check fuel reserves", "All of the above"], correct: "All of the above" },
+        { question: "What does 'M' represent in MSL?", options: ["Maximum", "Mean", "Minimum", "Measured"], correct: "Mean" },
+        { question: "How often should you calibrate the altimeter?", options: ["Every flight", "Once a month", "Once a year", "Every 100 hours"], correct: "Every flight" },
+        { question: "What action should you take if you experience a radio failure?", options: ["Land immediately", "Try to communicate", "Follow VFR rules", "Return to the nearest airport"], correct: "Follow VFR rules" },
+        { question: "What is the purpose of the emergency locator transmitter (ELT)?", options: ["To locate aircraft in emergencies", "To communicate with ATC", "To navigate", "To signal ground crews"], correct: "To locate aircraft in emergencies" },
+    ];
 
-  </section>
+    let currentQuestionIndex = 0;
+    let score = 0;
 
-  
-
-  
-  <!-- end shop section -->
-
-  <!-- about section -->
-
-<span style="padding: 0cqmax;">
-  <h3 style="text-align: center; color: rgb(241, 235, 236); font-size: 50px;"><u>OBJECTIVES</u></h3>
-<ul>
-  <li>♤ To promote financial stability and security among members.</li>
-  <li>♤ To encourage regular savings and investments.</li>
-  <li>♤ To provide access to affordable loans for members.</li>
-  <li>♤ To foster a culture of financial responsibility and independence.</li>
-  <li>♤ To offer members financial literacy and education programs.</li>
-  <li>♤ To create a sustainable fund that benefits all members equally.</li>
-  <li>♤ To support members during financial emergencies.</li>
-  <li>♤ To improve members' standards of living through financial empowerment.</li>
-  <li>♤ To create opportunities for members to invest in income-generating projects.</li>
-  <li>♤ To ensure transparency and accountability in fund management.</li>
-  <li>♤ To promote collaboration and unity among members.</li>
-  <li>♤ To grow the fund through strategic investments and partnerships.</li>
-  <li>♤ To provide financial support for members' education and skill development.</li>
-  <li>♤ To assist members in starting and sustaining small businesses.</li>
-  <li>♤ To encourage a spirit of entrepreneurship within the community.</li>
-  <li>♤ To provide a platform for members to share financial insights and advice.</li>
-  <li>♤ To maintain financial transparency and openness in all transactions.</li>
-  <li>♤ To ensure equitable distribution of resources and opportunities among members.</li>
-  <li>♤ To contribute to the economic development of the community.</li>
-  <li>♤ To build a network of financially independent and empowered individuals.</li>
-  <li>♤ To facilitate financial growth and prosperity among members.</li>
-  <li>♤ To provide emergency financial assistance to members in need.</li>
-  <li>♤ To create long-term financial plans for members’ retirement and future needs.</li>
-  <li>♤ To encourage regular member participation and engagement in fund activities.</li>
-  <li>♤ To advocate for policies that support financial inclusion and empowerment.</li>
-</ul>
-
-</span>
-
-  <!-- end about section -->
-
-  <!-- offer section -->
-<h1 style="color:gold; text-align:center;">Advertisement.</h1>
-  <h4 class ="container" style="color:green; text-align:justify; font-size:16px">Shop from IMF online shop. Shipped from Turkey, Europe up to E.A, and to your door.</h4>
-  <section class="offer_section layout_padding">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-7 px-0">
-          <div class="box offer-box1">
-            <img src="o1.jpg" alt="">
-            <div class="detail-box">
-              <h2>
-                -15% Off  20k Ugx
-              </h2>
-              <a href="">
-                Shop Now
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5 px-0">
-          <div class="box offer-box2">
-            <img src="o2.jpg" alt="">
-            <div class="detail-box">
-              <h2>
-                -15% off  20k Ugx
-              </h2>
-              <a href="">
-                Shop Now
-              </a>
-            </div>
-          </div>
-          <div class="box offer-box3">
-            <img src="o3.jpg" alt="">
-            <div class="detail-box">
-              <h2>
-                -10% Off  15k Ugx
-              </h2>
-              <a href="">
-                Shop Now
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end offer section -->
-
-  <!-- blog section -->
-
-  <section class="blog_section ">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Latest on market
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="box">
-            <div class="img-box">
-              <img src="b1.jpg" alt="">
-              <h4 class="blog_date">
-                14 <br>
-                July
-              </h4>
-            </div>
-            <div class="detail-box">
-              <h5>
-                Molestiae ad reiciendis dignissimos
-              </h5>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-              </p>
-              <a href="">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box">
-            <div class="img-box">
-              <img src="b2.jpg" alt="">
-              <h4 class="blog_date">
-                15 <br>
-                July
-              </h4>
-            </div>
-            <div class="detail-box">
-              <h5>
-                Dolores vel maiores voluptatem enim
-              </h5>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-              </p>
-              <a href="">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end blog section -->
-
-  <!-- client section -->
-
-  <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          MEMBERS
-        </h2>
-      </div>
-      <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="client.jpg" alt="" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>
-                        Donath Nowamaani 
-                      </h6>
-                    </div>
-                    <p>
-                      <span style="color: aqua;">AVIATOR- UGANDA AIRFORCE</span><br>
-                     Former Imperial secondary school- Ibanda student 
-                     Year-2018. <br>
-                     Class-S4.
-                      
-                                         </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
+    function displayQuestion() {
+        if (currentQuestionIndex < questions.length) {
+            const questionContainer = document.getElementById('question-container');
+            const question = questions[currentQuestionIndex];
+            questionContainer.innerHTML = `
+                <div class="question">
+                    <p>${question.question}</p>
+                    ${question.options.map((option, index) => `
+                        <label>
+                            <input type="radio" name="answer" value="${option}"> ${option}
+                        </label>
+                    `).join('')}
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="client.jpg" alt="" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>
-                        Samantha Jonas
-                      </h6>
-                    </div>
-                    <p>
-                      It is a long established fact that a reader will be
-                      distracted by the readable cIt is a long established fact
-                      that a reader will be distracted by the readable c
-                    </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="i
-                      client.jpg" alt="" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>
-                        Samantha Jonas
-                      </h6>
-                    </div>
-                    <p>
-                      It is a long established fact that a reader will be
-                      distracted by the readable cIt is a long established fact
-                      that a reader will be distracted by the readable c
-                    </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel_btn-container">
-          <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
-            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExample2Controls" role="button" data-slide="next">
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+            `;
+            document.querySelector('.question').style.display = 'block';
+            document.getElementById('next-button').style.display = 'block';
+        } else {
+            showResults();
+        }
+    }
 
-  <!-- end client section -->
+    function submitAnswer() {
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
+        if (selectedOption) {
+            if (selectedOption.value === questions[currentQuestionIndex].correct) {
+                score++;
+            }
+            currentQuestionIndex++;
+            displayQuestion();
+        } else {
+            alert('Please select an answer.');
+        }
+    }
 
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row info_form_social_row">
-        <div class="col-md-8 col-lg-9">
-          <div class="info_form">
-            <form action="">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-4 col-lg-3">
+    function showResults() {
+        const questionContainer = document.getElementById('question-container');
+        questionContainer.innerHTML = `<h2>Your score: ${score} out of ${questions.length}</h2>`;
+        document.getElementById('next-button').style.display = 'none';
+        document.getElementById('share-follow-container').style.display = 'flex';
+    }
 
-          <div class="social_box">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="https">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="row info_main_row">
-        <div class="col-md-6 col-lg-3">
-          
-          </div>
-        </div>
-       
-  
-        <div class="col-md-6 col-lg-3">
-          <div class="info_detail">
-            <h4>
-              About Us
-            </h4>
-            <p class="mb-0">
-              The International Monetary Fund (IMF) is a an organization that promotes economic stability and growth by providing financial assistance, policy advice, and technical support to its members. Its primary goals include reducing poverty, fostering coordinated  trade, and securing financial stability through monetary cooperation.
-
-
-            </p>
-          </div>
-        </div><br>
-        <div class="col-md-6 col-lg-3">
-          <h4>
-            Contact Us
-          </h4>
-          <div class="info_contact">
-            <a href="">
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span>
-                Location
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              <span>
-                Call +256 394894579
-              </span>
-            </a>
-            <a href="">
-              <i class="fa fa-envelope"></i>
-              <span>
-                info@imf.org
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end info_section -->
-
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">Imperial Monetary Fund</a>
-      </p>
-    </div>
-  </footer>
-  <!-- footer section -->
-
-
-  <!-- jQery -->
-  <script src="jquery-3.4.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="bootstrap.js"></script>
-  <!-- custom js -->
-  <script src="custom.js"></script>
-
+    function shareQuiz() {
+        const url = window.location.href;
+        const text = "Check out this awesome aviation quiz!";
+        navigator.clipboard.writeText(`${text} ${url}`);
+        alert("Quiz link copied to clipboard! Share it with your buddies!");
+    }
+</script>
 </body>
-
 </html>
+        
