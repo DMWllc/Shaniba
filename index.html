@@ -76,7 +76,7 @@
     <div class="container" id="question-container"></div>
     <button id="submit-button" class="button" style="display:none;" onclick="submitAnswer()">Submit</button>
     <div id="share-follow-container">
-        <button class="button" onclick="shareQuiz()">Share with a Buddy</button>
+        <button onclick="shareQuiz()">Share with a Buddy</button>
         <a href="https://x.com/DamnKampala" target="_blank" class="button">Follow for next series</a>
     </div>
     <footer>
@@ -218,21 +218,33 @@
         }
         
 function shareQuiz() {
-    const shareData = {
-        title: 'Damn Aviator Quiz',
-        text: 'Check out this aviation quiz app!',
-        url: 'https://median.co/share/wjadyj#apk'
-    };
+    // Link to share
+    const shareUrl = encodeURIComponent('https://median.co/share/wjadyj#apk');
+    const shareText = encodeURIComponent('Check out this aviation quiz app!');
 
-    // Check if Web Share API is supported
-    if (navigator.share) {
-        navigator.share(shareData)
-            .then(() => console.log('Content shared successfully!'))
-            .catch((error) => console.error('Error sharing:', error));
-    } else {
-        alert("Sharing is not supported on this browser. Please copy the link manually.");
-    }
+    // Build a custom share dialog with options
+    const shareOptions = `
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+            <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <p>Share this app</p>
+                <a href="https://wa.me/?text=${shareText}%20${shareUrl}" target="_blank">WhatsApp</a><br><br>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank">Facebook</a><br><br>
+                <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" target="_blank">Twitter</a><br><br>
+                <a href="sms:?body=${shareText}%20${shareUrl}" target="_blank">Messages</a><br><br>
+                <button onclick="closeShareMenu()">Close</button>
+            </div>
+        </div>
+    `;
+    
+    // Append the share options to the body
+    document.body.insertAdjacentHTML('beforeend', shareOptions);
+}
 
+// Function to close the share menu
+function closeShareMenu() {
+    const menu = document.querySelector('div[style*="z-index: 1000"]');
+    if (menu) menu.remove();
+}
     }
         
 
