@@ -216,11 +216,24 @@
             document.getElementById("submit-button").style.display = "none";
             document.getElementById("share-follow-container").style.display = "flex";
         }
+        
+function shareQuiz() {
+        const shareData = {
+            title: 'Nexy Aviator Quiz',
+            text: 'Test your aviation knowledge with this fun quiz! Can you get all questions right?',
+            url: window.location.href // Use current URL
+        };
 
-        function shareQuiz() {
-            alert("Share this quiz with your friends!");
-            // Implement sharing functionality if needed
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => console.log('Quiz shared successfully'))
+                .catch((error) => console.error('Error sharing quiz:', error));
+        } else {
+            // Fallback for browsers that don't support Web Share API
+            alert("Your browser doesn't support direct sharing. Copy this link to share: " + shareData.url);
         }
+    }
+        
 
         displayQuestion(); // Initial call to display the first question
     </script>
