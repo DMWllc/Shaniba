@@ -218,20 +218,21 @@
         }
         
 function shareQuiz() {
-        const shareData = {
-            title: 'Nexy Aviator Quiz',
-            text: 'Test your aviation knowledge with this fun quiz! Can you get all questions right?',
-            url: window.location.href // Use current URL
-        };
+    const shareData = {
+        title: 'Damn Aviator Quiz',
+        text: 'Check out this aviation quiz app!',
+        url: 'https://median.co/share/wjadyj#apk'
+    };
 
-        if (navigator.share) {
-            navigator.share(shareData)
-                .then(() => console.log('Quiz shared successfully'))
-                .catch((error) => console.error('Error sharing quiz:', error));
-        } else {
-            // Fallback for browsers that don't support Web Share API
-            alert("Your browser doesn't support direct sharing. Copy this link to share: " + shareData.url);
-        }
+    // Check if Web Share API is supported
+    if (navigator.share) {
+        navigator.share(shareData)
+            .then(() => console.log('Content shared successfully!'))
+            .catch((error) => console.error('Error sharing:', error));
+    } else {
+        alert("Sharing is not supported on this browser. Please copy the link manually.");
+    }
+}
     }
         
 
