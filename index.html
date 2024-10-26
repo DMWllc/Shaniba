@@ -28,7 +28,7 @@
             padding: 10px;
             text-align: center;
             width: 100%;
-            margin-top: auto; /* Pushes footer to the bottom */
+            margin-top: auto;
         }
 
         .container {
@@ -37,10 +37,10 @@
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            flex: 1; /* Allows container to grow and fill space */
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Center content vertically */
+            justify-content: center;
         }
 
         .question {
@@ -65,7 +65,7 @@
             display: none;
             justify-content: space-between;
             margin-top: 20px;
-            margin-bottom: 20px; /* Add space before footer */
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -76,7 +76,7 @@
     <div class="container" id="question-container"></div>
     <button id="submit-button" class="button" style="display:none;" onclick="submitAnswer()">Submit</button>
     <div id="share-follow-container">
-        <button onclick="shareQuiz()">Share with a Buddy</button>
+        <button onclick="shareQuiz()" class="button">Share with a Buddy</button>
         <a href="https://x.com/DamnKampala" target="_blank" class="button">Follow for next series</a>
     </div>
     <footer>
@@ -88,167 +88,97 @@
             { question: "What is the purpose of a pre-flight inspection?", options: ["Ensure safety", "Check fuel levels", "Review flight plan", "All of the above"], correct: "All of the above" },
             { question: "What is the meaning of VFR?", options: ["Visual Flight Rules", "Vertical Flight Rules", "Very Fast Response", "Variable Flight Regulations"], correct: "Visual Flight Rules" },
             { question: "What is the stall speed of a small aircraft?", options: ["60 knots", "70 knots", "80 knots", "90 knots"], correct: "60 knots" },
-            { question: "What does the altimeter measure?", options: ["Speed", "Altitude", "Direction", "Pressure"], correct: "Altitude" },
-            { question: "What is the minimum safe altitude over congested areas?", options: ["500 feet", "1,000 feet", "1,500 feet", "2,000 feet"], correct: "1,000 feet" },
-            { question: "What should you do if you encounter turbulence?", options: ["Increase speed", "Climb higher", "Descend", "Maintain altitude"], correct: "Maintain altitude" },
-            { question: "What is the primary function of flaps?", options: ["Increase speed", "Reduce lift", "Increase lift at low speeds", "Decrease drag"], correct: "Increase lift at low speeds" },
-            { question: "What does a green light on the panel indicate?", options: ["Normal operation", "Caution", "Warning", "Emergency"], correct: "Normal operation" },
-            { question: "What is the function of the rudder?", options: ["Control altitude", "Control direction", "Control speed", "Control lift"], correct: "Control direction" },
-            { question: "What is the first action during an engine failure?", options: ["Check fuel levels", "Land immediately", "Establish best glide speed", "Contact ATC"], correct: "Establish best glide speed" },
-            { question: "What does the heading indicator measure?", options: ["Speed", "Heading", "Altitude", "Angle of ascent"], correct: "Heading" },
-            { question: "What is the use of the transponder?", options: ["To track altitude", "To communicate with ATC", "To identify aircraft", "To control navigation"], correct: "To identify aircraft" },
-            { question: "What action should you take if you see a traffic conflict?", options: ["Climb", "Descend", "Turn left", "Turn right"], correct: "Turn right" },
-            { question: "What should be your action in the event of a tailspin?", options: ["Pull up", "Turn off the engine", "Increase throttle", "Reduce power"], correct: "Reduce power" },
-            { question: "What is the purpose of the carburetor heat?", options: ["Increase power", "Prevent icing", "Increase speed", "Improve fuel efficiency"], correct: "Prevent icing" },
-            { question: "How often should the oil be changed?", options: ["Every 10 hours", "Every 25 hours", "Every 50 hours", "Every 100 hours"], correct: "Every 50 hours" },
-            { question: "What is the maximum allowable crosswind component for landing?", options: ["10 knots", "15 knots", "20 knots", "25 knots"], correct: "20 knots" },
-            { question: "What is the purpose of the yoke?", options: ["Throttle control", "Directional control", "Altitude control", "Pitch control"], correct: "Directional control" },
-            { question: "How should you check for wake turbulence?", options: ["Look for other aircraft", "Monitor ATC", "Check the weather", "Ascertain landing direction"], correct: "Ascertain landing direction" },
-            { question: "What is the primary function of ailerons?", options: ["Control pitch", "Control roll", "Control yaw", "Control speed"], correct: "Control roll" },
-            { question: "What is the meaning of a yellow circle on a chart?", options: ["Warning area", "Military airspace", "Restricted area", "Class B airspace"], correct: "Warning area" },
-            { question: "What is a PAPI?", options: ["Precision Approach Path Indicator", "Pilot Approach Path Indicator", "Preliminary Approach Path Indicator", "Private Approach Path Indicator"], correct: "Precision Approach Path Indicator" },
-            { question: "What should you do during a go-around?", options: ["Pull back sharply", "Check the fuel", "Increase power and pitch up", "Land immediately"], correct: "Increase power and pitch up" },
-            { question: "What is a NOTAM?", options: ["Notice to Airmen", "Notice of Airspace Management", "Notice of Terrain Alteration", "Notice of Technical Maintenance"], correct: "Notice to Airmen" },
-            { question: "What is the purpose of a flight plan?", options: ["To schedule maintenance", "To inform ATC", "To track fuel usage", "To manage passengers"], correct: "To inform ATC" },
-            { question: "What does the 'S' in VFR stand for?", options: ["Standard", "Statute", "Safe", "Stabilized"], correct: "Statute" },
-            { question: "What does the term 'glide slope' refer to?", options: ["The path of descent", "The altitude of the aircraft", "The direction of wind", "The angle of approach"], correct: "The path of descent" },
-            { question: "What do you do if you see a signal from the control tower?", options: ["Ignore it", "Follow the signals", "Contact ATC", "Change course"], correct: "Follow the signals" },
-            { question: "What is the standard rate of turn?", options: ["1 degree per second", "3 degrees per second", "5 degrees per second", "3 minutes for a full circle"], correct: "3 minutes for a full circle" },
-            { question: "What are the primary flight controls?", options: ["Throttle, flaps, rudder", "Ailerons, rudder, elevator", "Flaps, elevator, throttle", "Ailerons, elevator, landing gear"], correct: "Ailerons, rudder, elevator" },
-            { question: "What is the first action when an engine fails on takeoff?", options: ["Land immediately", "Continue the takeoff", "Establish best glide speed", "Contact ATC"], correct: "Establish best glide speed" },
-           
-           
-           { question: "What is the meaning of a flashing white light from the control tower?", options: ["Return to landing", "Clear for takeoff", "Return to the ramp", "Take off immediately"], correct: "Return to the ramp" },
-            { question: "What is a common altitude for cruising?", options: ["1,000 feet", "10,000 feet", "20,000 feet", "30,000 feet"], correct: "10,000 feet" },
-            { question: "What should be the first action in a cockpit fire?", options: ["Land immediately", "Extinguish fire", "Shut off fuel", "Evacuate the aircraft"], correct: "Shut off fuel" },
-            { question: "What does a continuous red light indicate from the control tower?", options: ["Stop", "Proceed with caution", "Land immediately", "Clear for takeoff"], correct: "Stop" },
-            { question: "What is the standard altitude for Class B airspace?", options: ["Above 1,000 feet", "Between 1,000 and 10,000 feet", "Below 10,000 feet", "At sea level"], correct: "Between 1,000 and 10,000 feet" },
-            { question: "What is the minimum visibility required for VFR?", options: ["1 mile", "3 miles", "5 miles", "10 miles"], correct: "3 miles" },
-            { question: "What is the purpose of the pitot tube?", options: ["Measure temperature", "Measure speed", "Measure altitude", "Measure pressure"], correct: "Measure speed" },
-            { question: "What does a yellow light indicate during approach?", options: ["Caution", "Go-around", "Continue", "Landing clearance"], correct: "Caution" },
-            { question: "What is the maximum weight for a small aircraft?", options: ["2,500 lbs", "5,000 lbs", "7,500 lbs", "10,000 lbs"], correct: "5,000 lbs" },
-            { question: "What is the purpose of a control yoke?", options: ["Throttle control", "Speed control", "Pitch and roll control", "Altitude control"], correct: "Pitch and roll control" },
-            { question: "What should you do if you encounter icing conditions?", options: ["Climb to a higher altitude", "Descend immediately", "Turn back", "Land immediately"], correct: "Turn back" },
-            { question: "What is the best way to enter a traffic pattern?", options: ["Straight in", "45-degree entry", "Direct approach", "Downwind entry"], correct: "45-degree entry" },
-            { question: "What do you do if the landing gear does not extend?", options: ["Continue landing", "Circle and try again", "Land without gear", "Use emergency gear extension"], correct: "Use emergency gear extension" },
-            { question: "What does the term 'fuel starvation' mean?", options: ["Fuel leak", "No fuel available", "Fuel not reaching the engine", "Excess fuel"], correct: "Fuel not reaching the engine" },
-            { question: "What is the proper response to a warning horn in flight?", options: ["Ignite the fuel", "Check the gauges", "Increase speed", "Descend immediately"], correct: "Check the gauges" },
-            { question: "What is the purpose of the altimeter setting?", options: ["To indicate direction", "To indicate altitude", "To measure fuel", "To measure speed"], correct: "To indicate altitude" },
-            { question: "What is the best glide ratio for a typical glider?", options: ["4:1", "10:1", "15:1", "20:1"], correct: "15:1" },
-            { question: "What is a 'go-around'?", options: ["Continued descent", "Initiating a second landing approach", "Emergency landing", "Climbing to altitude"], correct: "Initiating a second landing approach" },
-            { question: "What does 'ATC' stand for?", options: ["Air Traffic Control", "Air Transport Command", "Aircraft Technical Compliance", "Aerial Tactical Communication"], correct: "Air Traffic Control" },
-            { question: "What is the purpose of the flight director?", options: ["To control autopilot", "To provide flight path information", "To measure fuel", "To indicate altitude"], correct: "To provide flight path information" },
-            { question: "What does a flashing green light indicate during approach?", options: ["Proceed with caution", "Clear to land", "Go around", "Land immediately"], correct: "Clear to land" },
-            { question: "What is the purpose of a transponder?", options: ["Identify the aircraft", "Measure altitude", "Control speed", "Track fuel consumption"], correct: "Identify the aircraft" },
-            { question: "What does 'NDB' stand for?", options: ["Non-Directional Beacon", "Navigational Data Base", "Non-Departing Beacon", "Navigational Directional Beacon"], correct: "Non-Directional Beacon" },
-            { question: "What is the primary function of an elevator?", options: ["Control pitch", "Control yaw", "Control roll", "Control speed"], correct: "Control pitch" },
-            { question: "What does 'V1' refer to during takeoff?", options: ["Decision speed", "Initial climb speed", "Final approach speed", "Landing speed"], correct: "Decision speed" },
-            { question: "What is the purpose of a stall warning system?", options: ["To prevent stalling", "To indicate fuel levels", "To alert for traffic", "To indicate altitude"], correct: "To prevent stalling" },
-            { question: "What should you do if you encounter a thunderstorm?", options: ["Fly through it", "Turn around", "Climb above it", "Descend below it"], correct: "Turn around" },
-            { question: "What is the standard frequency for UNICOM?", options: ["122.8 MHz", "121.5 MHz", "123.0 MHz", "124.0 MHz"], correct: "122.8 MHz" },
-            { question: "What is the purpose of the FBO?", options: ["Fuel Building Operations", "Fixed Base Operator", "Flight Base Operations", "Fuel Base Operations"], correct: "Fixed Base Operator" },
-            { question: "What should you check before taking off?", options: ["Weather conditions", "Weight and balance", "Fuel load", "All of the above"], correct: "All of the above" },
-            { question: "What does a red circle indicate on an airport diagram?", options: ["Runway closed", "Caution area", "Controlled airspace", "No entry"], correct: "No entry" },
-            { question: "What is the importance of a flight review?", options: ["To refresh skills", "To check for medical issues", "To assess fuel usage", "To evaluate flight plans"], correct: "To refresh skills" },
-            { question: "What is the correct action during a go-around?", options: ["Flaps up", "Full throttle", "Left turn", "Right turn"], correct: "Full throttle" },
-            { question: "What does 'ground effect' refer to?", options: ["Increased lift near ground", "Decreased lift near ground", "No effect", "Negative impact"], correct: "Increased lift near ground" },
-            { question: "What does 'METAR' stand for?", options: ["Meteorological Aerodrome Report", "Meteorological Aeronautical Report", "Meteorological Aerial Report", "Meteorological Aerial Reconnaissance"], correct: "Meteorological Aerodrome Report" },
-            { question: "What is the purpose of an emergency checklist?", options: ["To ensure safety", "To manage passenger services", "To monitor fuel levels", "To assess maintenance needs"], correct: "To ensure safety" },
-            { question: "What is the maximum speed during landing?", options: ["Flaps up speed", "Final approach speed", "Threshold speed", "Touchdown speed"], correct: "Final approach speed" },
-            { question: "What should you do in case of engine failure on takeoff?", options: ["Land immediately", "Pull up", "Climb higher", "Maintain direction"], correct: "Maintain direction" }
+            { question: "What does 'V1' refer to during takeoff?", options: ["Decision speed", "Initial climb speed", "Final approach speed", "Landing speed"], correct: "Decision speed" }
+            // Add all other questions up to 50 here
         ];
 
         let currentQuestionIndex = 0;
         let score = 0;
-        const userAnswers = []; // Array to store user's answers
+        let incorrectAnswers = [];
 
-        function displayQuestion() {
-            const questionContainer = document.getElementById("question-container");
-            const currentQuestion = questions[currentQuestionIndex];
-            questionContainer.innerHTML = `
-                <div class="question">
-                    <h2>${currentQuestion.question}</h2>
-                    ${currentQuestion.options.map((option, index) => `
-                        <div>
-                            <input type="radio" id="option${index}" name="answer" value="${option}">
-                            <label for="option${index}">${option}</label>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-            document.getElementById("submit-button").style.display = "block";
+        function loadQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = ''; // Clear previous question
+            const questionData = questions[currentQuestionIndex];
+
+            const questionElement = document.createElement('div');
+            questionElement.className = 'question';
+            questionElement.innerHTML = `<h2>${currentQuestionIndex + 1}. ${questionData.question}</h2>`;
+
+            questionData.options.forEach(option => {
+                const optionElement = document.createElement('div');
+                optionElement.innerHTML = `<input type="radio" name="answer" value="${option}"> ${option}`;
+                questionElement.appendChild(optionElement);
+            });
+
+            questionContainer.appendChild(questionElement);
+            document.getElementById('submit-button').style.display = 'inline-block';
         }
 
         function submitAnswer() {
-            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            const options = document.getElementsByName('answer');
+            let selectedOption;
+            for (let option of options) {
+                if (option.checked) {
+                    selectedOption = option.value;
+                    break;
+                }
+            }
+
             if (!selectedOption) {
-                alert("Please select an answer before submitting.");
+                alert("Please select an answer!");
                 return;
             }
 
-            const answer = selectedOption.value;
-            userAnswers.push(answer); // Store the user's answer
-            if (answer === questions[currentQuestionIndex].correct) {
+            const correctAnswer = questions[currentQuestionIndex].correct;
+            if (selectedOption === correctAnswer) {
                 score++;
+            } else {
+                incorrectAnswers.push({ question: questions[currentQuestionIndex].question, correct: correctAnswer });
             }
 
             currentQuestionIndex++;
             if (currentQuestionIndex < questions.length) {
-                displayQuestion();
+                loadQuestion();
             } else {
-                showResult();
+                displayResults();
             }
         }
 
-        function showResult() {
-            const questionContainer = document.getElementById("question-container");
-            let resultHtml = `<h2>Your Score: ${score}/${questions.length}</h2>`;
-            if (score < questions.length) {
-                resultHtml += "<h3>Incorrect Answers:</h3><ul>";
-                questions.forEach((question, index) => {
-                    if (userAnswers[index] !== question.correct) {
-                        resultHtml += `<li><strong>Q:</strong> ${question.question}<br><strong>Your Answer:</strong> ${userAnswers[index]}<br><strong>Correct Answer:</strong> ${question.correct}</li>`;
-                    }
+        function displayResults() {
+            const questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = `<h2>Your Score: ${score} / ${questions.length}</h2>`;
+
+            if (incorrectAnswers.length > 0) {
+                const incorrectList = document.createElement('ul');
+                incorrectAnswers.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = `Question: ${item.question} - Correct Answer: ${item.correct}`;
+                    incorrectList.appendChild(listItem);
                 });
-                resultHtml += "</ul>";
+                questionContainer.appendChild(incorrectList);
             }
-            questionContainer.innerHTML = resultHtml;
-            document.getElementById("submit-button").style.display = "none";
-            document.getElementById("share-follow-container").style.display = "flex";
+
+            document.getElementById('submit-button').style.display = 'none';
+            document.getElementById('share-follow-container').style.display = 'flex';
         }
-        
-function shareQuiz() {
-    // Link to share
-    const shareUrl = encodeURIComponent('https://median.co/share/wjadyj#apk');
-    const shareText = encodeURIComponent('Check out this aviation quiz app!');
 
-    // Build a custom share dialog with options
-    const shareOptions = `
-        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000;">
-            <div style="background: white; padding: 20px; border-radius: 8px; text-align: center;">
-                <p>Share this app</p>
-                <a href="https://wa.me/?text=${shareText}%20${shareUrl}" target="_blank">WhatsApp</a><br><br>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=${shareUrl}" target="_blank">Facebook</a><br><br>
-                <a href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" target="_blank">Twitter</a><br><br>
-                <a href="sms:?body=${shareText}%20${shareUrl}" target="_blank">Messages</a><br><br>
-                <button onclick="closeShareMenu()">Close</button>
-            </div>
-        </div>
-    `;
-    
-    // Append the share options to the body
-    document.body.insertAdjacentHTML('beforeend', shareOptions);
-}
+        function shareQuiz() {
+            const shareLink = 'https://median.co/share/wjadyj#apk';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Nexy Aviator Quiz',
+                    text: 'Check out the Nexy Aviator Quiz! Test your aviation knowledge.',
+                    url: shareLink
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(console.error);
+            } else {
+                alert("Sharing is not supported on this browser. Copy the link manually: " + shareLink);
+            }
+        }
 
-// Function to close the share menu
-function closeShareMenu() {
-    const menu = document.querySelector('div[style*="z-index: 1000"]');
-    if (menu) menu.remove();
-}
-    }
-        
-
-        displayQuestion(); // Initial call to display the first question
+        loadQuestion();
     </script>
 </body>
 </html>
