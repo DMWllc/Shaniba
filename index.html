@@ -12,6 +12,9 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -24,9 +27,8 @@
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             text-align: center;
-            position: fixed;
             width: 100%;
-            bottom: 0;
+            margin-top: auto; /* Pushes footer to the bottom */
         }
 
         .container {
@@ -35,6 +37,10 @@
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
+            flex: 1; /* Allows container to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
         }
 
         .question {
@@ -54,37 +60,21 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        
-        
-        
-       .button1 {
-            background-color: #28a745;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-right:50px;
-                    }
 
         #share-follow-container {
             display: none;
             justify-content: space-between;
             margin-top: 20px;
+            margin-bottom: 20px; /* Add space before footer */
         }
     </style>
 </head>
 <body>
     <header>
         <h1 style="font-size:60px"><span style="color:Gold; font-size:65px;">Nexy</span> Aviator Quiz</h1>
-    </header><br><br><br>
+    </header>
     <div class="container" id="question-container"></div>
-    <button id="next-button" class="button1" style="display:none;" onclick="submitAnswer()">Submit</button>
+    <button id="submit-button" class="button" style="display:none;" onclick="submitAnswer()">Submit</button>
     <div id="share-follow-container">
         <button class="button" onclick="shareQuiz()">Share with a Buddy</button>
         <a href="https://x.com/DamnKampala" target="_blank" class="button">Follow for next series</a>
@@ -95,7 +85,7 @@
 
     <script>
         const questions = [
-        { question: "What is the purpose of a pre-flight inspection?", options: ["Ensure safety", "Check fuel levels", "Review flight plan", "All of the above"], correct: "All of the above" },
+            { question: "What is the purpose of a pre-flight inspection?", options: ["Ensure safety", "Check fuel levels", "Review flight plan", "All of the above"], correct: "All of the above" },
             { question: "What is the meaning of VFR?", options: ["Visual Flight Rules", "Vertical Flight Rules", "Very Fast Response", "Variable Flight Regulations"], correct: "Visual Flight Rules" },
             { question: "What is the stall speed of a small aircraft?", options: ["60 knots", "70 knots", "80 knots", "90 knots"], correct: "60 knots" },
             { question: "What does the altimeter measure?", options: ["Speed", "Altitude", "Direction", "Pressure"], correct: "Altitude" },
@@ -167,69 +157,72 @@
             { question: "What is the maximum speed during landing?", options: ["Flaps up speed", "Final approach speed", "Threshold speed", "Touchdown speed"], correct: "Final approach speed" },
             { question: "What should you do in case of engine failure on takeoff?", options: ["Land immediately", "Pull up", "Climb higher", "Maintain direction"], correct: "Maintain direction" }
         ];
-        
+
         let currentQuestionIndex = 0;
-        let correctAnswers = 0;
+        let score = 0;
+        const userAnswers = []; // Array to store user's answers
 
         function displayQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                displayResult();
-                return;
-            }
-
-            const questionData = questions[currentQuestionIndex];
-            const container = document.getElementById('question-container');
-            container.innerHTML = `
+            const questionContainer = document.getElementById("question-container");
+            const currentQuestion = questions[currentQuestionIndex];
+            questionContainer.innerHTML = `
                 <div class="question">
-                    <h3>Question ${currentQuestionIndex + 1}</h3>
-                    <p>${questionData.question}</p>
-                    <form id="answer-form">
-                        ${questionData.options.map(option => `
-                            <label>
-                                <input type="radio" name="answer" value="${option}">
-                                ${option}
-                            </label><br>
-                        `).join('')}
-                    </form>
-                </div>
-            `;
-            document.getElementById('next-button').style.display = 'inline-block';
-        }
-
-        function submitAnswer() {
-            const form = document.getElementById('answer-form');
-            const selectedOption = form.answer.value;
-
-            const questionData = questions[currentQuestionIndex];
-            if (selectedOption === questionData.correct) {
-                correctAnswers++;
-            }
-            currentQuestionIndex++;
-            document.getElementById('next-button').style.display = 'none';
-            displayQuestion();
-        }
-
-        function displayResult() {
-            const container = document.getElementById('question-container');
-            const score = (correctAnswers / questions.length) * 100;
-            container.innerHTML = `
-                <div>
-                    <h2>Quiz Completed!</h2>
-                    <p>Your score: ${score.toFixed(2)}%</p>
-                    <p>Correct answers: ${correctAnswers}/${questions.length}</p>
-                    ${questions.map((q, i) => `
-                        <p>${i + 1}. ${q.question} <br>Correct Answer: ${q.correct}</p>
+                    <h2>${currentQuestion.question}</h2>
+                    ${currentQuestion.options.map((option, index) => `
+                        <div>
+                            <input type="radio" id="option${index}" name="answer" value="${option}">
+                            <label for="option${index}">${option}</label>
+                        </div>
                     `).join('')}
                 </div>
             `;
-            document.getElementById('share-follow-container').style.display = 'flex';
+            document.getElementById("submit-button").style.display = "block";
+        }
+
+        function submitAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (!selectedOption) {
+                alert("Please select an answer before submitting.");
+                return;
+            }
+
+            const answer = selectedOption.value;
+            userAnswers.push(answer); // Store the user's answer
+            if (answer === questions[currentQuestionIndex].correct) {
+                score++;
+            }
+
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            const questionContainer = document.getElementById("question-container");
+            let resultHtml = `<h2>Your Score: ${score}/${questions.length}</h2>`;
+            if (score < questions.length) {
+                resultHtml += "<h3>Incorrect Answers:</h3><ul>";
+                questions.forEach((question, index) => {
+                    if (userAnswers[index] !== question.correct) {
+                        resultHtml += `<li><strong>Q:</strong> ${question.question}<br><strong>Your Answer:</strong> ${userAnswers[index]}<br><strong>Correct Answer:</strong> ${question.correct}</li>`;
+                    }
+                });
+                resultHtml += "</ul>";
+            }
+            questionContainer.innerHTML = resultHtml;
+            document.getElementById("submit-button").style.display = "none";
+            document.getElementById("share-follow-container").style.display = "flex";
         }
 
         function shareQuiz() {
-            alert("Share this quiz with a buddy!");
+            alert("Share this quiz with your friends!");
+            // Implement sharing functionality if needed
         }
 
-        displayQuestion();
+        displayQuestion(); // Initial call to display the first question
     </script>
 </body>
 </html>
