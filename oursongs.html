@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Playlist</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+        }
+        body, html {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .track {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ff758f;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .track-title {
+            font-size: 1.5rem;
+            color: #ff758f;
+            margin-bottom: 10px;
+        }
+        .track-artist {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            outline: none;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .button {
+            background: #ff758f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #ff9a9e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Playlist</h1>
+
+        <!-- Track 1 -->
+        <div class="track">
+            <div class="track-title">Shivers</div>
+            <div class="track-artist">Ed Sheeran</div>
+            <audio controls>
+                <source src="song1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track">
+            <div class="track-title">Song Title 2</div>
+            <div class="track-artist">Artist Name 2</div>
+            <audio controls>
+                <source src="audio/song2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track">
+            <div class="track-title">Song Title 3</div>
+            <div class="track-artist">Artist Name 3</div>
+            <audio controls>
+                <source src="audio/song3.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- Add more tracks as needed -->
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="button" onclick="goToLoveLetters()">Go to Love Letters</button>
+            <button class="button" onclick="goToHome()">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function goToLoveLetters() {
+            window.location.href = 'loveletters.html';
+        }
+
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>

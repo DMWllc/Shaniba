@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Love Letters to Shaniba</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', serif;
+        }
+        body, html {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+        .letter {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ff758f;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .letter:hover {
+            transform: scale(1.02);
+        }
+        .letter-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff758f;
+        }
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            color: #555;
+        }
+        .date {
+            font-size: 0.9rem;
+            font-weight: lighter;
+            margin-top: 15px;
+            color: #888;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .button {
+            background: #ff9a9e;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #ff758f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Love Letters to Shaniba</h1>
+
+        <!-- Love Letter 1 -->
+        <div class="letter">
+            <div class="letter-header">To My Dearest Shaniba</div>
+            <div class="letter-content">
+                My love, every moment spent with you is a treasure I hold dear. Your laughter lights up my world, and your smile brings me peace. I cherish our memories together and look forward to creating more.
+            </div>
+            <div class="date">March 1, 2023</div>
+        </div>
+
+        <!-- Love Letter 2 -->
+        <div class="letter">
+            <div class="letter-header">Forever Yours</div>
+            <div class="letter-content">
+                Shaniba, you are the reason my heart beats. I am grateful for every day I get to love you. You inspire me to be a better person, and I promise to cherish you always.
+            </div>
+            <div class="date">April 10, 2023</div>
+        </div>
+
+        <!-- Love Letter 3 -->
+        <div class="letter">
+            <div class="letter-header">A Promise to Love You</div>
+            <div class="letter-content">
+                To my beautiful Shaniba, I vow to stand by your side through thick and thin. Our love story is my favorite, and I can't wait to write the rest of it with you. You complete me.
+            </div>
+            <div class="date">May 15, 2023</div>
+        </div>
+
+        <!-- Love Letter 4 -->
+        <div class="letter">
+            <div class="letter-header">You Are My Dream</div>
+            <div class="letter-content">
+                Shaniba, you are the dream I never want to wake up from. Your love is a melody that plays in my heart. Thank you for being you, and for being mine.
+            </div>
+            <div class="date">June 20, 2023</div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="button" onclick="goToMemories()">Go to Memories</button>
+            <button class="button" onclick="goToHome()">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function goToMemories() {
+            window.location.href = 'memories.html';
+        }
+
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>

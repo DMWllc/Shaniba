@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Love Messages for Shaniba</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body, html {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #ffccbc, #ffab91);
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #d84315;
+        }
+        .message {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #4a4a4a;
+            padding: 15px;
+            border: 1px solid #d84315;
+            border-radius: 10px;
+            background-color: #fff3e0;
+        }
+        .comments-section {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .comment {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .comment-input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .button {
+            background: #d84315;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .button:hover {
+            background: #a52a00;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #d84315;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Love Message for Shaniba</h1>
+        <div class="message" id="loveMessage"></div>
+
+        <div class="comments-section">
+            <h2>Comments</h2>
+            <div id="commentsContainer"></div>
+            <input type="text" id="commentInput" class="comment-input" placeholder="Leave a comment..." /><br>
+            <button class="button" id="commentButton" onclick="addComment()">Post Comment</button>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="button" onclick="goToHome()">Back to Home</button>
+            <button class="button" onclick="goToMemoryWall()">Go to Memory Wall</button>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "You are the light of my life, Shaniba. Without you, I am lost.",
+            "Every moment with you is a treasure. I cherish you deeply.",
+            "Your smile brightens my darkest days.",
+            "With every beat of my heart, I love you more.",
+            "You are my dream come true, my love.",
+            "No matter the distance, my love for you knows no bounds.",
+            "In your eyes, I see my forever.",
+            "Every day with you is a beautiful addition to my life's journey.",
+            "You are my greatest adventure, and I can't wait for more.",
+            "My love for you grows stronger with every passing moment.",
+            "You make my heart skip a beat every time I see you.",
+            "Together, we can conquer anything that comes our way.",
+            "You are my favorite hello and my hardest goodbye.",
+            "Your love is a melody that plays in my heart.",
+            "I fell in love with you because of the million things you never knew you were doing.",
+            "You are the missing piece of my puzzle.",
+            "If I had to choose again, I would still choose you.",
+            "You are my sun, my moon, and all my stars.",
+            "Every love story is beautiful, but ours is my favorite.",
+            "Your happiness is my happiness.",
+            "Being with you feels like home.",
+            
+            "Every day I wake up thankful for having you in my life. You are my sunshine.",
+            "Distance means so little when you mean so much. I love you more every day.",
+            "Your smile is the reason I wake up every morning with a happy heart.",
+            "I may not be there with you right now, but you're always in my thoughts and heart.",
+            "Each moment spent with you is a moment I cherish forever.",
+            "You are my greatest adventure, and I can’t wait to explore the world with you.",
+            "Even though we're miles apart, our love knows no boundaries.",
+            "You are the missing piece to my puzzle; without you, I'm incomplete.",
+            "Your love is my guiding light, illuminating my darkest days.",
+            "In a world full of chaos, your love is my peace.",
+            "You make my heart smile; I love you to the moon and back.",
+            "With every beat of my heart, I love you more than yesterday.",
+            "You are not just my partner; you are my best friend and my soulmate.",
+            "In every love song, I hear your name. You are my melody.",
+            "Every moment with you is precious, and I treasure each one.",
+            "Your love is like a beautiful melody that plays in my heart.",
+            "Together or apart, my heart will always be with you.",
+            "I wish I could hold you in my arms right now; I miss you so much.",
+            "You are the reason I believe in love; you make my life worth living.",
+            "No matter the distance, my love for you grows stronger every day.",
+            
+            
+            "You are the light of my life, Shaniba. Without you, I am lost.",
+            "Every moment with you is a treasure. I cherish you deeply.",
+            "Your smile brightens my darkest days.",
+            "With every beat of my heart, I love you more.",
+            "You are my dream come true, my love.",
+            "No matter the distance, my love for you knows no bounds.",
+            "In your eyes, I see my forever.",
+            "Every day with you is a beautiful addition to my life's journey.",
+            "You are my greatest adventure, and I can't wait for more.",
+            "My love for you grows stronger with every passing moment.",
+            "You make my heart skip a beat every time I see you.",
+            "Together, we can conquer anything that comes our way.",
+            "You are my favorite hello and my hardest goodbye.",
+            "Your love is a melody that plays in my heart.",
+            "I fell in love with you because of the million things you never knew you were doing.",
+            "You are the missing piece of my puzzle.",
+            "If I had to choose again, I would still choose you.",
+            "You are my sun, my moon, and all my stars.",
+            "Every love story is beautiful, but ours is my favorite.",
+            "Your happiness is my happiness.",
+            "Being with you feels like home.",
+            "I love you not only for who you are but for who I am when I’m with you.",
+            "You are the reason I look forward to each day.",
+            "With you, I have found my perfect match.",
+            "My heart beats for you and only you.",
+            "You are the best part of my day.",
+            "I promise to always be there for you, no matter what.",
+            "Your love is my favorite thing in the world.",
+            "I would travel anywhere just to be with you.",
+            "You fill my life with joy and laughter.",
+            "Forever isn't long enough with you by my side.",
+            "You are the reason my heart smiles.",
+            "I love you more than words can say."
+            
+            
+            
+            // Add more messages until you have 100
+        ];
+
+        const localStorageKey = 'shanibaLoveMessageComments';
+        const commentPostedKey = 'shanibaCommentPosted';
+        
+        function getTodayMessage() {
+            const today = new Date();
+            const startDate = new Date("2024-11-01T00:00:00");
+            const daysSinceStart = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+            const messageIndex = daysSinceStart % messages.length;
+            return messages[messageIndex];
+        }
+
+        function displayMessage() {
+            const loveMessageDiv = document.getElementById("loveMessage");
+            loveMessageDiv.textContent = getTodayMessage();
+            displayComments();
+        }
+
+        function addComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentsContainer = document.getElementById("commentsContainer");
+
+            if (localStorage.getItem(commentPostedKey)) {
+                alert("You can only comment once per message.");
+                return;
+            }
+
+            if (commentInput.value.trim() !== "") {
+                const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+                const todayMessage = getTodayMessage();
+
+                // Store the comment for today's message
+                comments[todayMessage] = comments[todayMessage] || [];
+                comments[todayMessage].push(commentInput.value);
+                localStorage.setItem(localStorageKey, JSON.stringify(comments));
+
+                // Display the new comment
+                const commentDiv = document.createElement("div");
+                commentDiv.classList.add("comment");
+                commentDiv.textContent = commentInput.value;
+                commentsContainer.appendChild(commentDiv);
+                
+                // Hide input and button after commenting
+                commentInput.style.display = 'none';
+                document.getElementById("commentButton").style.display = 'none';
+
+                // Mark that the user has posted a comment
+                localStorage.setItem(commentPostedKey, 'true');
+                commentInput.value = ""; // Clear input
+            } else {
+                alert("Please enter a comment before posting.");
+            }
+        }
+
+        function displayComments() {
+            const commentsContainer = document.getElementById("commentsContainer");
+            commentsContainer.innerHTML = ""; // Clear previous comments
+            const todayMessage = getTodayMessage();
+            const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+            const todayComments = comments[todayMessage] || [];
+
+            todayComments.forEach(comment => {
+                const commentDiv = document.createElement("div");
+                commentDiv.classList.add("comment");
+                commentDiv.textContent = comment;
+                commentsContainer.appendChild(commentDiv);
+            });
+
+            // Show comment input only if no comment has been posted
+            if (!localStorage.getItem(commentPostedKey)) {
+                document.getElementById("commentInput").style.display = 'block';
+                document.getElementById("commentButton").style.display = 'block';
+            } else {
+                // Hide the input and button since a comment was posted
+                document.getElementById("commentInput").style.display = 'none';
+                document.getElementById("commentButton").style.display = 'none';
+            }
+        }
+
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+
+        function goToMemoryWall() {
+            window.location.href = 'memorywall.html';
+        }
+
+        // Initial display of the message and comments
+        displayMessage();
+    </script>
+</body>
+</html>

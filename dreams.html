@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Dreams</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body, html {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #ffccbc, #ffab91);
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #d84315; /* A deep shade of red */
+        }
+        .dreams-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .dream-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .dream-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .dream-item h2 {
+            font-size: 1.5rem;
+            color: #c2185b; /* A vibrant pink */
+        }
+        .dream-item p {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+        }
+        .dream-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .button {
+            background: #d84315; /* Match the header color */
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .button:hover {
+            background: #a52a00; /* A darker shade for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Dreams</h1>
+        <ul class="dreams-list">
+            <li class="dream-item">
+                <h2>Travel the World</h2>
+                <p>Exploring new cultures and landscapes together, making unforgettable memories.</p>
+                <img class="dream-image" src="travel.jpg" alt="Travel Image">
+            </li>
+            <li class="dream-item">
+                <h2>Build Our Home</h2>
+                <p>A cozy place filled with love, laughter, and beautiful moments shared.</p>
+                <img class="dream-image" src="home.jpg" alt="Home Image">
+            </li>
+            <li class="dream-item">
+                <h2>Start a Family</h2>
+                <p>Creating a loving family filled with joy and nurturing our dreams together.</p>
+                <img class="dream-image" src="family.jpg" alt="Family Image">
+            </li>
+            <li class="dream-item">
+                <h2>Write a Book Together</h2>
+                <p>Documenting our adventures and love story to inspire others.</p>
+                <img class="dream-image" src="book.jpg" alt="Book Image">
+            </li>
+            <li class="dream-item">
+                <h2>Open a salon</h2>
+                <p>A stunning salon where people can always get modern hair styles.</p>
+                <img class="dream-image" src="salon.jpg" alt="Cafe Image">
+            </li>
+            <!-- Add more dreams as needed -->
+        </ul>
+        <div class="nav-buttons">
+            <button class="button" onclick="goToMemoryWall()">Go to Memory Wall</button>
+            <button class="button" onclick="goToHome()">Back to Home</button>
+        </div>
+    </div>
+
+    <script>
+        function goToMemoryWall() {
+            window.location.href = 'memorywall.html';
+        }
+
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>

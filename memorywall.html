@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Wall for Shaniba</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        body, html {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom right, #ffccbc, #ffab91);
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #d84315;
+        }
+        .memory {
+            border: 1px solid #d84315;
+            border-radius: 10px;
+            background-color: #fff3e0;
+            margin: 15px 0;
+            padding: 15px;
+            position: relative;
+        }
+        .memory img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .caption {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .button {
+            background: #d84315;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+        .button:hover {
+            background: #a52a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Memory Wall for Shaniba</h1>
+        
+        <div class="memory">
+            <img src="https://via.placeholder.com/600x400" alt="Memory 1">
+            <div class="caption">Remember our first day in primary school, where it all began in 2013!</div>
+        </div>
+
+        <div class="memory">
+            <img src="https://via.placeholder.com/600x400" alt="Memory 2">
+            <div class="caption">From friends to something more, every moment matters.</div>
+        </div>
+
+        <div class="memory">
+            <img src="https://via.placeholder.com/600x400" alt="Memory 3">
+            <div class="caption">Though we've never had picnics, our chats are just as special.</div>
+        </div>
+
+        <div class="memory">
+            <img src="https://via.placeholder.com/600x400" alt="Memory 4">
+            <div class="caption">Each day apart makes the moments we share even more precious.</div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="button" onclick="goToHome()">Back to Home</button>
+            <button class="button" onclick="goToDailyMessages()">Go to Daily Messages</button>
+        </div>
+    </div>
+
+    <script>
+        function goToHome() {
+            window.location.href = 'home.html';
+        }
+
+        function goToDailyMessages() {
+            window.location.href = 'daily_messages.html';
+        }
+    </script>
+</body>
+</html>
