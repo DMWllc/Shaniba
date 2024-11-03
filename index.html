@@ -2,203 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexy Aviator Quiz</title>
+    <title>Welcome to My Love's World</title>
     <style>
-        body {
-            background: url('https://imageio.forbes.com/specials-images/imageserve/66ba827c8ff2be58a5e1ea62/Aircraft-landing-at-sunrise/960x0.jpg?format=jpg&width=960') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Georgia', serif;
+        }
+        body, html {
+            height: 100%;
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            text-align: center;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-        }
-
-        .question {
-            margin-bottom: 20px;
-        }
-
-        .button {
-            background-color: #28a745;
-            border: none;
-            color: white;
-            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #fff;
+            overflow: hidden;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
         }
-
-        #share-follow-container {
-            display: none;
-            justify-content: space-between;
-            margin-top: 20px;
+        .container {
+            animation: fadeIn 3s ease;
+        }
+        h1 {
+            font-size: 2.8rem;
             margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        .message {
+            font-size: 1.2rem;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin: 10px 0;
+        }
+        .visible {
+            opacity: 1;
+        }
+        .loading-dots {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: blink 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.3s; }
+        .dot:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1 style="font-size:60px"><span style="color:Gold; font-size:65px;">Nexy</span> Aviator Quiz</h1>
-    </header>
-    <div class="container" id="question-container"></div>
-    <button id="submit-button" class="button" style="display:none;" onclick="submitAnswer()">Submit</button>
-    <div id="share-follow-container">
-        <button onclick="shareQuiz()" class="button">Share with a Buddy</button>
-        <a href="https://x.com/DamnKampala" target="_blank" class="button">Follow for next series</a>
+    <div class="container">
+        <h1>Welcome, My Love 💖</h1>
+        <p id="line1" class="message">Step into a world crafted just for us...</p>
+        <p id="line2" class="message">Every moment, every laugh, every memory...</p>
+        <p id="line3" class="message">Bound together in pages of our story...</p>
+        <p id="line4" class="message">Breathe in the love, crafted with care...</p>
+        <p id="line5" class="message">This is our space, forever and always.</p>
+
+        <!-- Loading dots animation -->
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
     </div>
-    <footer>
-        <p>&copy; 2024 iTech Web Design</p>
-    </footer>
 
     <script>
-        const questions = [
-            { question: "What is the purpose of a pre-flight inspection?", options: ["Ensure safety", "Check fuel levels", "Review flight plan", "All of the above"], correct: "All of the above" },
-            { question: "What is the meaning of VFR?", options: ["Visual Flight Rules", "Vertical Flight Rules", "Very Fast Response", "Variable Flight Regulations"], correct: "Visual Flight Rules" },
-            { question: "What is the stall speed of a small aircraft?", options: ["60 knots", "70 knots", "80 knots", "90 knots"], correct: "60 knots" },
-            { question: "What does the altimeter measure?", options: ["Speed", "Altitude", "Direction", "Pressure"], correct: "Altitude" },h
-            { question: "What is the minimum safe altitude over congested areas?", options: ["500 feet", "1,000 feet", "1,500 feet", "2,000 feet"], correct: "1,000 feet" },
-            { question: "What should you do if you encounter turbulence?", options: ["Increase speed", "Climb higher", "Descend", "Maintain altitude"], correct: "Maintain altitude" },
-            { question: "What is the primary function of flaps?", options: ["Increase speed", "Reduce lift", "Increase lift at low speeds", "Decrease drag"], correct: "Increase lift at low speeds" },
-            { question: "What does a green light on the panel indicate?", options: ["Normal operation", "Caution", "Warning", "Emergency"], correct: "Normal operation" },
-            { question: "What is the function of the rudder?", options: ["Control altitude", "Control direction", "Control speed", "Control lift"], correct: "Control direction" },
-            { question: "What is the first action during an engine failure?", options: ["Check fuel levels", "Land immediately", "Establish best glide speed", "Contact ATC"], correct: "Establish best glide speed" },
-            { question: "What does the heading indicator measure?", options: ["Speed", "Heading", "Altitude", "Angle of ascent"], correct: "Heading" },
-            { question: "What is the use of the transponder?", options: ["To track altitude", "To communicate with ATC", "To identify aircraft", "To control navigation"], correct: "To identify aircraft" },
-            { question: "What action should you take if you see a traffic conflict?", options: ["Climb", "Descend", "Turn left", "Turn right"], correct: "Turn right" },
-            { question: "What should be your action in the event of a tailspin?", options: ["Pull up", "Turn off the engine", "Increase throttle", "Reduce power"], correct: "Reduce power" },
-            { question: "What is the purpose of the carburetor heat?", options: ["Increase power", "Prevent icing", "Increase speed", "Improve fuel efficiency"], correct: "Prevent icing" },
-            { question: "How often should the oil be changed?", options: ["Every 10 hours", "Every 25 hours", "Every 50 hours", "Every 100 hours"], correct: "Every 50 hours" },
-            { question: "What is the maximum allowable crosswind component for landing?", options: ["10 knots", "15 knots", "20 knots", "25 knots"], correct: "20 knots" },
-            { question: "What is the purpose of the yoke?", options: ["Throttle control", "Directional control", "Altitude control", "Pitch control"], correct: "Directional control" },
-            { question: "How should you check for wake turbulence?", options: ["Look for other aircraft", "Monitor ATC", "Check the weather", "Ascertain landing direction"], correct: "Ascertain landing direction" },
-            { question: "What is the primary function of ailerons?", options: ["Control pitch", "Control roll", "Control yaw", "Control speed"], correct: "Control roll" },
-            { question: "What is the meaning of a yellow circle on a chart?", options: ["Warning area", "Military airspace", "Restricted area", "Class B airspace"], correct: "Warning area" },
-            { question: "What is a PAPI?", options: ["Precision Approach Path Indicator", "Pilot Approach Path Indicator", "Preliminary Approach Path Indicator", "Private Approach Path Indicator"], correct: "Precision Approach Path Indicator" },
-            { question: "What should you do during a go-around?", options: ["Pull back sharply", "Check the fuel", "Increase power and pitch up", "Land immediately"], correct: "Increase power and pitch up" },
-            { question: "What is a NOTAM?", options: ["Notice to Airmen", "Notice of Airspace Management", "Notice of Terrain Alteration", "Notice of Technical Maintenance"], correct: "Notice to Airmen" },
-            
+        const messages = [
+            document.getElementById('line1'),
+            document.getElementById('line2'),
+            document.getElementById('line3'),
+            document.getElementById('line4'),
+            document.getElementById('line5')
         ];
+        
+        let index = 0;
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let incorrectAnswers = [];
-
-        function loadQuestion() {
-            const questionContainer = document.getElementById('question-container');
-            questionContainer.innerHTML = ''; // Clear previous question
-            const questionData = questions[currentQuestionIndex];
-
-            const questionElement = document.createElement('div');
-            questionElement.className = 'question';
-            questionElement.innerHTML = `<h2>${currentQuestionIndex + 1}. ${questionData.question}</h2>`;
-
-            questionData.options.forEach(option => {
-                const optionElement = document.createElement('div');
-                optionElement.innerHTML = `<input type="radio" name="answer" value="${option}"> ${option}`;
-                questionElement.appendChild(optionElement);
-            });
-
-            questionContainer.appendChild(questionElement);
-            document.getElementById('submit-button').style.display = 'inline-block';
-        }
-
-        function submitAnswer() {
-            const options = document.getElementsByName('answer');
-            let selectedOption;
-            for (let option of options) {
-                if (option.checked) {
-                    selectedOption = option.value;
-                    break;
-                }
+        function showNextMessage() {
+            if (index > 0) {
+                messages[index - 1].classList.remove('visible');
             }
-
-            if (!selectedOption) {
-                alert("Please select an answer!");
-                return;
-            }
-
-            const correctAnswer = questions[currentQuestionIndex].correct;
-            if (selectedOption === correctAnswer) {
-                score++;
-            } else {
-                incorrectAnswers.push({ question: questions[currentQuestionIndex].question, correct: correctAnswer });
-            }
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                displayResults();
+            if (index < messages.length) {
+                messages[index].classList.add('visible');
+                index++;
+                setTimeout(showNextMessage, 4000); // Delay for each message
             }
         }
 
-        function displayResults() {
-            const questionContainer = document.getElementById('question-container');
-            questionContainer.innerHTML = `<h2>Your Score: ${score} / ${questions.length}</h2>`;
+        // Start displaying messages
+        showNextMessage();
 
-            if (incorrectAnswers.length > 0) {
-                const incorrectList = document.createElement('ul');
-                incorrectAnswers.forEach(item => {
-                    const listItem = document.createElement('li');
-                    listItem.innerText = `Question: ${item.question} - Correct Answer: ${item.correct}`;
-                    incorrectList.appendChild(listItem);
-                });
-                questionContainer.appendChild(incorrectList);
-            }
-
-            document.getElementById('submit-button').style.display = 'none';
-            document.getElementById('share-follow-container').style.display = 'flex';
-        }
-
-        function shareQuiz() {
-            const shareLink = 'https://median.co/share/wjadyj#apk';
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Nexy Aviator Quiz',
-                    text: 'Check out the Nexy Aviator Quiz! Test your aviation knowledge.',
-                    url: shareLink
-                }).then(() => {
-                    console.log('Thanks for sharing!');
-                }).catch(console.error);
-            } else {
-                alert("Sharing is not supported on this browser. Copy the link manually: " + shareLink);
-            }
-        }
-
-        loadQuestion();
+        // Redirect to home.html after 3 minutes (180,000 milliseconds)
+        setTimeout(function() {
+            window.location.href = "home.html";
+        }, 30000); // 30 seconds 
     </script>
 </body>
 </html>
