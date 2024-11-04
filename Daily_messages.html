@@ -28,6 +28,7 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hidden until password is correct */
         }
         h1 {
             font-size: 2rem;
@@ -84,10 +85,60 @@
             margin-top: 30px;
             color: #d84315;
         }
+        /* Lock Section Styles */
+        .lock-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .lock-modal {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 300px;
+        }
+        .lock-modal input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .lock-modal button {
+            margin-top: 15px;
+            background: #d84315;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        .lock-modal button:hover {
+            background: #a52a00;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="lock-section" id="lockSection">
+        <div class="lock-modal">
+            <h2>Enter Password</h2>
+            <input type="password" id="passwordInput" placeholder="Password" />
+            <button onclick="checkPassword()">Unlock</button>
+        </div>
+    </div>
+
+    <div class="container" id="contentContainer">
         <h1>Daily Love Message for Shaniba</h1>
         <div class="message" id="loveMessage"></div>
 
@@ -106,15 +157,27 @@
 
     <script>
         const messages = [
-            // Your love messages here
             "You are the light of my life, Shaniba. Without you, I am lost.",
             "Every moment with you is a treasure. I cherish you deeply.",
-            // ... other messages ...
+            // (rest of your messages)
             "I love you more than words can say."
         ];
 
         const localStorageKey = 'shanibaLoveMessageComments';
         const commentPostedKey = 'shanibaCommentPosted';
+        const password = 'tyfa'; // Set the password here
+
+        function checkPassword() {
+            const userPassword = document.getElementById("passwordInput").value;
+            if (userPassword === password) {
+                document.getElementById("lockSection").style.display = 'none'; // Hide lock section
+                document.getElementById("contentContainer").style.display = 'block'; // Show content
+                displayMessage(); // Display message and comments
+            } else {
+                alert("Incorrect password. Access denied.");
+                document.getElementById("passwordInput").value = ""; // Clear input
+            }
+        }
 
         function getTodayMessage() {
             const today = new Date();
@@ -133,20 +196,18 @@
         function addComment() {
             const commentInput = document.getElementById("commentInput");
             const commentsContainer = document.getElementById("commentsContainer");
-            const todayMessage = getTodayMessage();
 
-            // Check if a comment has been posted for today's message
-            const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
-            const todayComments = comments[todayMessage] || [];
-
-            if (todayComments.length >= 1) {
+            if (localStorage.getItem(commentPostedKey)) {
                 alert("You can only comment once per message.");
                 return;
             }
 
             if (commentInput.value.trim() !== "") {
+                const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+                const todayMessage = getTodayMessage();
+
                 // Store the comment for today's message
-                comments[todayMessage] = todayComments;
+                comments[todayMessage] = comments[todayMessage] || [];
                 comments[todayMessage].push(commentInput.value);
                 localStorage.setItem(localStorageKey, JSON.stringify(comments));
 
@@ -183,7 +244,7 @@
             });
 
             // Show comment input only if no comment has been posted
-            if (todayComments.length === 0) {
+            if (!localStorage.getItem(commentPostedKey)) {
                 document.getElementById("commentInput").style.display = 'block';
                 document.getElementById("commentButton").style.display = 'block';
             } else {
@@ -194,15 +255,20 @@
         }
 
         function goToHome() {
-            window.location.href = 'home.html';
+            // Logic to navigate back to the home page
+            alert("Navigating back to the home page...");
         }
 
         function goToMemoryWall() {
-            window.location.href = 'memorywall.html';
+            // Logic to navigate to the memory wall
+            alert("Navigating to the memory wall...");
         }
 
-        // Initial display of the message and comments
-        displayMessage();
+        // Initialize the lock section
+        window.onload = function() {
+            // Show the lock section on page load
+            document.getElementById("lockSection").style.display = 'flex';
+        };
     </script>
 </body>
 </html>
