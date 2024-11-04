@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Our Dreams</title>
     <style>
+        /* General Styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -22,8 +21,10 @@
             background: linear-gradient(to bottom right, #ffccbc, #ffab91);
             color: #333;
             text-align: center;
+            overflow: hidden;
         }
         .container {
+            display: none; /* Hide main content until unlocked */
             max-width: 800px;
             width: 90%;
             padding: 30px;
@@ -34,7 +35,7 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
-            color: #d84315; /* A deep shade of red */
+            color: #d84315;
         }
         .dreams-list {
             list-style-type: none;
@@ -54,7 +55,7 @@
         }
         .dream-item h2 {
             font-size: 1.5rem;
-            color: #c2185b; /* A vibrant pink */
+            color: #c2185b;
         }
         .dream-item p {
             font-size: 1.1rem;
@@ -73,7 +74,7 @@
             margin-top: 20px;
         }
         .button {
-            background: #d84315; /* Match the header color */
+            background: #d84315;
             color: #fff;
             border: none;
             padding: 12px 25px;
@@ -83,12 +84,68 @@
             font-size: 1rem;
         }
         .button:hover {
-            background: #a52a00; /* A darker shade for hover effect */
+            background: #a52a00;
+        }
+
+        /* Lock Screen Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+        }
+        .modal-content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .modal-content h2 {
+            color: #d84315;
+            margin-bottom: 20px;
+        }
+        .password-input {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .unlock-button {
+            background: #d84315;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .unlock-button:hover {
+            background: #a52a00;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Lock Screen Modal -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <h2>Enter Password to Unlock</h2>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Password">
+            <button class="unlock-button" onclick="checkPassword()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container" id="contentContainer">
         <h1>Our Dreams</h1>
         <ul class="dreams-list">
             <li class="dream-item">
@@ -101,22 +158,7 @@
                 <p>A cozy place filled with love, laughter, and beautiful moments shared.</p>
                 <img class="dream-image" src="home.jpg" alt="Home Image">
             </li>
-            <li class="dream-item">
-                <h2>Start a Family</h2>
-                <p>Creating a loving family filled with joy and nurturing our dreams together.</p>
-                <img class="dream-image" src="family.jpg" alt="Family Image">
-            </li>
-            <li class="dream-item">
-                <h2>Write a Book Together</h2>
-                <p>Documenting our adventures and love story to inspire others.</p>
-                <img class="dream-image" src="book.jpg" alt="Book Image">
-            </li>
-            <li class="dream-item">
-                <h2>Open a salon</h2>
-                <p>A stunning salon where people can always get modern hair styles.</p>
-                <img class="dream-image" src="salon.jpg" alt="Cafe Image">
-            </li>
-            <!-- Add more dreams as needed -->
+            <!-- Additional dreams -->
         </ul>
         <div class="nav-buttons">
             <button class="button" onclick="goToMemoryWall()">Go to Memory Wall</button>
@@ -125,6 +167,16 @@
     </div>
 
     <script>
+        function checkPassword() {
+            const passwordInput = document.getElementById('passwordInput').value;
+            if (passwordInput === 'tyfa') {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.getElementById('contentContainer').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
         function goToMemoryWall() {
             window.location.href = 'memorywall.html';
         }
