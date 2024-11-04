@@ -93,6 +93,7 @@
             text-decoration: line-through;
             background-color: #d4edda; /* Light green for found words */
             color: #6c757d; /* Gray for found words */
+            display: none; /* Hide the found word */
         }
     </style>
 </head>
@@ -102,14 +103,16 @@
         <div id="wordSearch" class="grid"></div>
         <h2>Words to Find:</h2>
         <ul id="wordList"></ul>
+        <button id="hintBtn">Hint</button>
+        <button id="restartBtn">Restart</button>
     </div>
     <script>
         const words = ["JAVASCRIPT", "HTML", "CSS", "WEB", "GAME", "PUZZLE", "CODE", "FUN", "LOVE", "GIRL"];
         const gridSize = 10;
         const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-        let foundWords = new Set(); // Use a Set to track found words
-        let selectedLetters = []; // Array to keep track of currently selected letters
-        let previousCell = null; // Track the previous cell for connection
+        let foundWords = new Set();
+        let selectedLetters = [];
+        let selectedCells = []; // Track the selected cells
 
         function placeWord(word) {
             const row = Math.floor(Math.random() * gridSize);
@@ -154,19 +157,9 @@
         }
 
         function selectLetter(row, col, cellElement, letter) {
-            if (previousCell && (Math.abs(previousCell.row - row) <= 1) && (Math.abs(previousCell.col - col) <= 1)) {
-                selectedLetters.push(letter);
-                cellElement.classList.add('found'); // Mark the cell as found
-                previousCell = { row, col }; // Update previous cell
-            } else if (!previousCell) {
-                // First letter selected
-                selectedLetters.push(letter);
-                cellElement.classList.add('found'); // Mark the cell as found
-                previousCell = { row, col }; // Set as previous cell
-            } else {
-                resetSelectedLetters(); // Reset if selection is invalid
-                return; // Exit function if invalid selection
-            }
+            selectedLetters.push(letter);
+            selectedCells.push(cellElement); // Keep track of the selected cells
+            cellElement.classList.add('found'); // Mark the cell as selected
 
             // Check if the currently selected letters form a valid word
             checkCurrentSelection();
@@ -184,36 +177,58 @@
             document.querySelectorAll('.word-item').forEach(item => {
                 if (item.textContent === word) {
                     item.classList.add('checked');
+                    item.style.display = 'none'; // Hide the found word from the list
                 }
             });
 
+            // Highlight the letters in the puzzle that were part of the found word
             highlightWord(word);
             resetSelectedLetters(); // Clear selected letters after finding a word
         }
 
         function highlightWord(word) {
             const letters = word.split('');
-            const cells = document.getElementsByClassName('found');
-
-            let index = 0;
-            for (let cell of cells) {
-                if (cell.textContent === letters[index]) {
+            selectedCells.forEach(cell => {
+                if (letters.includes(cell.textContent)) {
                     cell.classList.remove('found'); // Remove temporary class
-                    cell.classList.add('correct'); // Add class to highlight the word
-                    index++;
+                    cell.classList.add('correct'); // Highlight the found word letters
                 }
-                if (index === letters.length) break; // Stop if all letters are found
-            }
+            });
         }
 
         function resetSelectedLetters() {
-            selectedLetters = []; // Clear the current selection
-            previousCell = null; // Reset previous cell
-            const foundCells = Array.from(document.getElementsByClassName('found'));
-            foundCells.forEach(cell => {
-                cell.classList.remove('found'); // Remove found class from all cells
-            });
+            selectedLetters = [];
+            selectedCells.forEach(cell => cell.classList.remove('found'));
+            selectedCells = []; // Clear the selected cells
         }
+
+        function giveHint() {
+            const unfoundWords = words.filter(word => !foundWords.has(word));
+            if (unfoundWords.length > 0) {
+                const randomWord = unfoundWords[Math.floor(Math.random() * unfoundWords.length)];
+                const letterToReveal = randomWord[Math.floor(Math.random() * randomWord.length)];
+
+                const cells = document.getElementsByClassName('cell');
+                for (let cell of cells) {
+                    if (cell.textContent === letterToReveal) {
+                        cell.classList.add('correct');
+                        break;
+                    }
+                }
+            }
+        }
+
+        function restartGame() {
+            foundWords.clear();
+            selectedLetters = [];
+            selectedCells = [];
+            document.getElementById('wordSearch').innerHTML = '';
+            document.getElementById('wordList').innerHTML = '';
+            generateWordSearch();
+        }
+
+        document.getElementById('restartBtn').addEventListener('click', restartGame);
+        document.getElementById('hintBtn').addEventListener('click', giveHint);
 
         generateWordSearch();
     </script>
