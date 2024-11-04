@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaniba's Personal Wall</title>
+    <style>
+        /* Same CSS as before for styling and layout */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            height: 90vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .lock-screen, .content-form {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .lock-screen input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        .lock-screen button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ff6b6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content-form, .content-list {
+            display: none;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .content-form input, .content-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        .content-form button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #ff6b6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .content-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Shaniba's Personal Wall</h1>
+
+        <!-- Lock Screen -->
+        <div class="lock-screen" id="lockScreen">
+            <h2>Enter Password to Access</h2>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <button onclick="unlockPage()">Unlock</button>
+        </div>
+
+        <!-- Content Form for adding content -->
+        <div class="content-form" id="contentForm">
+            <h2>Add Your Content</h2>
+            <textarea id="contentInput" rows="4" placeholder="Write something here..."></textarea>
+            <input type="file" id="imageInput" accept="image/*">
+            <button onclick="addContent()">Add Content</button>
+        </div>
+
+        <!-- Display added content -->
+        <div class="content-list" id="contentList"></div>
+    </div>
+
+    <script>
+        const PASSWORD = "tyfa";
+
+        // Unlock the page if the correct password is entered
+        function unlockPage() {
+            const passwordInput = document.getElementById("passwordInput").value;
+            if (passwordInput === PASSWORD) {
+                document.getElementById("lockScreen").style.display = "none";
+                document.getElementById("contentForm").style.display = "block";
+                document.getElementById("contentList").style.display = "block";
+                displayStoredContent();
+            } else {
+                alert("Incorrect password. Please try again.");
+            }
+        }
+
+        function addContent() {
+            const contentText = document.getElementById("contentInput").value;
+            const imageFile = document.getElementById("imageInput").files[0];
+            if (!contentText && !imageFile) {
+                alert("Please add text or upload an image.");
+                return;
+            }
+
+            const newContent = {
+                text: contentText,
+                timestamp: new Date().toLocaleString()
+            };
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    newContent.image = event.target.result;
+                    saveContent(newContent);
+                    displayStoredContent(); // Display content immediately after adding
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                saveContent(newContent);
+                displayStoredContent();
+            }
+
+            document.getElementById("contentInput").value = "";
+            document.getElementById("imageInput").value = "";
+        }
+
+        function saveContent(content) {
+            let contentList = JSON.parse(localStorage.getItem("contentList")) || [];
+            contentList.push(content);
+            localStorage.setItem("contentList", JSON.stringify(contentList));
+        }
+
+        function displayStoredContent() {
+            const contentList = JSON.parse(localStorage.getItem("contentList")) || [];
+            const contentContainer = document.getElementById("contentList");
+            contentContainer.innerHTML = "";
+
+            contentList.forEach(content => {
+                const contentItem = document.createElement("div");
+                contentItem.classList.add("content-item");
+
+                if (content.text) {
+                    const contentText = document.createElement("p");
+                    contentText.textContent = content.text;
+                    contentItem.appendChild(contentText);
+                }
+
+                if (content.image) {
+                    const contentImage = document.createElement("img");
+                    contentImage.src = content.image;
+                    contentItem.appendChild(contentImage);
+                }
+
+                const timestamp = document.createElement("small");
+                timestamp.textContent = `Added on: ${content.timestamp}`;
+                contentItem.appendChild(timestamp);
+
+                contentContainer.appendChild(contentItem);
+            });
+        }
+    </script>
+
+</body>
+</html>
