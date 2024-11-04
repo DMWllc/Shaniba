@@ -106,92 +106,16 @@
 
     <script>
         const messages = [
+            // Your love messages here
             "You are the light of my life, Shaniba. Without you, I am lost.",
             "Every moment with you is a treasure. I cherish you deeply.",
-            "Your smile brightens my darkest days.",
-            "With every beat of my heart, I love you more.",
-            "You are my dream come true, my love.",
-            "No matter the distance, my love for you knows no bounds.",
-            "In your eyes, I see my forever.",
-            "Every day with you is a beautiful addition to my life's journey.",
-            "You are my greatest adventure, and I can't wait for more.",
-            "My love for you grows stronger with every passing moment.",
-            "You make my heart skip a beat every time I see you.",
-            "Together, we can conquer anything that comes our way.",
-            "You are my favorite hello and my hardest goodbye.",
-            "Your love is a melody that plays in my heart.",
-            "I fell in love with you because of the million things you never knew you were doing.",
-            "You are the missing piece of my puzzle.",
-            "If I had to choose again, I would still choose you.",
-            "You are my sun, my moon, and all my stars.",
-            "Every love story is beautiful, but ours is my favorite.",
-            "Your happiness is my happiness.",
-            "Being with you feels like home.",
-            
-            "Every day I wake up thankful for having you in my life. You are my sunshine.",
-            "Distance means so little when you mean so much. I love you more every day.",
-            "Your smile is the reason I wake up every morning with a happy heart.",
-            "I may not be there with you right now, but you're always in my thoughts and heart.",
-            "Each moment spent with you is a moment I cherish forever.",
-            "You are my greatest adventure, and I can’t wait to explore the world with you.",
-            "Even though we're miles apart, our love knows no boundaries.",
-            "You are the missing piece to my puzzle; without you, I'm incomplete.",
-            "Your love is my guiding light, illuminating my darkest days.",
-            "In a world full of chaos, your love is my peace.",
-            "You make my heart smile; I love you to the moon and back.",
-            "With every beat of my heart, I love you more than yesterday.",
-            "You are not just my partner; you are my best friend and my soulmate.",
-            "In every love song, I hear your name. You are my melody.",
-            "Every moment with you is precious, and I treasure each one.",
-            "Your love is like a beautiful melody that plays in my heart.",
-            "Together or apart, my heart will always be with you.",
-            "I wish I could hold you in my arms right now; I miss you so much.",
-            "You are the reason I believe in love; you make my life worth living.",
-            "No matter the distance, my love for you grows stronger every day.",
-            
-            
-            "You are the light of my life, Shaniba. Without you, I am lost.",
-            "Every moment with you is a treasure. I cherish you deeply.",
-            "Your smile brightens my darkest days.",
-            "With every beat of my heart, I love you more.",
-            "You are my dream come true, my love.",
-            "No matter the distance, my love for you knows no bounds.",
-            "In your eyes, I see my forever.",
-            "Every day with you is a beautiful addition to my life's journey.",
-            "You are my greatest adventure, and I can't wait for more.",
-            "My love for you grows stronger with every passing moment.",
-            "You make my heart skip a beat every time I see you.",
-            "Together, we can conquer anything that comes our way.",
-            "You are my favorite hello and my hardest goodbye.",
-            "Your love is a melody that plays in my heart.",
-            "I fell in love with you because of the million things you never knew you were doing.",
-            "You are the missing piece of my puzzle.",
-            "If I had to choose again, I would still choose you.",
-            "You are my sun, my moon, and all my stars.",
-            "Every love story is beautiful, but ours is my favorite.",
-            "Your happiness is my happiness.",
-            "Being with you feels like home.",
-            "I love you not only for who you are but for who I am when I’m with you.",
-            "You are the reason I look forward to each day.",
-            "With you, I have found my perfect match.",
-            "My heart beats for you and only you.",
-            "You are the best part of my day.",
-            "I promise to always be there for you, no matter what.",
-            "Your love is my favorite thing in the world.",
-            "I would travel anywhere just to be with you.",
-            "You fill my life with joy and laughter.",
-            "Forever isn't long enough with you by my side.",
-            "You are the reason my heart smiles.",
+            // ... other messages ...
             "I love you more than words can say."
-            
-            
-            
-            // Add more messages until you have 100
         ];
 
         const localStorageKey = 'shanibaLoveMessageComments';
         const commentPostedKey = 'shanibaCommentPosted';
-        
+
         function getTodayMessage() {
             const today = new Date();
             const startDate = new Date("2024-11-01T00:00:00");
@@ -209,18 +133,20 @@
         function addComment() {
             const commentInput = document.getElementById("commentInput");
             const commentsContainer = document.getElementById("commentsContainer");
+            const todayMessage = getTodayMessage();
 
-            if (localStorage.getItem(commentPostedKey)) {
+            // Check if a comment has been posted for today's message
+            const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
+            const todayComments = comments[todayMessage] || [];
+
+            if (todayComments.length >= 1) {
                 alert("You can only comment once per message.");
                 return;
             }
 
             if (commentInput.value.trim() !== "") {
-                const comments = JSON.parse(localStorage.getItem(localStorageKey)) || {};
-                const todayMessage = getTodayMessage();
-
                 // Store the comment for today's message
-                comments[todayMessage] = comments[todayMessage] || [];
+                comments[todayMessage] = todayComments;
                 comments[todayMessage].push(commentInput.value);
                 localStorage.setItem(localStorageKey, JSON.stringify(comments));
 
@@ -257,7 +183,7 @@
             });
 
             // Show comment input only if no comment has been posted
-            if (!localStorage.getItem(commentPostedKey)) {
+            if (todayComments.length === 0) {
                 document.getElementById("commentInput").style.display = 'block';
                 document.getElementById("commentButton").style.display = 'block';
             } else {
