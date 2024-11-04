@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Dreams</title>
     <style>
-        /* General Styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,22 +14,51 @@
         body, html {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: linear-gradient(to bottom right, #ffccbc, #ffab91);
             color: #333;
             text-align: center;
-            overflow: hidden;
         }
         .container {
-            display: none; /* Hide main content until unlocked */
             max-width: 800px;
             width: 90%;
             padding: 30px;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        .password-prompt {
+            max-width: 400px;
+            width: 80%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .password-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .password-button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #d84315;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .password-button:hover {
+            background: #a52a00;
         }
         h1 {
             font-size: 2.5rem;
@@ -87,66 +114,16 @@
         .button:hover {
             background: #a52a00;
         }
-
-        /* Lock Screen Modal Styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 10;
-        }
-        .modal-content {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        .modal-content h2 {
-            color: #d84315;
-            margin-bottom: 20px;
-        }
-        .password-input {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 15px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .unlock-button {
-            background: #d84315;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .unlock-button:hover {
-            background: #a52a00;
-        }
     </style>
 </head>
 <body>
-    <!-- Lock Screen Modal -->
-    <div class="modal" id="passwordModal">
-        <div class="modal-content">
-            <h2>Enter Password to Unlock</h2>
-            <input type="password" class="password-input" id="passwordInput" placeholder="Password">
-            <button class="unlock-button" onclick="checkPassword()">Unlock</button>
-        </div>
+    <div class="password-prompt">
+        <h1>Enter Password</h1>
+        <input type="password" id="passwordInput" class="password-input" placeholder="Password">
+        <button onclick="checkPassword()" class="password-button">Unlock</button>
     </div>
 
-    <!-- Main Content -->
-    <div class="container" id="contentContainer">
+    <div class="container" id="dreamsContainer">
         <h1>Our Dreams</h1>
         <ul class="dreams-list">
             <li class="dream-item">
@@ -159,12 +136,6 @@
                 <p>A cozy place filled with love, laughter, and beautiful moments shared.</p>
                 <img class="dream-image" src="home.jpg" alt="Home Image">
             </li>
-            <!-- Additional dreams -->
-            <li class="dream-item">
-                <h2>Build Our Home</h2>
-                <p>A cozy place filled with love, laughter, and beautiful moments shared.</p>
-                <img class="dream-image" src="https://example.com/home.jpg" alt="Home Image">
-            </li>
             <li class="dream-item">
                 <h2>Start a Family</h2>
                 <p>Creating a loving family filled with joy and nurturing our dreams together.</p>
@@ -176,15 +147,10 @@
                 <img class="dream-image" src="book.jpg" alt="Book Image">
             </li>
             <li class="dream-item">
-                <h2>Open a Salon</h2>
-                <p>A stunning salon where people can always get modern hairstyles.</p>
-                <img class="dream-image" src="salon.jpg" alt="Salon Image">
+                <h2>Open a salon</h2>
+                <p>A stunning salon where people can always get modern hair styles.</p>
+                <img class="dream-image" src="salon.jpg" alt="Cafe Image">
             </li>
-        </ul>
-
-
-
-            
         </ul>
         <div class="nav-buttons">
             <button class="button" onclick="goToMemoryWall()">Go to Memory Wall</button>
@@ -194,12 +160,12 @@
 
     <script>
         function checkPassword() {
-            const passwordInput = document.getElementById('passwordInput').value;
-            if (passwordInput === 'tyfa') {
-                document.getElementById('passwordModal').style.display = 'none';
-                document.getElementById('contentContainer').style.display = 'block';
+            const password = document.getElementById("passwordInput").value;
+            if (password === "tyfa") {
+                document.querySelector(".password-prompt").style.display = "none";
+                document.getElementById("dreamsContainer").style.display = "block";
             } else {
-                alert('Incorrect password. Please try again.');
+                alert("Incorrect password. Please try again.");
             }
         }
 
