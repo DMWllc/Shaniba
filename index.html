@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to My Love's World</title>
     <style>
         * {
@@ -12,7 +12,6 @@
         }
         body, html {
             height: 100%;
-            width:100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -20,19 +19,18 @@
             color: #fff;
             overflow: hidden;
             text-align: center;
-            
         }
         .container {
             animation: fadeIn 3s ease;
         }
         h1 {
-            font-size: 4.8rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
             color: #fff;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
         .message {
-            font-size: 3.2rem;
+            font-size: 1.2rem;
             color: #fff;
             opacity: 0;
             transition: opacity 1s ease;
@@ -42,7 +40,7 @@
             opacity: 1;
         }
         .loading-dots {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             margin-top: 30px;
             display: flex;
             justify-content: center;
@@ -111,7 +109,7 @@
         // Redirect to home.html after 3 minutes (180,000 milliseconds)
         setTimeout(function() {
             window.location.href = "home.html";
-        }, 20000); // 20 seconds 
+        }, 20000); // 30 seconds 
     </script>
 </body>
 </html>
