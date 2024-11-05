@@ -16,9 +16,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom right, #e0c3fc, #8ec5fc);
             color: #333;
             text-align: center;
+            overflow: hidden;
+        }
+        /* Video Background */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
         .container {
             max-width: 800px;
@@ -27,6 +37,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: rgba(255, 255, 255, 0.8); /* Slight transparency for readability */
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 90vh;
         }
         h1 {
             font-size: 2.5rem;
@@ -80,9 +94,20 @@
         .button:hover {
             background: #ff758f;
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
     </style>
 </head>
 <body>
+    <!-- Video Background -->
+    <video class="video-bg" autoplay loop muted playsinline>
+        <source src="vid.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <div class="container">
         <h1>Love Letters to Shaniba</h1>
 
@@ -122,10 +147,33 @@
             <div class="date">June 20, 2023</div>
         </div>
 
+        <!-- Love Letter 5 -->
+        <div class="letter">
+            <div class="letter-header">My Heart's Song</div>
+            <div class="letter-content">
+                Sweet Shaniba, my heart sings every time I think of you. The love you give is my life’s sweetest blessing. I am so lucky to have you by my side.
+            </div>
+            <div class="date">July 5, 2023</div>
+        </div>
+
+        <!-- Love Letter 6 -->
+        <div class="letter">
+            <div class="letter-header">Together Forever</div>
+            <div class="letter-content">
+                From the moment we met, I knew you were the one. With every passing day, my love for you grows stronger. Here's to us, forever and always.
+            </div>
+            <div class="date">August 12, 2023</div>
+        </div>
+
         <!-- Navigation Buttons -->
         <div class="nav-buttons">
             <button class="button" onclick="goToMemories()">Go to Memories</button>
             <button class="button" onclick="goToHome()">Back to Home</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2024, Love Letters to Shaniba. All rights reserved.
         </div>
     </div>
 
