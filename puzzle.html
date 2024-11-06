@@ -3,234 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Search Game</title>
+    <title>Games Showcase for Shaniba</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
+    background-image: url('back.jpg');
+    background-size: cover; /* This ensures the image covers the entire background */
+    background-position: center; /* This centers the image */
+    background-repeat: no-repeat; /* This prevents the image from repeating */
+    color: #333;
+}
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-container input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .games-showcase {
             display: flex;
             justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            width: 90%;
-            max-width: 600px;
-            border: 2px solid #007BFF;
-            border-radius: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
             padding: 20px;
+            gap: 20px;
         }
 
-        h1 {
-            color: #007BFF;
+        .game-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            width: 45%;
+            max-width: 200px;
+            transition: box-shadow 0.3s;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 1px;
+        .game-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card img {
             width: 100%;
             height: auto;
-            max-width: 400px;
-            margin: 20px auto;
-            border: 2px solid #007BFF;
             border-radius: 8px;
         }
 
-        .cell {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-            font-size: 24px;
+        .game-card p {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #333;
             font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
+        a{
+            text-decoration:none;        }
 
-        .cell:hover {
-            background-color: #d1d1d1;
-        }
+        footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures the footer stays on top */
+}
 
-        .found {
-            background-color: #28a745; /* Green for letters in words */
-            color: white;
-            pointer-events: none; /* Disable interaction with found letters */
-        }
-
-        .correct {
-            background-color: #007BFF; /* Blue for letters forming a word */
-            color: white;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        li {
-            margin: 5px;
-            font-size: 18px;
-            padding: 5px 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            display: inline-block;
-            transition: background-color 0.3s;
-        }
-
-        li.checked {
-            text-decoration: line-through;
-            background-color: #d4edda; /* Light green for found words */
-            color: #6c757d; /* Gray for found words */
-            display: none; /* Hide the found word */
+        /* Hide games by default when search query is applied */
+        .game-card[hidden] {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Word Search Game</h1>
-        <div id="wordSearch" class="grid"></div>
-        <h2>Words to Find:</h2>
-        <ul id="wordList"></ul>
-        <button id="hintBtn">Hint</button>
-        <button id="restartBtn">Restart</button>
+
+    <!-- Header -->
+    <header>
+        <h1>Games Showcase for Shaniba</h1>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search games..." oninput="filterGames()">
     </div>
+
+    <!-- Games Section -->
+    <section class="games-showcase">
+        <!-- Game Cards -->
+        <div class="game-card" data-name="Candy Crush Saga">
+            <a href="game1.html">
+                <img src="Candy.jpg" alt="Candy Crush Saga">
+                <p>Candy Crush Saga</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Temple Run 2">
+            <a href="game2.html">
+                <img src="family.jpg" alt="Temple Run 2">
+                <p>Temple Run 2</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Subway Surfers">
+            <a href="game3.html">
+                <img src="family.jpg" alt="Subway Surfers">
+                <p>Subway Surfers</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Angry Birds 2">
+            <a href="game4.html">
+                <img src="family.jpg" alt="Angry Birds 2">
+                <p>Angry Birds 2</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Clash Royale">
+            <a href="game5.html">
+                <img src="family.jpg" alt="Clash Royale">
+                <p>Clash Royale</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Wordscapes">
+            <a href="game6.html">
+                <img src="family.jpg" alt="Wordscapes">
+                <p>Wordscapes</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Ludo King">
+            <a href="game7.html">
+                <img src="family.jpg" alt="Ludo King">
+                <p>Ludo King</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="8 Ball Pool">
+            <a href="game8.html">
+                <img src="family.jpg" alt="8 Ball Pool">
+                <p>8 Ball Pool</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Asphalt 9: Legends">
+            <a href="game9.html">
+                <img src="family.jpg" alt="Asphalt 9: Legends">
+                <p>Asphalt 9: Legends</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Farmville 2">
+            <a href="game10.html">
+                <img src="family.jpg" alt="Farmville 2">
+                <p>Farmville 2</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Minecraft">
+            <a href="game11.html">
+                <img src="family.jpg" alt="Minecraft">
+                <p>Minecraft</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Fortnite">
+            <a href="game12.html">
+                <img src="family.jpg" alt="Fortnite">
+                <p>Fortnite</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Call of Duty Mobile">
+            <a href="game13.html">
+                <img src="family.jpg" alt="Call of Duty Mobile">
+                <p>Call of Duty Mobile</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="PUBG Mobile">
+            <a href="game14.html">
+                <img src="family.jpg" alt="PUBG Mobile">
+                <p>PUBG Mobile</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Brawl Stars">
+            <a href="game15.html">
+                <img src="family.jpg" alt="Brawl Stars">
+                <p>Brawl Stars</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Mario Kart Tour">
+            <a href="game16.html">
+                <img src="family.jpg" alt="Mario Kart Tour">
+                <p>Mario Kart Tour</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Pokemon GO">
+            <a href="game17.html">
+                <img src="family.jpg" alt="Pokemon GO">
+                <p>Pokemon GO</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Monument Valley 2">
+            <a href="game18.html">
+                <img src="family.jpg" alt="Monument Valley 2">
+                <p>Monument Valley 2</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="The Sims Mobile">
+            <a href="game19.html">
+                <img src="family.jpg" alt="The Sims Mobile">
+                <p>The Sims Mobile</p>
+            </a>
+        </div>
+        <div class="game-card" data-name="Dragon City">
+            <a href="game20.html">
+                <img src="family.jpg" alt="Dragon City">
+                <p>Dragon City</p>
+            </a>
+        </div>
+        <!-- Repeat this pattern for the remaining games up to Game 50 -->
+        <div class="game-card" data-name="Fashion Frenzy">
+    <a href="fashion_frenzy.html">
+        <img src="family.jpg" alt="Fashion Frenzy">
+        <p>Fashion Frenzy</p>
+    </a>
+</div>
+<div class="game-card" data-name="Jewels Quest">
+    <a href="jewels_quest.html">
+        <img src="family.jpg" alt="Jewels Quest">
+        <p>Jewels Quest</p>
+    </a>
+</div>
+<div class="game-card" data-name="Beauty Salon Tycoon">
+    <a href="beauty_salon_tycoon.html">
+        <img src="family.jpg" alt="Beauty Salon Tycoon">
+        <p>Beauty Salon Tycoon</p>
+    </a>
+</div>
+<div class="game-card" data-name="Cupcake Craze">
+    <a href="cupcake_craze.html">
+        <img src="family.jpg" alt="Cupcake Craze">
+        <p>Cupcake Craze</p>
+    </a>
+</div>
+<div class="game-card" data-name="Princess Adventure">
+    <a href="princess_adventure.html">
+        <img src="family.jpg" alt="Princess Adventure">
+        <p>Princess Adventure</p>
+    </a>
+</div>
+<div class="game-card" data-name="Pet Rescue Saga">
+    <a href="pet_rescue_saga.html">
+        <img src="family.jpg" alt="Pet Rescue Saga">
+        <p>Pet Rescue Saga</p>
+    </a>
+</div>
+<div class="game-card" data-name="Flower Garden Escape">
+    <a href="flower_garden_escape.html">
+        <img src="family.jpg" alt="Flower Garden Escape">
+        <p>Flower Garden Escape</p>
+    </a>
+</div>
+<div class="game-card" data-name="Dream Home Designer">
+    <a href="dream_home_designer.html">
+        <img src="family.jpg" alt="Dream Home Designer">
+        <p>Dream Home Designer</p>
+    </a>
+</div>
+<div class="game-card" data-name="Fashion Designer Studio">
+    <a href="fashion_designer_studio.html">
+        <img src="family.jpg" alt="Fashion Designer Studio">
+        <p>Fashion Designer Studio</p>
+    </a>
+</div>
+<div class="game-card" data-name="Cooking Craze">
+    <a href="cooking_craze.html">
+        <img src="family.jpg" alt="Cooking Craze">
+        <p>Cooking Craze</p>
+    </a>
+</div>
+<div class="game-card" data-name="Coloring World">
+    <a href="coloring_world.html">
+        <img src="family.jpg" alt="Coloring World">
+        <p>Coloring World</p>
+    </a>
+</div>
+<div class="game-card" data-name="Secret Garden">
+    <a href="secret_garden.html">
+        <img src="family.jpg" alt="Secret Garden">
+        <p>Secret Garden</p>
+    </a>
+</div>
+<div class="game-card" data-name="Magic Bakery">
+    <a href="magic_bakery.html">
+        <img src="family.jpg" alt="Magic Bakery">
+        <p>Magic Bakery</p>
+    </a>
+</div>
+<div class="game-card" data-name="Glamour Girls">
+    <a href="glamour_girls.html">
+        <img src="family.jpg" alt="Glamour Girls">
+        <p>Glamour Girls</p>
+    </a>
+</div>
+<div class="game-card" data-name="Animal Rescue">
+    <a href="animal_rescue.html">
+        <img src="family.jpg" alt="Animal Rescue">
+        <p>Animal Rescue</p>
+    </a>
+</div>
+<div class="game-card" data-name="Cooking Diary">
+    <a href="cooking_diary.html">
+        <img src="family.jpg" alt="Cooking Diary">
+        <p>Cooking Diary</p>
+    </a>
+</div>
+<div class="game-card" data-name="Candy Crush Saga">
+    <a href="candy_crush_saga.html">
+        <img src="family.jpg" alt="Candy Crush Saga">
+        <p>Candy Crush Saga</p>
+    </a>
+</div>
+<div class="game-card" data-name="My Little Bakery">
+    <a href="my_little_bakery.html">
+        <img src="family.jpg" alt="My Little Bakery">
+        <p>My Little Bakery</p>
+    </a>
+</div>
+<div class="game-card" data-name="Starlight Spa">
+    <a href="starlight_spa.html">
+        <img src="family.jpg" alt="Starlight Spa">
+        <p>Starlight Spa</p>
+    </a>
+</div>
+<div class="game-card" data-name="Glamour Fashion Show">
+    <a href="glamour_fashion_show.html">
+        <img src="family.jpg" alt="Glamour Fashion Show">
+        <p>Glamour Fashion Show</p>
+    </a>
+</div>
+<div class="game-card" data-name="Flower Shop Frenzy">
+    <a href="flower_shop_frenzy.html">
+        <img src="family.jpg" alt="Flower Shop Frenzy">
+        <p>Flower Shop Frenzy</p>
+    </a>
+</div>
+<div class="game-card" data-name="Magical Boutique">
+    <a href="magical_boutique.html">
+        <img src="family.jpg" alt="Magical Boutique">
+        <p>Magical Boutique</p>
+    </a>
+</div>
+<div class="game-card" data-name="Love Story">
+    <a href="love_story.html">
+        <img src="family.jpg" alt="Love Story">
+        <p>Love Story</p>
+    </a>
+</div>
+<div class="game-card" data-name="Parisian Fashion">
+    <a href="parisian_fashion.html">
+        <img src="family.jpg" alt="Parisian Fashion">
+        <p>Parisian Fashion</p>
+    </a>
+</div>
+<div class="game-card" data-name="Fruit Mania">
+    <a href="fruit_mania.html">
+        <img src="family.jpg" alt="Fruit Mania">
+        <p>Fruit Mania</p>
+    </a>
+</div>
+<div class="game-card" data-name="Decor Dream">
+    <a href="decor_dream.html">
+        <img src="family.jpg" alt="Decor Dream">
+        <p>Decor Dream</p>
+    </a>
+</div>
+<div class="game-card" data-name="Sugar Rush">
+    <a href="sugar_rush.html">
+        <img src="family.jpg" alt="Sugar Rush">
+        <p>Sugar Rush</p>
+    </a>
+</div>
+<div class="game-card" data-name="Spa Day Escape">
+    <a href="spa_day_escape.html">
+        <img src="family.jpg" alt="Spa Day Escape">
+        <p>Spa Day Escape</p>
+    </a>
+</div>
+<div class="game-card" data-name="The Cooking Academy">
+    <a href="the_cooking_academy.html">
+        <img src="family.jpg" alt="The Cooking Academy">
+        <p>The Cooking Academy</p>
+    </a>
+</div>
+<div class="game-card" data-name="Royal Dress Up">
+    <a href="royal_dress_up.html">
+        <img src="family.jpg" alt="Royal Dress Up">
+        <p>Royal Dress Up</p>
+    </a>
+</div>
+    </section>
+<br><br>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Games Showcase for Shaniba</p>
+    </footer>
+
     <script>
-        const words = ["JAVASCRIPT", "HTML", "CSS", "WEB", "GAME", "PUZZLE", "CODE", "FUN", "LOVE", "GIRL"];
-        const gridSize = 10;
-        const grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
-        let foundWords = new Set();
-        let selectedLetters = [];
-        let selectedCells = []; // Track the selected cells
+        function filterGames() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const games = document.querySelectorAll('.game-card');
 
-        function placeWord(word) {
-            const row = Math.floor(Math.random() * gridSize);
-            const col = Math.floor(Math.random() * (gridSize - word.length));
-            for (let i = 0; i < word.length; i++) {
-                grid[row][col + i] = word[i];
-            }
-        }
-
-        function fillEmptySpaces() {
-            for (let row = 0; row < gridSize; row++) {
-                for (let col = 0; col < gridSize; col++) {
-                    if (grid[row][col] === '') {
-                        grid[row][col] = String.fromCharCode(Math.floor(Math.random() * 26) + 65); // Random letter A-Z
-                    }
-                }
-            }
-        }
-
-        function generateWordSearch() {
-            words.forEach(word => placeWord(word));
-            fillEmptySpaces();
-            const wordSearchElement = document.getElementById('wordSearch');
-
-            grid.forEach((row, rowIndex) => {
-                row.forEach((cell, colIndex) => {
-                    const cellElement = document.createElement('div');
-                    cellElement.className = 'cell';
-                    cellElement.textContent = cell;
-                    cellElement.addEventListener('click', () => selectLetter(rowIndex, colIndex, cellElement, cell));
-                    wordSearchElement.appendChild(cellElement);
-                });
-            });
-
-            const wordListElement = document.getElementById('wordList');
-            words.forEach(word => {
-                const listItem = document.createElement('li');
-                listItem.textContent = word;
-                listItem.className = 'word-item';
-                wordListElement.appendChild(listItem);
-            });
-        }
-
-        function selectLetter(row, col, cellElement, letter) {
-            selectedLetters.push(letter);
-            selectedCells.push(cellElement); // Keep track of the selected cells
-            cellElement.classList.add('found'); // Mark the cell as selected
-
-            // Check if the currently selected letters form a valid word
-            checkCurrentSelection();
-        }
-
-        function checkCurrentSelection() {
-            const currentWord = selectedLetters.join('');
-            if (words.includes(currentWord)) {
-                markWordAsFound(currentWord);
-            }
-        }
-
-        function markWordAsFound(word) {
-            foundWords.add(word);
-            document.querySelectorAll('.word-item').forEach(item => {
-                if (item.textContent === word) {
-                    item.classList.add('checked');
-                    item.style.display = 'none'; // Hide the found word from the list
-                }
-            });
-
-            // Highlight the letters in the puzzle that were part of the found word
-            highlightWord(word);
-            resetSelectedLetters(); // Clear selected letters after finding a word
-        }
-
-        function highlightWord(word) {
-            const letters = word.split('');
-            selectedCells.forEach(cell => {
-                if (letters.includes(cell.textContent)) {
-                    cell.classList.remove('found'); // Remove temporary class
-                    cell.classList.add('correct'); // Highlight the found word letters
+            games.forEach(game => {
+                const gameName = game.getAttribute('data-name').toLowerCase();
+                if (gameName.includes(searchValue)) {
+                    game.removeAttribute('hidden');
+                } else {
+                    game.setAttribute('hidden', true);
                 }
             });
         }
-
-        function resetSelectedLetters() {
-            selectedLetters = [];
-            selectedCells.forEach(cell => cell.classList.remove('found'));
-            selectedCells = []; // Clear the selected cells
-        }
-
-        function giveHint() {
-            const unfoundWords = words.filter(word => !foundWords.has(word));
-            if (unfoundWords.length > 0) {
-                const randomWord = unfoundWords[Math.floor(Math.random() * unfoundWords.length)];
-                const letterToReveal = randomWord[Math.floor(Math.random() * randomWord.length)];
-
-                const cells = document.getElementsByClassName('cell');
-                for (let cell of cells) {
-                    if (cell.textContent === letterToReveal) {
-                        cell.classList.add('correct');
-                        break;
-                    }
-                }
-            }
-        }
-
-        function restartGame() {
-            foundWords.clear();
-            selectedLetters = [];
-            selectedCells = [];
-            document.getElementById('wordSearch').innerHTML = '';
-            document.getElementById('wordList').innerHTML = '';
-            generateWordSearch();
-        }
-
-        document.getElementById('restartBtn').addEventListener('click', restartGame);
-        document.getElementById('hintBtn').addEventListener('click', giveHint);
-
-        generateWordSearch();
     </script>
+
 </body>
 </html>
