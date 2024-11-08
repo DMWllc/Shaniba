@@ -196,9 +196,9 @@
         <!-- Grid layout for album photos -->
         <div class="photo-grid" id="albumContent">
             <script>
-                // Array for photo descriptions
+                // Generate 100 unique image names in format a.jpg to zz.jpg
                 const photoDescriptions = [
-                    "A memorable meeti in Kyaliwajjala.",
+                    "A memorable meeting in Kyaliwajjala.",
                     "Memorable Shaniba.",
                     "Memories.",
                     "Our backyard.",
@@ -206,30 +206,36 @@
                     "A beautiful spring.",
                     "Our family road trip adventure.",
                     "Moment to remember.",
-                    "A fun day at the amusement.",
-                    "Memories."
-                    // Add more descriptions as needed
+                    "A fun day at the amusement park."
                 ];
 
                 const photos = [];
-                let letter = 'a';
-                let sequence = 1;
-                for (let i = 1; i <= 1000; i++) {
-                    const imgName = (sequence <= 26) ? `${letter}.jpg` : `${letter}${letter}.jpg`;
-                    const descriptionIndex = (i - 1) % photoDescriptions.length;  // Loop through descriptions
+                const alphabet = "abcdefghijklmnopqrstuvwxyz";
+                
+                let imgCount = 100;
+                let descriptionIndex = 0;
+
+                // Loop to generate image names and create photo elements
+                for (let i = 0; i < imgCount; i++) {
+                    let imgName = "";
+
+                    if (i < 26) {
+                        imgName = `${alphabet[i]}.jpg`;
+                    } else {
+                        imgName = `${alphabet[Math.floor((i - 26) / 26)]}${alphabet[(i - 26) % 26]}.jpg`;
+                    }
+
+                    const description = photoDescriptions[descriptionIndex];
+                    descriptionIndex = (descriptionIndex + 1) % photoDescriptions.length;
+
                     photos.push(`
                         <div class="photo">
-                            <img src="${imgName}" alt="Family Photo ${i}">
-                            <div class="photo-description">${photoDescriptions[descriptionIndex]}</div>
+                            <img src="${imgName}" alt="Family Photo ${i + 1}">
+                            <div class="photo-description">${description}</div>
                         </div>
                     `);
-
-                    // Progress the letters
-                    if (++sequence > 26) {
-                        letter = String.fromCharCode(letter.charCodeAt(0) + 1);
-                        sequence = 1;
-                    }
                 }
+                
                 document.getElementById("albumContent").innerHTML = photos.join('');
             </script>
         </div>
